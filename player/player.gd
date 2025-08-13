@@ -2,12 +2,10 @@
 class_name Player
 extends CharacterBody2D
 
+@export var _move_action: GUIDEAction
 @export_range(0.0, 100.0, 0.5) var _move_speed: float = 100.0
 
 
 func _process(delta: float) -> void:
-	var dir := Vector2.ZERO
-	dir.x = Input.get_action_strength("player_right") - Input.get_action_strength("player_left")
-	dir.y = Input.get_action_strength("player_down") - Input.get_action_strength("player_up")
-	velocity = dir * _move_speed
+	velocity = _move_action.value_axis_2d * _move_speed
 	move_and_slide()

@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://1wudjg2ogp8c"]
+[gd_scene load_steps=5 format=3 uid="uid://1wudjg2ogp8c"]
 
 [ext_resource type="Texture2D" uid="uid://c11vcsevg8m17" path="res://player/sprite-sheet.png" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://gfqy1u7rvdfs" path="res://player/player.gd" id="1_rkbax"]
+[ext_resource type="Resource" uid="uid://c733h7i0ma1x1" path="res://player/input/move.tres" id="2_g1dw6"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g1dw6"]
 radius = 16.0
@@ -9,6 +10,7 @@ height = 48.0
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_rkbax")
+_move_action = ExtResource("2_g1dw6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_g1dw6")
