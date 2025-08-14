@@ -23,7 +23,6 @@ func _on_idle_state_processing(_delta: float) -> void:
 
 
 func _on_walking_state_entered() -> void:
-	_last_move_direction = _move_action.value_axis_2d
 	if _move_action.value_axis_2d == Vector2.DOWN or _move_action.value_axis_2d == Vector2.UP:
 		%AnimationPlayer.play(
 			"Movement/Walk" + ("Up" if _move_action.value_axis_2d.y < 0 else "Down")
@@ -31,6 +30,7 @@ func _on_walking_state_entered() -> void:
 	else:
 		%AnimationPlayer.play("Movement/WalkSide")
 		%Sprite2D.flip_h = true if _move_action.value_axis_2d.x < 0 else false
+	_last_move_direction = _move_action.value_axis_2d
 
 
 func _on_walking_state_processing(delta: float) -> void:
@@ -38,5 +38,5 @@ func _on_walking_state_processing(delta: float) -> void:
 		%StateChart.send_event("idle")
 		return
 
-	velocity = _move_action.value_axis_2d * _move_speed
+	velocity = _move_action.value_axis_2d.normalized() * _move_speed
 	move_and_slide()

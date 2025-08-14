@@ -157,6 +157,8 @@ radius = 16.0
 height = 48.0
 
 [node name="Player" type="CharacterBody2D"]
+collision_layer = 2
+motion_mode = 1
 script = ExtResource("1_rkbax")
 _move_action = ExtResource("2_g1dw6")
 
@@ -167,6 +169,8 @@ libraries = {
 &"Movement": SubResource("AnimationLibrary_rgyib")
 }
 autoplay = "RESET"
+
+[node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 unique_name_in_owner = true
