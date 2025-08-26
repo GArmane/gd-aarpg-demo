@@ -1,6 +1,6 @@
-[gd_scene load_steps=18 format=3 uid="uid://1wudjg2ogp8c"]
+[gd_scene load_steps=22 format=3 uid="uid://1wudjg2ogp8c"]
 
-[ext_resource type="Texture2D" uid="uid://c11vcsevg8m17" path="res://components/player/sprite-sheet.png" id="1_oul6g"]
+[ext_resource type="Texture2D" uid="uid://duudsnvdn0ng4" path="res://components/player/sprites/sprite-sheet.png" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://gfqy1u7rvdfs" path="res://components/player/player.gd" id="1_rkbax"]
 [ext_resource type="Resource" uid="uid://c733h7i0ma1x1" path="res://components/player/input/move.tres" id="2_g1dw6"]
 [ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="4_g6k8r"]
@@ -22,22 +22,65 @@ tracks/0/keys = {
 "update": 1,
 "values": [0]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:flip_h")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_g1dw6"]
 _data = {
 &"RESET": SubResource("Animation_g1dw6")
+}
+
+[sub_resource type="Animation" id="Animation_02tnr"]
+resource_name = "Down"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [21, 23]
+}
+
+[sub_resource type="Animation" id="Animation_bv0o5"]
+resource_name = "Up"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [24, 26]
+}
+
+[sub_resource type="Animation" id="Animation_pxnim"]
+resource_name = "Side"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [27, 29]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bv0o5"]
+_data = {
+&"Down": SubResource("Animation_02tnr"),
+&"Side": SubResource("Animation_pxnim"),
+&"Up": SubResource("Animation_bv0o5")
 }
 
 [sub_resource type="Animation" id="Animation_qjkh3"]
@@ -53,7 +96,7 @@ tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.4),
 "transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
+"update": 0,
 "values": [0, 1, 2]
 }
 
@@ -70,8 +113,8 @@ tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.4),
 "transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [14, 15, 16]
+"update": 0,
+"values": [6, 7, 8]
 }
 
 [sub_resource type="Animation" id="Animation_yw30f"]
@@ -87,8 +130,8 @@ tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.4),
 "transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [7, 8, 9]
+"update": 0,
+"values": [3, 4, 5]
 }
 
 [sub_resource type="Animation" id="Animation_hg6s5"]
@@ -104,8 +147,8 @@ tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [3, 4, 5, 6]
+"update": 0,
+"values": [9, 10, 11, 12]
 }
 
 [sub_resource type="Animation" id="Animation_8t03j"]
@@ -121,7 +164,7 @@ tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
+"update": 0,
 "values": [17, 18, 19, 20]
 }
 
@@ -138,8 +181,8 @@ tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [10, 11, 12, 13]
+"update": 0,
+"values": [13, 14, 15, 16]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rgyib"]
@@ -153,7 +196,7 @@ _data = {
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g1dw6"]
-radius = 16.0
+radius = 8.0
 height = 48.0
 
 [node name="Player" type="CharacterBody2D"]
@@ -166,6 +209,7 @@ _move_action = ExtResource("2_g1dw6")
 unique_name_in_owner = true
 libraries = {
 &"": SubResource("AnimationLibrary_g1dw6"),
+&"Attack": SubResource("AnimationLibrary_bv0o5"),
 &"Movement": SubResource("AnimationLibrary_rgyib")
 }
 autoplay = "RESET"
@@ -179,7 +223,8 @@ shape = SubResource("CapsuleShape2D_g1dw6")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 unique_name_in_owner = true
 texture = ExtResource("1_oul6g")
-hframes = 21
+hframes = 16
+vframes = 3
 
 [node name="StateChart" type="Node" parent="."]
 unique_name_in_owner = true
@@ -196,7 +241,13 @@ script = ExtResource("6_rgyib")
 [node name="ToWalking" type="Node" parent="StateChart/Root/Idle"]
 script = ExtResource("7_boad6")
 to = NodePath("../../Walking")
-event = &"moving"
+event = &"Walking"
+delay_in_seconds = "0.0"
+
+[node name="ToAttacking" type="Node" parent="StateChart/Root/Idle"]
+script = ExtResource("7_boad6")
+to = NodePath("../../Attacking")
+event = &"Attacking"
 delay_in_seconds = "0.0"
 
 [node name="Walking" type="Node" parent="StateChart/Root"]
@@ -205,10 +256,26 @@ script = ExtResource("6_rgyib")
 [node name="ToIdle" type="Node" parent="StateChart/Root/Walking"]
 script = ExtResource("7_boad6")
 to = NodePath("../../Idle")
-event = &"idle"
+event = &"Idle"
+delay_in_seconds = "0.0"
+
+[node name="Attacking" type="Node" parent="StateChart/Root"]
+script = ExtResource("6_rgyib")
+
+[node name="ToIdle" type="Node" parent="StateChart/Root/Attacking"]
+script = ExtResource("7_boad6")
+to = NodePath("../../Idle")
+event = &"Idle"
+delay_in_seconds = "0.0"
+
+[node name="ToWalking" type="Node" parent="StateChart/Root/Attacking"]
+script = ExtResource("7_boad6")
+to = NodePath("../../Walking")
+event = &"Walking"
 delay_in_seconds = "0.0"
 
 [connection signal="state_entered" from="StateChart/Root/Idle" to="." method="_on_idle_state_entered"]
 [connection signal="state_processing" from="StateChart/Root/Idle" to="." method="_on_idle_state_processing"]
 [connection signal="state_entered" from="StateChart/Root/Walking" to="." method="_on_walking_state_entered"]
 [connection signal="state_processing" from="StateChart/Root/Walking" to="." method="_on_walking_state_processing"]
+[connection signal="state_entered" from="StateChart/Root/Attacking" to="." method="_on_attacking_state_entered"]

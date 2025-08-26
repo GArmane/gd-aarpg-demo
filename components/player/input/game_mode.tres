@@ -115,6 +115,6 @@ metadata/_guide_input_mappings_collapsed = false
 
 [resource]
 script = ExtResource("7_cmsxv")
-display_name = "Walk Mode"
+display_name = "Game Mode"
 mappings = Array[ExtResource("1_f8sk4")]([SubResource("Resource_odpa8")])
 metadata/_custom_type_script = "uid://dsa1dnifd6w32"

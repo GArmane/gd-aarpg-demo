@@ -6,37 +6,47 @@ extends CharacterBody2D
 @export var _move_action: GUIDEAction
 @export_range(0.0, 100.0, 0.5) var _move_speed: float = 100.0
 
-var _last_move_direction := Vector2.DOWN
+var _cardinal_direction := Vector2.DOWN
+
+
+func _update_animation(anim: String) -> void:
+	if _cardinal_direction.x != 0:
+		%Sprite2D.scale.x = _cardinal_direction.x
+	var anim_direction = (
+		"Down"
+		if _cardinal_direction == Vector2.DOWN
+		else "Up" if _cardinal_direction == Vector2.UP else "Side"
+	)
+	%AnimationPlayer.play(anim + anim_direction)
 
 
 func _on_idle_state_entered() -> void:
-	if _last_move_direction == Vector2.DOWN or _last_move_direction == Vector2.UP:
-		%AnimationPlayer.play("Movement/Idle" + ("Up" if _last_move_direction.y < 0 else "Down"))
-	else:
-		%AnimationPlayer.play("Movement/IdleSide")
-		%Sprite2D.flip_h = true if _last_move_direction.x < 0 else false
+	velocity = Vector2.ZERO
+	_update_animation("Movement/Idle")
 
 
 func _on_idle_state_processing(_delta: float) -> void:
 	if _move_action.is_triggered() and _move_action.value_axis_2d != Vector2.ZERO:
-		%StateChart.send_event("moving")
+		%StateChart.send_event("Walking")
 
 
 func _on_walking_state_entered() -> void:
-	if _move_action.value_axis_2d == Vector2.DOWN or _move_action.value_axis_2d == Vector2.UP:
-		%AnimationPlayer.play(
-			"Movement/Walk" + ("Up" if _move_action.value_axis_2d.y < 0 else "Down")
-		)
-	else:
-		%AnimationPlayer.play("Movement/WalkSide")
-		%Sprite2D.flip_h = true if _move_action.value_axis_2d.x < 0 else false
-	_last_move_direction = _move_action.value_axis_2d
+	_cardinal_direction = _move_action.value_axis_2d
+	_update_animation("Movement/Walk")
 
 
-func _on_walking_state_processing(delta: float) -> void:
+func _on_walking_state_processing(_delta: float) -> void:
+	# Stopped moving.
 	if not _move_action.is_triggered() or _move_action.value_axis_2d == Vector2.ZERO:
-		%StateChart.send_event("idle")
+		%StateChart.send_event("Idle")
 		return
-
+	# Changed direction sinced started moving.
+	if _cardinal_direction != _move_action.value_axis_2d:
+		_cardinal_direction = _move_action.value_axis_2d
+		_update_animation("Movement/Walk")
 	velocity = _move_action.value_axis_2d.normalized() * _move_speed
 	move_and_slide()
+
+
+func _on_attacking_state_entered() -> void:
+	%AnimationPlayer.play("Attack/Down")
