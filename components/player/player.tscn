@@ -1,12 +1,17 @@
-[gd_scene load_steps=22 format=3 uid="uid://1wudjg2ogp8c"]
+[gd_scene load_steps=27 format=3 uid="uid://1wudjg2ogp8c"]
 
 [ext_resource type="Texture2D" uid="uid://duudsnvdn0ng4" path="res://components/player/sprites/sprite-sheet.png" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://gfqy1u7rvdfs" path="res://components/player/player.gd" id="1_rkbax"]
+[ext_resource type="Resource" uid="uid://cbbtl5mcbr67" path="res://components/player/input/game_mode.tres" id="2_bv0o5"]
 [ext_resource type="Resource" uid="uid://c733h7i0ma1x1" path="res://components/player/input/move.tres" id="2_g1dw6"]
 [ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="4_g6k8r"]
+[ext_resource type="Resource" uid="uid://bf14bejt1d6x2" path="res://components/player/input/attack.tres" id="4_pxnim"]
 [ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="5_boad6"]
+[ext_resource type="AudioStream" uid="uid://bedtfa1kdlgb8" path="res://components/player/audio/SwordSwoosh.wav" id="5_vxcs8"]
+[ext_resource type="Texture2D" uid="uid://bwb323mswpe82" path="res://components/player/sprites/attack-fx-sprite-01.png" id="6_fwwnh"]
 [ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="6_rgyib"]
 [ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="7_boad6"]
+[ext_resource type="Texture2D" uid="uid://yjadre666npo" path="res://components/player/sprites/shadow.png" id="8_16fba"]
 
 [sub_resource type="Animation" id="Animation_g1dw6"]
 length = 0.001
@@ -17,6 +22,30 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D/AttackSlashFX:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D/AttackSlashFX:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -43,21 +72,29 @@ tracks/0/keys = {
 "update": 0,
 "values": [21, 23]
 }
-
-[sub_resource type="Animation" id="Animation_bv0o5"]
-resource_name = "Up"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D/AttackSlashFX:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D/AttackSlashFX:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [24, 26]
+"values": [0, 3]
 }
 
 [sub_resource type="Animation" id="Animation_pxnim"]
@@ -74,6 +111,70 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [27, 29]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D/AttackSlashFX:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D/AttackSlashFX:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [8, 11]
+}
+
+[sub_resource type="Animation" id="Animation_bv0o5"]
+resource_name = "Up"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [24, 26]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D/AttackSlashFX:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D/AttackSlashFX:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [4, 7]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bv0o5"]
@@ -203,7 +304,10 @@ height = 48.0
 collision_layer = 2
 motion_mode = 1
 script = ExtResource("1_rkbax")
+_game_mode = ExtResource("2_bv0o5")
 _move_action = ExtResource("2_g1dw6")
+_attack_action = ExtResource("4_pxnim")
+_attack_sound = ExtResource("5_vxcs8")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
@@ -214,7 +318,12 @@ libraries = {
 }
 autoplay = "RESET"
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+max_polyphony = 4
+
 [node name="Camera2D" type="Camera2D" parent="."]
+unique_name_in_owner = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 unique_name_in_owner = true
@@ -225,6 +334,18 @@ unique_name_in_owner = true
 texture = ExtResource("1_oul6g")
 hframes = 16
 vframes = 3
+
+[node name="AttackSlashFX" type="Sprite2D" parent="Sprite2D"]
+unique_name_in_owner = true
+visible = false
+texture = ExtResource("6_fwwnh")
+hframes = 12
+
+[node name="ShadowFX" type="Sprite2D" parent="Sprite2D"]
+modulate = Color(0, 0, 0, 0.784314)
+show_behind_parent = true
+position = Vector2(0, 21)
+texture = ExtResource("8_16fba")
 
 [node name="StateChart" type="Node" parent="."]
 unique_name_in_owner = true
@@ -259,6 +380,12 @@ to = NodePath("../../Idle")
 event = &"Idle"
 delay_in_seconds = "0.0"
 
+[node name="ToAttacking" type="Node" parent="StateChart/Root/Walking"]
+script = ExtResource("7_boad6")
+to = NodePath("../../Attacking")
+event = &"Attacking"
+delay_in_seconds = "0.0"
+
 [node name="Attacking" type="Node" parent="StateChart/Root"]
 script = ExtResource("6_rgyib")
 
@@ -279,3 +406,4 @@ delay_in_seconds = "0.0"
 [connection signal="state_entered" from="StateChart/Root/Walking" to="." method="_on_walking_state_entered"]
 [connection signal="state_processing" from="StateChart/Root/Walking" to="." method="_on_walking_state_processing"]
 [connection signal="state_entered" from="StateChart/Root/Attacking" to="." method="_on_attacking_state_entered"]
+[connection signal="state_processing" from="StateChart/Root/Attacking" to="." method="_on_attacking_state_processing"]
