@@ -13,6 +13,5 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - uses: Scony/godot-gdscript-toolkit@master
-    - run: ls -lah
-    - run: gdformat --check source/
-    - run: gdlint source/
+    - run: find . -type f -name "*.gd" -not -path "./addons/*" -print0 | xargs -0 gdformat --check
+    - run: find . -type f -name "*.gd" -not -path "./addons/*" -print0 | xargs -0 gdlint
