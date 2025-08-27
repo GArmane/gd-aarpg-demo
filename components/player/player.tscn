@@ -338,6 +338,7 @@ vframes = 3
 [node name="AttackSlashFX" type="Sprite2D" parent="Sprite2D"]
 unique_name_in_owner = true
 visible = false
+show_behind_parent = true
 texture = ExtResource("6_fwwnh")
 hframes = 12
 
