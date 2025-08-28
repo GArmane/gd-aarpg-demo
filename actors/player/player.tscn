@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://1wudjg2ogp8c"]
+[gd_scene load_steps=29 format=3 uid="uid://1wudjg2ogp8c"]
 
 [ext_resource type="Texture2D" uid="uid://duudsnvdn0ng4" path="res://actors/player/sprites/sprite-sheet.png" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://gfqy1u7rvdfs" path="res://actors/player/player.gd" id="1_rkbax"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="6_rgyib"]
 [ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="7_boad6"]
 [ext_resource type="Texture2D" uid="uid://yjadre666npo" path="res://actors/player/sprites/shadow.png" id="8_16fba"]
+[ext_resource type="PackedScene" uid="uid://biba33ekj332o" path="res://components/hurtbox/hurtbox.tscn" id="13_7aotg"]
 
 [sub_resource type="Animation" id="Animation_g1dw6"]
 length = 0.001
@@ -50,6 +51,42 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D/Hurtbox:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite2D/Hurtbox:monitoring")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprite2D/Hurtbox:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_g1dw6"]
@@ -96,6 +133,42 @@ tracks/2/keys = {
 "update": 0,
 "values": [0, 3]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D/Hurtbox:monitoring")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite2D/Hurtbox:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2(0, 24), Vector2(0, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprite2D/Hurtbox:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0.0, 0.0]
+}
 
 [sub_resource type="Animation" id="Animation_pxnim"]
 resource_name = "Side"
@@ -136,6 +209,42 @@ tracks/2/keys = {
 "update": 0,
 "values": [8, 11]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D/Hurtbox:monitoring")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite2D/Hurtbox:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2(18, 8), Vector2(0, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprite2D/Hurtbox:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1.5708, 0.0]
+}
 
 [sub_resource type="Animation" id="Animation_bv0o5"]
 resource_name = "Up"
@@ -175,6 +284,42 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [4, 7]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D/Hurtbox:monitoring")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite2D/Hurtbox:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2(0, -16), Vector2(0, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprite2D/Hurtbox:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0.0, 0.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bv0o5"]
@@ -300,6 +445,10 @@ _data = {
 radius = 8.0
 height = 16.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7aotg"]
+radius = 8.0
+height = 32.0
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 4
 motion_mode = 1
@@ -348,6 +497,15 @@ modulate = Color(0, 0, 0, 0.784314)
 show_behind_parent = true
 position = Vector2(0, 21)
 texture = ExtResource("8_16fba")
+
+[node name="Hurtbox" parent="Sprite2D" instance=ExtResource("13_7aotg")]
+unique_name_in_owner = true
+collision_mask = 2
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Hurtbox"]
+shape = SubResource("CapsuleShape2D_7aotg")
+debug_color = Color(0.802655, 0.203324, 0.0776397, 0.42)
 
 [node name="StateChart" type="Node" parent="."]
 unique_name_in_owner = true
