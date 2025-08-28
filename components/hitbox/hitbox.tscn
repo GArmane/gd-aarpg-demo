@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://w7txpjedkngh"]
+
+[node name="Hitbox" type="Area2D"]
+collision_layer = 0
+collision_mask = 0
+monitoring = false

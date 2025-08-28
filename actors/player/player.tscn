@@ -298,10 +298,10 @@ _data = {
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g1dw6"]
 radius = 8.0
-height = 48.0
+height = 16.0
 
 [node name="Player" type="CharacterBody2D"]
-collision_layer = 2
+collision_layer = 4
 motion_mode = 1
 script = ExtResource("1_rkbax")
 _game_mode = ExtResource("2_bv0o5")
@@ -327,6 +327,7 @@ unique_name_in_owner = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 unique_name_in_owner = true
+position = Vector2(0, 16)
 shape = SubResource("CapsuleShape2D_g1dw6")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
