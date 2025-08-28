@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=4 uid="uid://ovs7lvvfl4nx"]
 
-[ext_resource type="PackedScene" uid="uid://1wudjg2ogp8c" path="res://components/player/player.tscn" id="1_i6ipm"]
+[ext_resource type="PackedScene" uid="uid://1wudjg2ogp8c" path="res://actors/player/player.tscn" id="1_i6ipm"]
 [ext_resource type="PackedScene" uid="uid://cm63mk8ap754y" path="res://tile-maps/grass-01/grass_01.tscn" id="3_d8hcq"]
 [ext_resource type="PackedScene" uid="uid://dkr80d2pi0d41" path="res://addons/guide/debugger/guide_debugger.tscn" id="4_7g1fm"]
 [ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="5_ew2ye"]

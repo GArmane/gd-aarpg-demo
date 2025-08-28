@@ -1,14 +1,14 @@
 [gd_resource type="Resource" script_class="GUIDEMappingContext" load_steps=27 format=3 uid="uid://cbbtl5mcbr67"]
 
 [ext_resource type="Script" uid="uid://cpplm41b5bt6m" path="res://addons/guide/guide_action_mapping.gd" id="1_qhqyf"]
-[ext_resource type="Resource" uid="uid://c733h7i0ma1x1" path="res://components/player/input/move.tres" id="2_0hcpy"]
+[ext_resource type="Resource" uid="uid://c733h7i0ma1x1" path="res://actors/player/input/move.tres" id="2_0hcpy"]
 [ext_resource type="Script" uid="uid://mtx1unc2aqn7" path="res://addons/guide/guide_input_mapping.gd" id="3_tp2rs"]
 [ext_resource type="Script" uid="uid://cw71o87tvdx3q" path="res://addons/guide/inputs/guide_input_key.gd" id="4_p8m6t"]
 [ext_resource type="Script" uid="uid://bl8rjl4oaldje" path="res://addons/guide/modifiers/guide_modifier.gd" id="5_6bt3v"]
 [ext_resource type="Script" uid="uid://ckggy40lm0vjc" path="res://addons/guide/modifiers/guide_modifier_negate.gd" id="6_mkwy5"]
 [ext_resource type="Script" uid="uid://bm5gjgadon6hb" path="res://addons/guide/modifiers/guide_modifier_input_swizzle.gd" id="7_kghkl"]
 [ext_resource type="Script" uid="uid://x74mnwgr08a7" path="res://addons/guide/triggers/guide_trigger.gd" id="8_qxb2r"]
-[ext_resource type="Resource" uid="uid://bf14bejt1d6x2" path="res://components/player/input/attack.tres" id="9_3qoqq"]
+[ext_resource type="Resource" uid="uid://bf14bejt1d6x2" path="res://actors/player/input/attack.tres" id="9_3qoqq"]
 [ext_resource type="Script" uid="uid://dsa1dnifd6w32" path="res://addons/guide/guide_mapping_context.gd" id="10_rtnfr"]
 
 [sub_resource type="Resource" id="Resource_egfbn"]
