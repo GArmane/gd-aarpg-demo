@@ -13,31 +13,32 @@ extends CharacterBody2D
 var _cardinal_direction := Vector2.DOWN
 
 
+func _play_audio(audio: AudioStream, pitch_scale: float = 1.0) -> void:
+	%AudioStreamPlayer2D.stream = audio
+	%AudioStreamPlayer2D.pitch_scale = pitch_scale
+	%AudioStreamPlayer2D.play()
+
+
+func _update_movement_animation(anim_key: String) -> void:
+	const DIRECTION_NAMES = {
+		Vector2.RIGHT: "Side", Vector2.DOWN: "Down", Vector2.LEFT: "Side", Vector2.UP: "Up"
+	}
+	var mov_angle = (velocity.normalized() + _cardinal_direction * 0.1).angle()
+	var mov_direc = DIRECTION_NAMES.keys()[round(mov_angle / TAU * DIRECTION_NAMES.size())]
+	# Character changed movement or animation since last frame.
+	if mov_direc != _cardinal_direction or anim_key not in %AnimationPlayer.current_animation:
+		var anim_dir = DIRECTION_NAMES[mov_direc]
+		%AnimationPlayer.play(anim_key + anim_dir)
+		%Sprite2D.scale.x = -1 if mov_direc in [Vector2.LEFT, Vector2.DOWN] else 1
+		_cardinal_direction = mov_direc
+
+
 func _ready() -> void:
 	GUIDE.enable_mapping_context(_game_mode)
 
 
-func _play_audio(audio: AudioStream, pitch_scale: float = 1.0) -> Result:
-	%AudioStreamPlayer2D.stream = audio
-	%AudioStreamPlayer2D.pitch_scale = pitch_scale
-	%AudioStreamPlayer2D.play()
-	return Result.ok()
-
-
-func _update_animation(anim: String) -> Result:
-	if _cardinal_direction.x != 0:
-		%Sprite2D.scale.x = _cardinal_direction.x
-	var anim_direction = (
-		"Down"
-		if _cardinal_direction == Vector2.DOWN
-		else "Up" if _cardinal_direction == Vector2.UP else "Side"
-	)
-	%AnimationPlayer.play(anim + anim_direction)
-	return Result.ok()
-
-
 func _on_idle_state_entered() -> void:
-	_update_animation("Movement/Idle").unwrap()
+	_update_movement_animation("Movement/Idle")
 
 
 func _on_idle_state_processing(delta: float) -> void:
@@ -51,7 +52,7 @@ func _on_idle_state_processing(delta: float) -> void:
 
 func _on_walking_state_entered() -> void:
 	_cardinal_direction = _move_action.value_axis_2d
-	_update_animation("Movement/Walk").unwrap()
+	_update_movement_animation("Movement/Walk")
 
 
 func _on_walking_state_processing(_delta: float) -> void:
@@ -62,16 +63,14 @@ func _on_walking_state_processing(_delta: float) -> void:
 		%StateChart.send_event("Attacking")
 		return
 	# Changed direction sinced started moving.
-	if _cardinal_direction != _move_action.value_axis_2d:
-		_cardinal_direction = _move_action.value_axis_2d
-		_update_animation("Movement/Walk").unwrap()
+	_update_movement_animation("Movement/Walk")
 	velocity = _move_action.value_axis_2d.normalized() * _move_speed
 	move_and_slide()
 
 
 func _on_attacking_state_entered() -> void:
-	_update_animation("Attack/").unwrap()
-	_play_audio(_attack_sound, randf_range(0.9, 1.1)).unwrap()
+	_update_movement_animation("Attack/")
+	_play_audio(_attack_sound, randf_range(0.9, 1.1))
 
 
 func _on_attacking_state_processing(delta: float) -> void:
