@@ -471,9 +471,6 @@ autoplay = "RESET"
 unique_name_in_owner = true
 max_polyphony = 4
 
-[node name="Camera2D" type="Camera2D" parent="."]
-unique_name_in_owner = true
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(0, 16)
