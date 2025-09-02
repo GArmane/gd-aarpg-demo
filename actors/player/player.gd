@@ -77,8 +77,8 @@ func _on_attacking_state_entered() -> void:
 
 func _on_attacking_state_processing(delta: float) -> void:
 	update_movement(delta)
-	await %AnimationPlayer.animation_finished
-	if _move_action.is_triggered():
-		%StateChart.send_event(STATE_DATA["Walking"]["event"])
-	else:
-		%StateChart.send_event(STATE_DATA["Idle"]["event"])
+	if %AnimationPlayer.is_playing() == false:
+		if _move_action.is_triggered():
+			%StateChart.send_event(STATE_DATA["Walking"]["event"])
+		else:
+			%StateChart.send_event(STATE_DATA["Idle"]["event"])
