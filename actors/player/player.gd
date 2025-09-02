@@ -2,7 +2,7 @@
 
 class_name Player extends Actor2D
 
-const STATE_DATA = {
+@export var state_configuration = {
 	"Idle":
 	{
 		"base_animation": "Movement/Idle",
@@ -34,35 +34,34 @@ func _on_root_state_exited() -> void:
 
 
 func _on_idle_state_entered() -> void:
-	update_animation(STATE_DATA["Idle"]["base_animation"])
+	update_animation(state_configuration["Idle"]["base_animation"])
 
 
 func _on_idle_state_processing(delta: float) -> void:
 	if _move_action.is_triggered() and _move_action.value_axis_2d != Vector2.ZERO:
-		%StateChart.send_event(STATE_DATA["Walking"]["event"])
-	if _attack_action.is_triggered():
-		%StateChart.send_event(STATE_DATA["Attacking"]["event"])
-	update_movement(delta)
+		%StateChart.send_event(state_configuration["Walking"]["event"])
+	elif _attack_action.is_triggered():
+		%StateChart.send_event(state_configuration["Attacking"]["event"])
+	else:
+		update_movement(delta)
 
 
 func _on_walking_state_cardinal_direction_changed(_old_dir, _new_dir) -> void:
-	update_animation(STATE_DATA["Walking"]["base_animation"])
+	update_animation(state_configuration["Walking"]["base_animation"])
 
 
 func _on_walking_state_entered() -> void:
-	update_animation(STATE_DATA["Walking"]["base_animation"])
+	update_animation(state_configuration["Walking"]["base_animation"])
 	cardinal_direction_changed.connect(_on_walking_state_cardinal_direction_changed)
 
 
 func _on_walking_state_processing(delta: float) -> void:
 	if not _move_action.is_triggered() or _move_action.value_axis_2d == Vector2.ZERO:
-		%StateChart.send_event(STATE_DATA["Idle"]["event"])
-		return
-	if _attack_action.is_triggered():
-		%StateChart.send_event(STATE_DATA["Attacking"]["event"])
-		return
-	# Changed direction sinced started moving.
-	update_movement(delta, _move_action.value_axis_2d)
+		%StateChart.send_event(state_configuration["Idle"]["event"])
+	elif _attack_action.is_triggered():
+		%StateChart.send_event(state_configuration["Attacking"]["event"])
+	else:
+		update_movement(delta, _move_action.value_axis_2d)
 
 
 func _on_walking_state_exited() -> void:
@@ -70,13 +69,13 @@ func _on_walking_state_exited() -> void:
 
 
 func _on_attacking_state_entered() -> void:
-	update_animation(STATE_DATA["Attacking"]["base_animation"])
+	update_animation(state_configuration["Attacking"]["base_animation"])
 
 
 func _on_attacking_state_processing(delta: float) -> void:
 	update_movement(delta)
 	if %AnimationPlayer.is_playing() == false:
 		if _move_action.is_triggered():
-			%StateChart.send_event(STATE_DATA["Walking"]["event"])
+			%StateChart.send_event(state_configuration["Walking"]["event"])
 		else:
-			%StateChart.send_event(STATE_DATA["Idle"]["event"])
+			%StateChart.send_event(state_configuration["Idle"]["event"])

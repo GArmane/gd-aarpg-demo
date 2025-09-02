@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://btt0bkps2e7t2"]
+[gd_scene load_steps=18 format=3 uid="uid://btt0bkps2e7t2"]
 
 [ext_resource type="Script" uid="uid://b73a1h7hs1mft" path="res://actors/slime/slime.gd" id="1_qfp8a"]
 [ext_resource type="Texture2D" uid="uid://dw27puoe1pawy" path="res://actors/slime/sprites/slime.png" id="1_xkj1h"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="4_ppdhw"]
 [ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="5_cjasg"]
 [ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="6_4skca"]
+[ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="7_cjasg"]
 
 [sub_resource type="Animation" id="Animation_ypj56"]
 length = 0.001
@@ -129,6 +130,7 @@ tracks/1/keys = {
 [sub_resource type="Animation" id="Animation_xkj1h"]
 resource_name = "WalkDown"
 length = 0.7
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -136,10 +138,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.7),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [9, 10, 11, 9]
+"times": PackedFloat32Array(0, 0.4, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [9, 11, 9]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -157,6 +159,7 @@ tracks/1/keys = {
 [sub_resource type="Animation" id="Animation_vbgn4"]
 resource_name = "WalkSide"
 length = 0.7
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -164,10 +167,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.7),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [15, 16, 17, 15]
+"times": PackedFloat32Array(0, 0.4, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [15, 17, 15]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -185,6 +188,7 @@ tracks/1/keys = {
 [sub_resource type="Animation" id="Animation_qfp8a"]
 resource_name = "WalkUp"
 length = 0.7
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -192,10 +196,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.7),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [12, 13, 14, 12]
+"times": PackedFloat32Array(0, 0.4, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [12, 14, 12]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -229,6 +233,7 @@ collision_layer = 16
 collision_mask = 5
 motion_mode = 1
 script = ExtResource("1_qfp8a")
+move_speed = 30.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
@@ -236,7 +241,7 @@ libraries = {
 &"": SubResource("AnimationLibrary_vbgn4"),
 &"Movement": SubResource("AnimationLibrary_aojdn")
 }
-autoplay = "Movement/IdleDown"
+autoplay = "RESET"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 unique_name_in_owner = true
@@ -256,6 +261,10 @@ position = Vector2(0, 2)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_0cxnd")
 
+[node name="Timer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
+
 [node name="StateChart" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("4_ppdhw")
@@ -268,5 +277,22 @@ initial_state = NodePath("Idle")
 [node name="Idle" type="Node" parent="StateChart/Root"]
 script = ExtResource("6_4skca")
 
-[node name="Patrolling" type="Node" parent="StateChart/Root"]
+[node name="ToWandering" type="Node" parent="StateChart/Root/Idle"]
+script = ExtResource("7_cjasg")
+to = NodePath("../../Wandering")
+event = &"Wandering"
+delay_in_seconds = "0.0"
+
+[node name="Wandering" type="Node" parent="StateChart/Root"]
 script = ExtResource("6_4skca")
+
+[node name="ToIdle" type="Node" parent="StateChart/Root/Wandering"]
+script = ExtResource("7_cjasg")
+to = NodePath("../../Idle")
+event = &"Idle"
+delay_in_seconds = "0.0"
+
+[connection signal="state_entered" from="StateChart/Root/Idle" to="." method="_on_idle_state_entered"]
+[connection signal="state_processing" from="StateChart/Root/Idle" to="." method="_on_idle_state_processing"]
+[connection signal="state_entered" from="StateChart/Root/Wandering" to="." method="_on_wandering_state_entered"]
+[connection signal="state_processing" from="StateChart/Root/Wandering" to="." method="_on_wandering_state_processing"]
