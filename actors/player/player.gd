@@ -23,7 +23,6 @@ const STATE_DATA = {
 @export var _game_mode: GUIDEMappingContext
 @export var _move_action: GUIDEAction
 @export var _attack_action: GUIDEAction
-@export var _attack_sound: AudioStream
 
 
 func _on_root_state_entered() -> void:
@@ -72,7 +71,6 @@ func _on_walking_state_exited() -> void:
 
 func _on_attacking_state_entered() -> void:
 	update_animation(STATE_DATA["Attacking"]["base_animation"])
-	play_audio(_attack_sound, randf_range(0.9, 1.1))
 
 
 func _on_attacking_state_processing(delta: float) -> void:

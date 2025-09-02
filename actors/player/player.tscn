@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://1wudjg2ogp8c"]
+[gd_scene load_steps=30 format=3 uid="uid://1wudjg2ogp8c"]
 
 [ext_resource type="Texture2D" uid="uid://duudsnvdn0ng4" path="res://actors/player/sprites/sprite-sheet.png" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://gfqy1u7rvdfs" path="res://actors/player/player.gd" id="1_rkbax"]
@@ -94,6 +94,11 @@ _data = {
 &"RESET": SubResource("Animation_g1dw6")
 }
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_7aotg"]
+random_pitch = 1.1
+streams_count = 1
+stream_0/stream = ExtResource("5_vxcs8")
+
 [sub_resource type="Animation" id="Animation_02tnr"]
 resource_name = "Down"
 length = 0.3
@@ -169,6 +174,21 @@ tracks/5/keys = {
 "update": 1,
 "values": [0.0, 0.0]
 }
+tracks/6/type = "audio"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("AudioStreamPlayer2D")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": SubResource("AudioStreamRandomizer_7aotg")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/6/use_blend = true
 
 [sub_resource type="Animation" id="Animation_pxnim"]
 resource_name = "Side"
@@ -245,6 +265,21 @@ tracks/5/keys = {
 "update": 1,
 "values": [1.5708, 0.0]
 }
+tracks/6/type = "audio"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("AudioStreamPlayer2D")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": SubResource("AudioStreamRandomizer_7aotg")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/6/use_blend = true
 
 [sub_resource type="Animation" id="Animation_bv0o5"]
 resource_name = "Up"
@@ -321,6 +356,21 @@ tracks/5/keys = {
 "update": 1,
 "values": [0.0, 0.0]
 }
+tracks/6/type = "audio"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("AudioStreamPlayer2D")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": SubResource("AudioStreamRandomizer_7aotg")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/6/use_blend = true
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bv0o5"]
 _data = {
@@ -456,7 +506,6 @@ script = ExtResource("1_rkbax")
 _game_mode = ExtResource("2_bv0o5")
 _move_action = ExtResource("2_g1dw6")
 _attack_action = ExtResource("4_pxnim")
-_attack_sound = ExtResource("5_vxcs8")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
@@ -469,6 +518,7 @@ autoplay = "RESET"
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
+pitch_scale = 505.15
 max_polyphony = 4
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

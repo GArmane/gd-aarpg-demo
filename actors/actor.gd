@@ -17,12 +17,6 @@ const DIRECTION_NAMES = {
 var _cardinal_direction := Vector2.DOWN
 
 
-func play_audio(audio: AudioStream, pitch_scale: float = 1.0) -> void:
-	%AudioStreamPlayer2D.stream = audio
-	%AudioStreamPlayer2D.pitch_scale = pitch_scale
-	%AudioStreamPlayer2D.play()
-
-
 func update_animation(anim_key):
 	var anim_dir = DIRECTION_NAMES[_cardinal_direction]
 	if (anim_key + anim_dir) not in %AnimationPlayer.current_animation:

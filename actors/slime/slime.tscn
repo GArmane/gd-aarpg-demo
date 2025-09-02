@@ -1,8 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://btt0bkps2e7t2"]
+[gd_scene load_steps=17 format=3 uid="uid://btt0bkps2e7t2"]
 
 [ext_resource type="Script" uid="uid://b73a1h7hs1mft" path="res://actors/slime/slime.gd" id="1_qfp8a"]
 [ext_resource type="Texture2D" uid="uid://dw27puoe1pawy" path="res://actors/slime/sprites/slime.png" id="1_xkj1h"]
 [ext_resource type="Texture2D" uid="uid://f62fys208nw0" path="res://actors/slime/sprites/shadow.png" id="2_qfp8a"]
+[ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="4_ppdhw"]
+[ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="5_cjasg"]
+[ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="6_4skca"]
 
 [sub_resource type="Animation" id="Animation_ypj56"]
 length = 0.001
@@ -252,3 +255,18 @@ texture = ExtResource("2_qfp8a")
 position = Vector2(0, 2)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_0cxnd")
+
+[node name="StateChart" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("4_ppdhw")
+metadata/_custom_type_script = "uid://couw105c3bde4"
+
+[node name="Root" type="Node" parent="StateChart"]
+script = ExtResource("5_cjasg")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateChart/Root"]
+script = ExtResource("6_4skca")
+
+[node name="Patrolling" type="Node" parent="StateChart/Root"]
+script = ExtResource("6_4skca")
