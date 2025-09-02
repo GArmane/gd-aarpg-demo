@@ -441,13 +441,13 @@ _data = {
 &"WalkUp": SubResource("Animation_rgyib")
 }
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g1dw6"]
-radius = 8.0
-height = 16.0
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7aotg"]
 radius = 8.0
 height = 32.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g1dw6"]
+radius = 8.0
+height = 16.0
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 4
@@ -470,11 +470,6 @@ autoplay = "RESET"
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
 max_polyphony = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-unique_name_in_owner = true
-position = Vector2(0, 16)
-shape = SubResource("CapsuleShape2D_g1dw6")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 unique_name_in_owner = true
@@ -503,6 +498,11 @@ monitoring = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Hurtbox"]
 shape = SubResource("CapsuleShape2D_7aotg")
 debug_color = Color(0.802655, 0.203324, 0.0776397, 0.42)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, 16)
+shape = SubResource("CapsuleShape2D_g1dw6")
 
 [node name="StateChart" type="Node" parent="."]
 unique_name_in_owner = true
@@ -558,9 +558,12 @@ to = NodePath("../../Walking")
 event = &"Walking"
 delay_in_seconds = "0.0"
 
+[connection signal="state_entered" from="StateChart/Root" to="." method="_on_root_state_entered"]
+[connection signal="state_exited" from="StateChart/Root" to="." method="_on_root_state_exited"]
 [connection signal="state_entered" from="StateChart/Root/Idle" to="." method="_on_idle_state_entered"]
 [connection signal="state_processing" from="StateChart/Root/Idle" to="." method="_on_idle_state_processing"]
 [connection signal="state_entered" from="StateChart/Root/Walking" to="." method="_on_walking_state_entered"]
+[connection signal="state_exited" from="StateChart/Root/Walking" to="." method="_on_walking_state_exited"]
 [connection signal="state_processing" from="StateChart/Root/Walking" to="." method="_on_walking_state_processing"]
 [connection signal="state_entered" from="StateChart/Root/Attacking" to="." method="_on_attacking_state_entered"]
 [connection signal="state_processing" from="StateChart/Root/Attacking" to="." method="_on_attacking_state_processing"]
