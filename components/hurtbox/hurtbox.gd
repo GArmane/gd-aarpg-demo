@@ -1,9 +1,9 @@
-class_name Hurtbox
-extends Area2D
+@icon("res://assets/icon-godot-node/node-2D/icon_area_meteo.png")
 
-@export var damage: int = 1
+class_name Hurtbox extends Area2D
+
+signal damaged(damage: int)
 
 
-func _on_area_entered(area: Area2D) -> void:
-	if area is Hitbox:
-		area.take_damage(damage)
+func take_damage(damage: int) -> void:
+	damaged.emit(damage)

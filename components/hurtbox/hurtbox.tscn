@@ -4,8 +4,6 @@
 
 [node name="Hurtbox" type="Area2D"]
 collision_layer = 0
-collision_mask = 8
-monitorable = false
+collision_mask = 0
+monitoring = false
 script = ExtResource("1_bud2i")
-
-[connection signal="area_entered" from="." to="." method="_on_area_entered"]

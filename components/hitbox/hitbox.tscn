@@ -3,7 +3,9 @@
 [ext_resource type="Script" uid="uid://dgk7wna5giq05" path="res://components/hitbox/hitbox.gd" id="1_2y4qk"]
 
 [node name="Hitbox" type="Area2D"]
-collision_layer = 8
+collision_layer = 0
 collision_mask = 0
-monitoring = false
+monitorable = false
 script = ExtResource("1_2y4qk")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
