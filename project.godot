@@ -68,11 +68,11 @@ player_attack={
 [layer_names]
 
 2d_physics/layer_1="Static Collision"
-2d_physics/layer_2="Static Hitbox"
+2d_physics/layer_2="Static Hurtbox"
 2d_physics/layer_3="Player Collision"
-2d_physics/layer_4="Player Hitbox"
+2d_physics/layer_4="Player Hurtbox"
 2d_physics/layer_5="Enemy Collision"
-2d_physics/layer_6="Enemy Hitbox"
+2d_physics/layer_6="Enemy Hurtbox"
 
 [rendering]
 

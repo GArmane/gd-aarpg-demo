@@ -14,7 +14,17 @@ class_name Slime extends Actor2D
 		"event": "Wandering",
 		"cycle_duration": Vector2i(1, 3),
 		"timer_transition_to": "Idle"
-	}
+	},
+	"Stunned":
+	{
+		"base_animation": "Combat/Stun",
+		"event": "Stunned",
+	},
+	"Death":
+	{
+		"base_animation": "Combat/Death",
+		"event": "Death",
+	},
 }
 
 

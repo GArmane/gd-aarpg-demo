@@ -15,7 +15,7 @@ class_name Player extends Actor2D
 	},
 	"Attacking":
 	{
-		"base_animation": "Attack/",
+		"base_animation": "Combat/Attack",
 		"event": "Attacking",
 	},
 }
