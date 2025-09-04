@@ -5,13 +5,6 @@ class_name Actor2D extends CharacterBody2D
 signal cardinal_direction_changed(old_value, new_value)
 signal hitpoints_changed(old_value, new_value)
 
-const DIRECTION_NAMES = {
-	Vector2.RIGHT: "Side",
-	Vector2.DOWN: "Down",
-	Vector2.LEFT: "Side",
-	Vector2.UP: "Up",
-}
-
 @export_category("Movement")
 @export_range(0.0, 100.0, 0.5) var move_speed: float = 100.0
 @export_range(0.0, 20.00, 0.5) var deacceleration_speed: float = 10.0
@@ -26,12 +19,12 @@ const DIRECTION_NAMES = {
 var cardinal_direction := Vector2.DOWN:
 	set(value):
 		var old_cardinal_direction = cardinal_direction
-		cardinal_direction = value
+		cardinal_direction = MovementUtils.angle_to_cardinal_direction(value.angle())
 		cardinal_direction_changed.emit(old_cardinal_direction, cardinal_direction)
 
 
 func update_animation(anim_key):
-	var anim_dir = DIRECTION_NAMES[cardinal_direction]
+	var anim_dir = MovementUtils.CARDINAL_DIRECTION[cardinal_direction]
 	if (anim_key + anim_dir) not in %AnimationPlayer.current_animation:
 		%AnimationPlayer.play(anim_key + anim_dir)
 	%Sprite2D.scale.x = -1 if cardinal_direction in [Vector2.LEFT, Vector2.DOWN] else 1
@@ -45,7 +38,7 @@ func update_movement(delta: float, direction := Vector2.ZERO) -> Vector2:
 	move_and_slide()
 
 	var mov_angle = (velocity.normalized() + cardinal_direction * 0.1).angle()
-	var mov_direc = DIRECTION_NAMES.keys()[round(mov_angle / TAU * DIRECTION_NAMES.size())]
+	var mov_direc = MovementUtils.angle_to_cardinal_direction(mov_angle)
 	if mov_direc != cardinal_direction:
 		cardinal_direction = mov_direc
 

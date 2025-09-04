@@ -28,8 +28,8 @@ class_name Slime extends Actor2D
 }
 
 
-func _ready() -> void:
-	%StateChart.set_expression_property.call_deferred("hitpoints", hitpoints)
+func _on_root_state_entered() -> void:
+	%StateChart.set_expression_property("hitpoints", hitpoints)
 
 
 func _on_idle_state_entered() -> void:
@@ -47,7 +47,7 @@ func _on_idle_state_physics_processing(delta: float) -> void:
 
 func _on_wandering_state_entered() -> void:
 	# Set random direction with animation
-	cardinal_direction = DIRECTION_NAMES.keys()[randi() % 4]
+	cardinal_direction = MovementUtils.CARDINAL_DIRECTION.keys()[randi() % 4]
 	update_animation(state_configuration["Wandering"]["base_animation"])
 	# Set timer based on direction
 	var cycle_duration: Vector2i = state_configuration["Wandering"]["cycle_duration"]
@@ -64,13 +64,15 @@ func _on_wandering_state_physics_processing(delta: float) -> void:
 
 
 func _on_hitpoints_changed(_old_value: Variant, _new_value: Variant) -> void:
-	%StateChart.set_expression_property.call_deferred("hitpoints", hitpoints)
+	%StateChart.set_expression_property("hitpoints", hitpoints)
 
 
-func _on_hurtbox_damaged(damage: int, knockback_direction: Vector2) -> void:
+func _on_hurtbox_damaged(damage: int, knockback_direction: Vector2, knockback_force: float) -> void:
 	hitpoints -= damage
 	if hitpoints > 0:
-		velocity = knockback_direction * state_configuration["Stunned"]["knockback_speed"]
+		knockback_direction = knockback_direction.normalized()
+		velocity = knockback_direction * knockback_force
+		cardinal_direction = knockback_direction * -1
 		%StateChart.send_event(state_configuration["Stunned"]["event"])
 
 
@@ -79,9 +81,14 @@ func _on_stunned_state_entered() -> void:
 
 
 func _on_stunned_state_physics_processing(delta: float) -> void:
-	update_movement(delta)
 	if not %AnimationPlayer.is_playing():
 		%StateChart.send_event(state_configuration["Idle"]["event"])
+		return
+	update_movement(delta)
+
+
+func _on_stunned_state_exited() -> void:
+	cardinal_direction *= -1
 
 
 func _on_dead_state_entered() -> void:
