@@ -4,7 +4,6 @@
 [ext_resource type="Script" uid="uid://gfqy1u7rvdfs" path="res://actors/player/player.gd" id="1_rkbax"]
 [ext_resource type="Resource" uid="uid://cbbtl5mcbr67" path="res://actors/player/input/game_mode.tres" id="2_bv0o5"]
 [ext_resource type="Resource" uid="uid://c733h7i0ma1x1" path="res://actors/player/input/move.tres" id="2_g1dw6"]
-[ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="4_g6k8r"]
 [ext_resource type="Resource" uid="uid://bf14bejt1d6x2" path="res://actors/player/input/attack.tres" id="4_pxnim"]
 [ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="5_boad6"]
 [ext_resource type="AudioStream" uid="uid://bedtfa1kdlgb8" path="res://actors/player/audio/SwordSwoosh.wav" id="5_vxcs8"]
@@ -13,6 +12,7 @@
 [ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="7_boad6"]
 [ext_resource type="Texture2D" uid="uid://yjadre666npo" path="res://actors/player/sprites/shadow.png" id="8_16fba"]
 [ext_resource type="PackedScene" uid="uid://w7txpjedkngh" path="res://components/hitbox/hitbox.tscn" id="9_7aotg"]
+[ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="10_7aotg"]
 
 [sub_resource type="Animation" id="Animation_g1dw6"]
 length = 0.001
@@ -506,6 +506,7 @@ script = ExtResource("1_rkbax")
 _game_mode = ExtResource("2_bv0o5")
 _move_action = ExtResource("2_g1dw6")
 _attack_action = ExtResource("4_pxnim")
+hitpoints = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
@@ -555,7 +556,7 @@ shape = SubResource("CapsuleShape2D_g1dw6")
 
 [node name="StateChart" type="Node" parent="."]
 unique_name_in_owner = true
-script = ExtResource("4_g6k8r")
+script = ExtResource("10_7aotg")
 metadata/_custom_type_script = "uid://couw105c3bde4"
 
 [node name="Root" type="Node" parent="StateChart"]

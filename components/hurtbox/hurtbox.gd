@@ -2,8 +2,11 @@
 
 class_name Hurtbox extends Area2D
 
-signal damaged(damage: int)
+signal damaged(damage: int, knockback_direction: Vector2)
 
 
-func take_damage(damage: int) -> void:
-	damaged.emit(damage)
+func apply_damage(source: Hitbox) -> void:
+	var knockback_direction := (
+		source.global_position.direction_to(get_parent().global_position).normalized()
+	)
+	damaged.emit(source.damage, knockback_direction)

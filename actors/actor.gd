@@ -2,7 +2,8 @@
 
 class_name Actor2D extends CharacterBody2D
 
-signal cardinal_direction_changed(old_dir, new_dir)
+signal cardinal_direction_changed(old_value, new_value)
+signal hitpoints_changed(old_value, new_value)
 
 const DIRECTION_NAMES = {
 	Vector2.RIGHT: "Side",
@@ -11,8 +12,16 @@ const DIRECTION_NAMES = {
 	Vector2.UP: "Up",
 }
 
+@export_category("Movement")
 @export_range(0.0, 100.0, 0.5) var move_speed: float = 100.0
 @export_range(0.0, 20.00, 0.5) var deacceleration_speed: float = 10.0
+
+@export_category("Stats")
+@export var hitpoints := 1:
+	set(value):
+		var old_value = hitpoints
+		hitpoints = value
+		hitpoints_changed.emit(old_value, hitpoints)
 
 var cardinal_direction := Vector2.DOWN:
 	set(value):
