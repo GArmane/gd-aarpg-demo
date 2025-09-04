@@ -67,11 +67,9 @@ func _on_hitpoints_changed(_old_value: Variant, _new_value: Variant) -> void:
 
 
 func _on_hurtbox_damaged(damage: int, knockback_direction: Vector2, knockback_force: float) -> void:
-	hitpoints -= damage
+	apply_damage(damage)
 	if hitpoints > 0:
-		knockback_direction = knockback_direction.normalized()
-		velocity = knockback_direction * knockback_force
-		cardinal_direction = knockback_direction * -1
+		apply_force(knockback_direction, knockback_force, knockback_direction * -1)
 		%StateChart.send_event(state_configuration["Stunned"]["event"])
 
 

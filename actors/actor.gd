@@ -23,6 +23,16 @@ var cardinal_direction := Vector2.DOWN:
 		cardinal_direction_changed.emit(old_cardinal_direction, cardinal_direction)
 
 
+func apply_damage(qtd: int) -> void:
+	hitpoints -= abs(qtd)
+
+
+func apply_force(direction: Vector2, force: float, new_cardinal_direction := Vector2.ZERO) -> void:
+	velocity = direction.normalized() * force
+	if new_cardinal_direction != Vector2.ZERO:
+		cardinal_direction = new_cardinal_direction
+
+
 func update_animation(anim_key):
 	var anim_dir = MovementUtils.CARDINAL_DIRECTION[cardinal_direction]
 	if (anim_key + anim_dir) not in %AnimationPlayer.current_animation:

@@ -18,6 +18,12 @@ class_name Player extends Actor2D
 		"base_animation": "Combat/Attack",
 		"event": "Attacking",
 	},
+	"ResumeActive": {"event": "ResumeActive"},
+	"Stunned":
+	{
+		"base_animation": "Combat/Stun",
+		"event": "Stunned",
+	},
 }
 
 @export var _game_mode: GUIDEMappingContext
@@ -79,3 +85,26 @@ func _on_attacking_state_physics_processing(delta: float) -> void:
 			%StateChart.send_event(state_configuration["Walking"]["event"])
 		else:
 			%StateChart.send_event(state_configuration["Idle"]["event"])
+
+
+func _on_hurtbox_damaged(damage: int, knockback_direction: Vector2, knockback_force: float) -> void:
+	apply_damage(damage)
+	if damage > 0:
+		apply_force(knockback_direction, knockback_force, knockback_direction * -1)
+		%StateChart.send_event(state_configuration["Stunned"]["event"])
+
+
+func _on_stunned_state_entered() -> void:
+	update_animation(state_configuration["Stunned"]["base_animation"])
+	%AnimationPlayerFX.play("Effects/Blinking")  # TODO use shaders to make this effect
+
+
+func _on_stunned_state_physics_processing(delta: float) -> void:
+	if not %AnimationPlayer.is_playing():
+		%StateChart.send_event(state_configuration["ResumeActive"]["event"])
+		return
+	update_movement(delta)
+
+
+func _on_stunned_state_exited() -> void:
+	cardinal_direction *= -1

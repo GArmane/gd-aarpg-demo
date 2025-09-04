@@ -2,7 +2,7 @@
 
 class_name Hurtbox extends Area2D
 
-signal damaged(damage: int, knockback_direction: Vector2)
+signal damaged(damage: int, knockback_direction: Vector2, knockback_force: float)
 
 
 func apply_damage(source: Hitbox) -> void:

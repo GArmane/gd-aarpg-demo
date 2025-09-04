@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://1wudjg2ogp8c"]
+[gd_scene load_steps=39 format=3 uid="uid://1wudjg2ogp8c"]
 
 [ext_resource type="Texture2D" uid="uid://duudsnvdn0ng4" path="res://actors/player/sprites/sprite-sheet.png" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://gfqy1u7rvdfs" path="res://actors/player/player.gd" id="1_rkbax"]
@@ -8,11 +8,14 @@
 [ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="5_boad6"]
 [ext_resource type="AudioStream" uid="uid://bedtfa1kdlgb8" path="res://actors/player/audio/sword_swoosh.wav" id="5_vxcs8"]
 [ext_resource type="Texture2D" uid="uid://bwb323mswpe82" path="res://actors/player/sprites/attack-slash-fx.png" id="6_fwwnh"]
+[ext_resource type="AudioStream" uid="uid://bn6smj6jjsoso" path="res://actors/player/audio/hit_player.wav" id="6_k67x5"]
 [ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="6_rgyib"]
 [ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="7_boad6"]
 [ext_resource type="Texture2D" uid="uid://yjadre666npo" path="res://actors/player/sprites/shadow.png" id="8_16fba"]
 [ext_resource type="PackedScene" uid="uid://w7txpjedkngh" path="res://components/hitbox/hitbox.tscn" id="9_7aotg"]
 [ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="10_7aotg"]
+[ext_resource type="PackedScene" uid="uid://biba33ekj332o" path="res://components/hurtbox/hurtbox.tscn" id="11_rt46e"]
+[ext_resource type="Script" uid="uid://b4dwolbvt8our" path="res://addons/godot_state_charts/history_state.gd" id="13_12xki"]
 
 [sub_resource type="Animation" id="Animation_g1dw6"]
 length = 0.001
@@ -372,11 +375,107 @@ tracks/6/keys = {
 }
 tracks/6/use_blend = true
 
+[sub_resource type="Animation" id="Animation_rt46e"]
+resource_name = "StunDown"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [30]
+}
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer2D")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("6_k67x5")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/1/use_blend = true
+
+[sub_resource type="Animation" id="Animation_0wchr"]
+resource_name = "StunSide"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [32]
+}
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer2D")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("6_k67x5")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/1/use_blend = true
+
+[sub_resource type="Animation" id="Animation_qrxv1"]
+resource_name = "StunUp"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [31]
+}
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer2D")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("6_k67x5")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/1/use_blend = true
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rt46e"]
 _data = {
 &"AttackDown": SubResource("Animation_7aotg"),
 &"AttackSide": SubResource("Animation_k67x5"),
-&"AttackUp": SubResource("Animation_12xki")
+&"AttackUp": SubResource("Animation_12xki"),
+&"StunDown": SubResource("Animation_rt46e"),
+&"StunSide": SubResource("Animation_0wchr"),
+&"StunUp": SubResource("Animation_qrxv1")
 }
 
 [sub_resource type="Animation" id="Animation_qjkh3"]
@@ -491,6 +590,27 @@ _data = {
 &"WalkUp": SubResource("Animation_rgyib")
 }
 
+[sub_resource type="Animation" id="Animation_otn2r"]
+resource_name = "Blinking"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ctwkf"]
+_data = {
+&"Blinking": SubResource("Animation_otn2r")
+}
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7aotg"]
 radius = 5.0
 height = 26.0
@@ -498,6 +618,10 @@ height = 26.0
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g1dw6"]
 radius = 8.0
 height = 16.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rt46e"]
+radius = 8.0
+height = 48.0
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 4
@@ -516,6 +640,12 @@ libraries = {
 &"Movement": SubResource("AnimationLibrary_rgyib")
 }
 autoplay = "RESET"
+
+[node name="AnimationPlayerFX" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"Effects": SubResource("AnimationLibrary_ctwkf")
+}
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
@@ -544,6 +674,7 @@ texture = ExtResource("8_16fba")
 [node name="Hitbox" parent="Sprite2D" instance=ExtResource("9_7aotg")]
 collision_mask = 34
 monitoring = false
+force = 300.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Hitbox"]
 shape = SubResource("CapsuleShape2D_7aotg")
@@ -554,6 +685,13 @@ unique_name_in_owner = true
 position = Vector2(0, 16)
 shape = SubResource("CapsuleShape2D_g1dw6")
 
+[node name="Hurtbox" parent="." instance=ExtResource("11_rt46e")]
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CapsuleShape2D_rt46e")
+debug_color = Color(1, 1, 0, 0.419608)
+
 [node name="StateChart" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("10_7aotg")
@@ -561,59 +699,98 @@ metadata/_custom_type_script = "uid://couw105c3bde4"
 
 [node name="Root" type="Node" parent="StateChart"]
 script = ExtResource("5_boad6")
+initial_state = NodePath("Active")
+
+[node name="Active" type="Node" parent="StateChart/Root"]
+script = ExtResource("5_boad6")
 initial_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="StateChart/Root"]
+[node name="Resume" type="Node" parent="StateChart/Root/Active"]
+script = ExtResource("13_12xki")
+default_state = NodePath("../Idle")
+
+[node name="Idle" type="Node" parent="StateChart/Root/Active"]
 script = ExtResource("6_rgyib")
 
-[node name="ToWalking" type="Node" parent="StateChart/Root/Idle"]
+[node name="ToWalking" type="Node" parent="StateChart/Root/Active/Idle"]
 script = ExtResource("7_boad6")
 to = NodePath("../../Walking")
 event = &"Walking"
 delay_in_seconds = "0.0"
 
-[node name="ToAttacking" type="Node" parent="StateChart/Root/Idle"]
+[node name="ToAttacking" type="Node" parent="StateChart/Root/Active/Idle"]
 script = ExtResource("7_boad6")
 to = NodePath("../../Attacking")
 event = &"Attacking"
 delay_in_seconds = "0.0"
 
-[node name="Walking" type="Node" parent="StateChart/Root"]
+[node name="ToStunned" type="Node" parent="StateChart/Root/Active/Idle"]
+script = ExtResource("7_boad6")
+to = NodePath("../../../Stunned")
+event = &"Stunned"
+delay_in_seconds = "0.0"
+
+[node name="Walking" type="Node" parent="StateChart/Root/Active"]
 script = ExtResource("6_rgyib")
 
-[node name="ToIdle" type="Node" parent="StateChart/Root/Walking"]
+[node name="ToIdle" type="Node" parent="StateChart/Root/Active/Walking"]
 script = ExtResource("7_boad6")
 to = NodePath("../../Idle")
 event = &"Idle"
 delay_in_seconds = "0.0"
 
-[node name="ToAttacking" type="Node" parent="StateChart/Root/Walking"]
+[node name="ToAttacking" type="Node" parent="StateChart/Root/Active/Walking"]
 script = ExtResource("7_boad6")
 to = NodePath("../../Attacking")
 event = &"Attacking"
 delay_in_seconds = "0.0"
 
-[node name="Attacking" type="Node" parent="StateChart/Root"]
+[node name="ToStunned" type="Node" parent="StateChart/Root/Active/Walking"]
+script = ExtResource("7_boad6")
+to = NodePath("../../../Stunned")
+event = &"Stunned"
+delay_in_seconds = "0.0"
+
+[node name="Attacking" type="Node" parent="StateChart/Root/Active"]
 script = ExtResource("6_rgyib")
 
-[node name="ToIdle" type="Node" parent="StateChart/Root/Attacking"]
+[node name="ToIdle" type="Node" parent="StateChart/Root/Active/Attacking"]
 script = ExtResource("7_boad6")
 to = NodePath("../../Idle")
 event = &"Idle"
 delay_in_seconds = "0.0"
 
-[node name="ToWalking" type="Node" parent="StateChart/Root/Attacking"]
+[node name="ToWalking" type="Node" parent="StateChart/Root/Active/Attacking"]
 script = ExtResource("7_boad6")
 to = NodePath("../../Walking")
 event = &"Walking"
 delay_in_seconds = "0.0"
 
+[node name="ToStunned" type="Node" parent="StateChart/Root/Active/Attacking"]
+script = ExtResource("7_boad6")
+to = NodePath("../../../Stunned")
+event = &"Stunned"
+delay_in_seconds = "0.0"
+
+[node name="Stunned" type="Node" parent="StateChart/Root"]
+script = ExtResource("6_rgyib")
+
+[node name="ToResumeActive" type="Node" parent="StateChart/Root/Stunned"]
+script = ExtResource("7_boad6")
+to = NodePath("../../Active/Resume")
+event = &"ResumeActive"
+delay_in_seconds = "0.0"
+
+[connection signal="damaged" from="Hurtbox" to="." method="_on_hurtbox_damaged"]
 [connection signal="state_entered" from="StateChart/Root" to="." method="_on_root_state_entered"]
 [connection signal="state_exited" from="StateChart/Root" to="." method="_on_root_state_exited"]
-[connection signal="state_entered" from="StateChart/Root/Idle" to="." method="_on_idle_state_entered"]
-[connection signal="state_physics_processing" from="StateChart/Root/Idle" to="." method="_on_idle_state_physics_processing"]
-[connection signal="state_entered" from="StateChart/Root/Walking" to="." method="_on_walking_state_entered"]
-[connection signal="state_exited" from="StateChart/Root/Walking" to="." method="_on_walking_state_exited"]
-[connection signal="state_physics_processing" from="StateChart/Root/Walking" to="." method="_on_walking_state_physics_processing"]
-[connection signal="state_entered" from="StateChart/Root/Attacking" to="." method="_on_attacking_state_entered"]
-[connection signal="state_physics_processing" from="StateChart/Root/Attacking" to="." method="_on_attacking_state_physics_processing"]
+[connection signal="state_entered" from="StateChart/Root/Active/Idle" to="." method="_on_idle_state_entered"]
+[connection signal="state_physics_processing" from="StateChart/Root/Active/Idle" to="." method="_on_idle_state_physics_processing"]
+[connection signal="state_entered" from="StateChart/Root/Active/Walking" to="." method="_on_walking_state_entered"]
+[connection signal="state_exited" from="StateChart/Root/Active/Walking" to="." method="_on_walking_state_exited"]
+[connection signal="state_physics_processing" from="StateChart/Root/Active/Walking" to="." method="_on_walking_state_physics_processing"]
+[connection signal="state_entered" from="StateChart/Root/Active/Attacking" to="." method="_on_attacking_state_entered"]
+[connection signal="state_physics_processing" from="StateChart/Root/Active/Attacking" to="." method="_on_attacking_state_physics_processing"]
+[connection signal="state_entered" from="StateChart/Root/Stunned" to="." method="_on_stunned_state_entered"]
+[connection signal="state_exited" from="StateChart/Root/Stunned" to="." method="_on_stunned_state_exited"]
+[connection signal="state_physics_processing" from="StateChart/Root/Stunned" to="." method="_on_stunned_state_physics_processing"]
