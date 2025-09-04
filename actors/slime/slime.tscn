@@ -965,7 +965,7 @@ radius = 13.0384
 
 [sub_resource type="Resource" id="Resource_ow7r1"]
 script = ExtResource("12_odhwe")
-expression = "hitpoints <= 0"
+expression = "hitpoints == 0"
 metadata/_custom_type_script = "uid://le5w1cm0ul8p"
 
 [node name="Slime" type="CharacterBody2D"]
@@ -1086,10 +1086,12 @@ script = ExtResource("6_4skca")
 
 [connection signal="hitpoints_changed" from="." to="." method="_on_hitpoints_changed"]
 [connection signal="damaged" from="Hurtbox" to="." method="_on_hurtbox_damaged"]
+[connection signal="state_entered" from="StateChart/Root" to="." method="_on_root_state_entered"]
 [connection signal="state_entered" from="StateChart/Root/Active/Idle" to="." method="_on_idle_state_entered"]
 [connection signal="state_physics_processing" from="StateChart/Root/Active/Idle" to="." method="_on_idle_state_physics_processing"]
 [connection signal="state_entered" from="StateChart/Root/Active/Wandering" to="." method="_on_wandering_state_entered"]
 [connection signal="state_physics_processing" from="StateChart/Root/Active/Wandering" to="." method="_on_wandering_state_physics_processing"]
 [connection signal="state_entered" from="StateChart/Root/Stunned" to="." method="_on_stunned_state_entered"]
+[connection signal="state_exited" from="StateChart/Root/Stunned" to="." method="_on_stunned_state_exited"]
 [connection signal="state_physics_processing" from="StateChart/Root/Stunned" to="." method="_on_stunned_state_physics_processing"]
 [connection signal="state_entered" from="StateChart/Root/Dead" to="." method="_on_dead_state_entered"]

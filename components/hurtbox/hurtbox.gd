@@ -9,4 +9,5 @@ func apply_damage(source: Hitbox) -> void:
 	var knockback_direction := (
 		source.global_position.direction_to(get_parent().global_position).normalized()
 	)
-	damaged.emit(source.damage, knockback_direction)
+	var knockback_force := source.force
+	damaged.emit(source.damage, knockback_direction, knockback_force)
