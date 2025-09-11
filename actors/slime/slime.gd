@@ -46,7 +46,7 @@ func _on_idle_state_physics_processing(delta: float) -> void:
 
 func _on_wandering_state_entered() -> void:
 	# Set random direction with animation
-	cardinal_direction = MovementUtils.CARDINAL_DIRECTION.keys()[randi() % 4]
+	cardinal_direction = CARDINAL_DIRECTION.keys()[randi() % 4]
 	update_animation(state_configuration["Wandering"]["base_animation"])
 	# Set timer based on direction
 	var cycle_duration: Vector2i = state_configuration["Wandering"]["cycle_duration"]
