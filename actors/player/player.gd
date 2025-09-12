@@ -18,7 +18,6 @@ class_name Player extends Actor2D
 		"base_animation": "Combat/Attack",
 		"event": "Attacking",
 	},
-	"ResumeActive": {"event": "ResumeActive"},
 	"Stunned":
 	{
 		"base_animation": "Combat/Stun",
@@ -101,10 +100,11 @@ func _on_stunned_state_entered() -> void:
 
 func _on_stunned_state_physics_processing(delta: float) -> void:
 	if not %AnimationPlayer.is_playing():
-		%StateChart.send_event(state_configuration["ResumeActive"]["event"])
+		%StateChart.send_event(state_configuration["Idle"]["event"])
 		return
 	update_movement(delta)
 
 
 func _on_stunned_state_exited() -> void:
+	%AnimationPlayer.play("RESET")
 	cardinal_direction *= -1
