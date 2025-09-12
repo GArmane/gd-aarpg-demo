@@ -43,12 +43,14 @@ func _on_idle_state_entered() -> void:
 
 
 func _on_idle_state_physics_processing(delta: float) -> void:
+	update_movement(delta)
+
+
+func _on_idle_state_processing(_delta: float) -> void:
 	if _move_action.is_triggered() and _move_action.value_axis_2d != Vector2.ZERO:
 		%StateChart.send_event(state_configuration["Walking"]["event"])
 	elif _attack_action.is_triggered():
 		%StateChart.send_event(state_configuration["Attacking"]["event"])
-	else:
-		update_movement(delta)
 
 
 func _on_walking_state_cardinal_direction_changed(_old_dir, _new_dir) -> void:
@@ -61,12 +63,14 @@ func _on_walking_state_entered() -> void:
 
 
 func _on_walking_state_physics_processing(delta: float) -> void:
+	update_movement(delta, _move_action.value_axis_2d)
+
+
+func _on_walking_state_processing(_delta: float) -> void:
 	if not _move_action.is_triggered() or _move_action.value_axis_2d == Vector2.ZERO:
 		%StateChart.send_event(state_configuration["Idle"]["event"])
 	elif _attack_action.is_triggered():
 		%StateChart.send_event(state_configuration["Attacking"]["event"])
-	else:
-		update_movement(delta, _move_action.value_axis_2d)
 
 
 func _on_walking_state_exited() -> void:
@@ -79,6 +83,9 @@ func _on_attacking_state_entered() -> void:
 
 func _on_attacking_state_physics_processing(delta: float) -> void:
 	update_movement(delta)
+
+
+func _on_attacking_state_processing(_delta: float) -> void:
 	if %AnimationPlayer.is_playing() == false:
 		if _move_action.is_triggered():
 			%StateChart.send_event(state_configuration["Walking"]["event"])
@@ -106,5 +113,4 @@ func _on_stunned_state_physics_processing(delta: float) -> void:
 
 
 func _on_stunned_state_exited() -> void:
-	%AnimationPlayer.play("RESET")
 	cardinal_direction *= -1
