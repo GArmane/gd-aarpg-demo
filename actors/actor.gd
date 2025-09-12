@@ -20,7 +20,6 @@ const CARDINAL_DIRECTION = {
 @export_category("Stats")
 @export_range(0, 50) var health_points := 1:
 	set(value):
-		assert(value >= 0, "Health points should not be negative")
 		var old_value = health_points
 		health_points = value
 		health_points_changed.emit(old_value, health_points)

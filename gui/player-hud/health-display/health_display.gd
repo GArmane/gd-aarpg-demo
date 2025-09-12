@@ -4,7 +4,6 @@ extends Control
 
 
 func set_health_points(value: int) -> void:
-	assert(value >= 0, "Health points should not be negative")
 	var hearts = %IconContainer.get_children()
 	for index in hearts.size():
 		hearts[index].frame = clampi(
