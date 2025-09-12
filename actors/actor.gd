@@ -3,7 +3,8 @@
 class_name Actor2D extends CharacterBody2D
 
 signal cardinal_direction_changed(old_value, new_value)
-signal hitpoints_changed(old_value, new_value)
+signal health_points_changed(old_value, new_value)
+signal max_health_points_changed(old_value, new_value)
 
 const CARDINAL_DIRECTION = {
 	Vector2.RIGHT: "Side",
@@ -17,11 +18,18 @@ const CARDINAL_DIRECTION = {
 @export_range(0.0, 20.00, 0.5) var deacceleration_speed: float = 10.0
 
 @export_category("Stats")
-@export var hitpoints := 1:
+@export var health_points := 1:
 	set(value):
-		var old_value = hitpoints
-		hitpoints = value
-		hitpoints_changed.emit(old_value, hitpoints)
+		var old_value = health_points
+		health_points = value
+		health_points_changed.emit(old_value, health_points)
+@export var max_health_points := 1:
+	set(value):
+		var old_value = max_health_points
+		if value < health_points:
+			health_points = value
+		max_health_points = value
+		max_health_points_changed.emit(old_value, max_health_points)
 
 var cardinal_direction := Vector2.DOWN:
 	set(value):
@@ -31,7 +39,7 @@ var cardinal_direction := Vector2.DOWN:
 
 
 func apply_damage(qtd: int) -> void:
-	hitpoints -= abs(qtd)
+	health_points -= abs(qtd)
 
 
 func apply_force(direction: Vector2, force: float, new_cardinal_direction := Vector2.ZERO) -> void:

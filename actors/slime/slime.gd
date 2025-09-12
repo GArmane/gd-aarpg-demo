@@ -28,7 +28,7 @@ class_name Slime extends Actor2D
 
 
 func _on_root_state_entered() -> void:
-	%StateChart.set_expression_property("hitpoints", hitpoints)
+	%StateChart.set_expression_property("health_points", health_points)
 
 
 func _on_idle_state_entered() -> void:
@@ -62,13 +62,13 @@ func _on_wandering_state_physics_processing(delta: float) -> void:
 		update_movement(delta, cardinal_direction)
 
 
-func _on_hitpoints_changed(_old_value: Variant, _new_value: Variant) -> void:
-	%StateChart.set_expression_property("hitpoints", hitpoints)
+func _on_health_points_changed(_old_value: Variant, _new_value: Variant) -> void:
+	%StateChart.set_expression_property("health_points", health_points)
 
 
 func _on_hurtbox_damaged(damage: int, knockback_direction: Vector2, knockback_force: float) -> void:
 	apply_damage(damage)
-	if hitpoints > 0:
+	if health_points > 0:
 		apply_force(knockback_direction, knockback_force, knockback_direction * -1)
 		%StateChart.send_event(state_configuration["Stunned"]["event"])
 

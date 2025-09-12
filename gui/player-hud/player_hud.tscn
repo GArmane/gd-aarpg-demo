@@ -7,3 +7,4 @@
 script = ExtResource("1_0npua")
 
 [node name="PlayerHealthControl" parent="." instance=ExtResource("2_o17gi")]
+unique_name_in_owner = true

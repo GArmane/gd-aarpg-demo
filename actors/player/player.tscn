@@ -857,7 +857,8 @@ script = ExtResource("1_rkbax")
 _game_mode = ExtResource("2_bv0o5")
 _move_action = ExtResource("2_g1dw6")
 _attack_action = ExtResource("4_pxnim")
-hitpoints = 5
+health_points = 4
+max_health_points = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true

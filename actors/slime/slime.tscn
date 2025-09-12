@@ -1077,7 +1077,7 @@ radius = 13.0384
 
 [sub_resource type="Resource" id="Resource_ow7r1"]
 script = ExtResource("12_odhwe")
-expression = "hitpoints == 0"
+expression = "health_points == 0"
 metadata/_custom_type_script = "uid://le5w1cm0ul8p"
 
 [node name="Slime" type="CharacterBody2D"]
@@ -1086,7 +1086,8 @@ collision_mask = 5
 motion_mode = 1
 script = ExtResource("1_qfp8a")
 move_speed = 30.0
-hitpoints = 3
+health_points = 3
+max_health_points = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
@@ -1205,7 +1206,7 @@ delay_in_seconds = "0.0"
 [node name="Dead" type="Node" parent="StateChart/Root"]
 script = ExtResource("6_4skca")
 
-[connection signal="hitpoints_changed" from="." to="." method="_on_hitpoints_changed"]
+[connection signal="health_points_changed" from="." to="." method="_on_health_points_changed"]
 [connection signal="damaged" from="Hurtbox" to="." method="_on_hurtbox_damaged"]
 [connection signal="state_entered" from="StateChart/Root" to="." method="_on_root_state_entered"]
 [connection signal="state_entered" from="StateChart/Root/Active/Idle" to="." method="_on_idle_state_entered"]
