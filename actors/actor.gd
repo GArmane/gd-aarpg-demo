@@ -18,13 +18,15 @@ const CARDINAL_DIRECTION = {
 @export_range(0.0, 20.00, 0.5) var deacceleration_speed: float = 10.0
 
 @export_category("Stats")
-@export var health_points := 1:
+@export_range(0, 50) var health_points := 1:
 	set(value):
+		assert(value >= 0, "Health points should not be negative")
 		var old_value = health_points
 		health_points = value
 		health_points_changed.emit(old_value, health_points)
-@export var max_health_points := 1:
+@export_range(0, 50) var max_health_points := 1:
 	set(value):
+		assert(value >= 0, "Max health points should not be negative")
 		var old_value = max_health_points
 		if value < health_points:
 			health_points = value

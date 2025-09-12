@@ -4,6 +4,7 @@ extends Control
 
 
 func set_health_points(value: int) -> void:
+	assert(value >= 0, "Health points should not be negative")
 	var hearts = %IconContainer.get_children()
 	for index in hearts.size():
 		hearts[index].frame = clampi(
@@ -12,6 +13,7 @@ func set_health_points(value: int) -> void:
 
 
 func set_max_health_points(value: int) -> Array:
+	assert(value >= 0, "Max health points should not be negative")
 	_reset_icons()
 	var count := roundi(value * 0.5)
 	for i in count:
