@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://vbilvk3vph8h"]
+
+[ext_resource type="Script" uid="uid://rfyebyef1efo" path="res://gui/player-hud/health-display/health_display.gd" id="1_r663v"]
+[ext_resource type="Texture2D" uid="uid://xsgx47j1mwmi" path="res://gui/player-hud/health-display/label.png" id="2_x8ko0"]
+
+[node name="HealthDisplay" type="Control"]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+grow_horizontal = 0
+size_flags_horizontal = 0
+size_flags_vertical = 4
+script = ExtResource("1_r663v")
+
+[node name="Label" type="TextureRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = -176.0
+offset_top = 8.0
+offset_right = -142.0
+offset_bottom = 16.0
+texture = ExtResource("2_x8ko0")
+stretch_mode = 2
+
+[node name="IconContainer" type="HFlowContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = -144.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = 26.0
+theme_override_constants/h_separation = 4
+theme_override_constants/v_separation = 2
+alignment = 1

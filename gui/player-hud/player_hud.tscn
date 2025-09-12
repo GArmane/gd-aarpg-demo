@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://2m8iv274top"]
+
+[ext_resource type="Script" uid="uid://e7jcm7anks0i" path="res://gui/player-hud/player_hud.gd" id="1_0npua"]
+[ext_resource type="PackedScene" uid="uid://vbilvk3vph8h" path="res://gui/player-hud/health-display/health_display.tscn" id="2_o17gi"]
+
+[node name="PlayerHUD" type="CanvasLayer"]
+script = ExtResource("1_0npua")
+
+[node name="PlayerHealthControl" parent="." instance=ExtResource("2_o17gi")]
