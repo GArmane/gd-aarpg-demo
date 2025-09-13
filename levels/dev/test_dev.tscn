@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://ovs7lvvfl4nx"]
+[gd_scene load_steps=10 format=4 uid="uid://ovs7lvvfl4nx"]
 
 [ext_resource type="PackedScene" uid="uid://ctj3fr05y0gdi" path="res://gui/debug/debug_layer.tscn" id="1_ucg7n"]
 [ext_resource type="PackedScene" uid="uid://cm63mk8ap754y" path="res://tile-maps/grass-01/grass_01.tscn" id="3_d8hcq"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bqhiyry5b66aa" path="res://props/sprites/Bush01.tscn" id="5_d8hcq"]
 [ext_resource type="PackedScene" uid="uid://1wudjg2ogp8c" path="res://actors/player/player.tscn" id="5_ucg7n"]
 [ext_resource type="Texture2D" uid="uid://duudsnvdn0ng4" path="res://actors/player/sprites/sprite-sheet.png" id="6_5dwok"]
+[ext_resource type="Texture2D" uid="uid://dw27puoe1pawy" path="res://actors/slime/sprites/slime.png" id="7_2do3s"]
 [ext_resource type="PackedScene" uid="uid://tbf5j4i8ibai" path="res://components/spawner/spawner.tscn" id="7_5dwok"]
 [ext_resource type="PackedScene" uid="uid://btt0bkps2e7t2" path="res://actors/slime/slime.tscn" id="7_ucg7n"]
 
@@ -32,8 +33,17 @@ texture = ExtResource("6_5dwok")
 hframes = 16
 vframes = 3
 
-[node name="Slime" parent="." instance=ExtResource("7_ucg7n")]
+[node name="SlimeSpawn" parent="." instance=ExtResource("7_5dwok")]
 position = Vector2(160, 352)
+scene = ExtResource("7_ucg7n")
+autospawn = true
+
+[node name="Sprite2D" type="Sprite2D" parent="SlimeSpawn"]
+modulate = Color(0, 1, 0, 0.588235)
+position = Vector2(0, -15)
+texture = ExtResource("7_2do3s")
+hframes = 16
+vframes = 2
 
 [node name="Props" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -81,3 +91,4 @@ position = Vector2(467, 112)
 position = Vector2(80, 112)
 
 [connection signal="spawned" from="PlayerSpawn" to="UI/PlayerHUD" method="set_player"]
+[connection signal="spawned" from="SlimeSpawn" to="UI/PlayerHUD" method="set_player"]
