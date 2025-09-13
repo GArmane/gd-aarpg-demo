@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=4 uid="uid://dt0tcdjp5ty4u"]
+[gd_scene load_steps=7 format=4 uid="uid://dt0tcdjp5ty4u"]
 
 [ext_resource type="PackedScene" uid="uid://2m8iv274top" path="res://gui/player-hud/player_hud.tscn" id="1_f4ru3"]
 [ext_resource type="PackedScene" uid="uid://ctj3fr05y0gdi" path="res://gui/debug/debug_layer.tscn" id="2_1pal0"]
 [ext_resource type="PackedScene" uid="uid://cm63mk8ap754y" path="res://tile-maps/grass-01/grass_01.tscn" id="3_fyli1"]
 [ext_resource type="PackedScene" uid="uid://tbf5j4i8ibai" path="res://components/spawner/spawner.tscn" id="4_1pal0"]
 [ext_resource type="PackedScene" uid="uid://1wudjg2ogp8c" path="res://actors/player/player.tscn" id="5_fyli1"]
+[ext_resource type="Texture2D" uid="uid://duudsnvdn0ng4" path="res://actors/player/sprites/sprite-sheet.png" id="6_0pei2"]
 
 [node name="World" type="Node2D"]
 y_sort_enabled = true
@@ -22,5 +23,11 @@ tile_map_data = PackedByteArray("AAAAAAAAAAAKAAQAAAAAAAEAAAAKAAUAAAAAAAIAAAAKAAY
 position = Vector2(96, 96)
 scene = ExtResource("5_fyli1")
 autospawn = true
+
+[node name="Sprite2D" type="Sprite2D" parent="PlayerSpawn"]
+modulate = Color(0, 1, 0, 0.588235)
+texture = ExtResource("6_0pei2")
+hframes = 16
+vframes = 3
 
 [connection signal="spawned" from="PlayerSpawn" to="GUI/PlayerHUD" method="set_player"]
