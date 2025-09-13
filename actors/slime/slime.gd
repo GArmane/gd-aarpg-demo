@@ -1,3 +1,4 @@
+@icon("res://assets/icon-godot-node/node-2D/icon_skull.png")
 class_name Slime extends Actor2D
 
 @export var state_configuration := {

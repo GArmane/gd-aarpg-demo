@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://1wudjg2ogp8c"]
+[gd_scene load_steps=39 format=3 uid="uid://1wudjg2ogp8c"]
 
 [ext_resource type="Texture2D" uid="uid://duudsnvdn0ng4" path="res://actors/player/sprites/sprite-sheet.png" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://gfqy1u7rvdfs" path="res://actors/player/player.gd" id="1_rkbax"]
@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://bn6smj6jjsoso" path="res://actors/player/audio/hit_player.wav" id="6_k67x5"]
 [ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="6_rgyib"]
 [ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="7_boad6"]
+[ext_resource type="Script" uid="uid://c2617wgbmg014" path="res://components/camera/game_camera.gd" id="7_rt46e"]
 [ext_resource type="Texture2D" uid="uid://yjadre666npo" path="res://actors/player/sprites/shadow.png" id="8_16fba"]
 [ext_resource type="PackedScene" uid="uid://w7txpjedkngh" path="res://components/hitbox/hitbox.tscn" id="9_7aotg"]
 [ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="10_7aotg"]
@@ -879,6 +880,10 @@ libraries = {
 unique_name_in_owner = true
 pitch_scale = 505.15
 max_polyphony = 4
+
+[node name="GameCamera" type="Camera2D" parent="."]
+script = ExtResource("7_rt46e")
+metadata/_custom_type_script = "uid://c2617wgbmg014"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 unique_name_in_owner = true
