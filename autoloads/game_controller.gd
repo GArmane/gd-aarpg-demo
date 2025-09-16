@@ -4,7 +4,7 @@ extends Node
 func start_game(main_scene: String) -> void:
 	var player := PlayerManager.setup_player()
 	var level := await LevelManager.load_level(main_scene)
-	level.spawn_player_at_spawn_point(player)
+	level.spawn_actor_at_spawn_point(player)
 	level.attach_gui(GUIController.setup_gui(player))
 
 
