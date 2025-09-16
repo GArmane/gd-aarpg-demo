@@ -8,6 +8,7 @@ class_name SceneTransition extends Control
 				%AnimationPlayer.play("Scene Transitions/fade_in")
 			false:
 				%AnimationPlayer.play("Scene Transitions/fade_out")
+		await %AnimationPlayer.animation_finished
 
 
 func toggle() -> bool:
