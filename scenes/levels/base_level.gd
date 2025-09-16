@@ -1,4 +1,4 @@
-class_name BaseLevel extends Node2D
+class_name Level extends Node2D
 
 signal actor_traveling_to(level, actor, target_area_transition, position_offset)
 
