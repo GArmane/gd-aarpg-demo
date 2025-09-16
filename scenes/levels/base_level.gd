@@ -5,13 +5,6 @@ signal actor_traveling_to(level, actor, target_area_transition, position_offset)
 @export var spawn_point: Marker2D
 
 
-## Attach a GUI instance to current level for rendering.
-## [gui]: should be a initialized GUI node.
-func attach_gui(gui: GUI) -> void:
-	add_child(gui)
-	move_child(gui, 0)
-
-
 ## Spawn an instanced actor in the default scene spawn point.
 ## [actor]: should be an instanced actor.
 ##

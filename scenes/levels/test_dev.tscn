@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bqhiyry5b66aa" path="res://props/sprites/Bush01.tscn" id="8_8i6yb"]
 [ext_resource type="PackedScene" uid="uid://copbpewupkbro" path="res://components/transition/area_transition.tscn" id="9_uog5e"]
 
-[node name="World" type="Node2D" node_paths=PackedStringArray("spawn_point")]
+[node name="World2D" type="Node2D" node_paths=PackedStringArray("spawn_point")]
 y_sort_enabled = true
 script = ExtResource("1_c8tsn")
 spawn_point = NodePath("PlayerSpawn")

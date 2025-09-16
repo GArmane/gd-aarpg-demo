@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cm63mk8ap754y" path="res://tile-maps/grass-01/grass_01.tscn" id="3_fyli1"]
 [ext_resource type="PackedScene" uid="uid://copbpewupkbro" path="res://components/transition/area_transition.tscn" id="8_r3bxm"]
 
-[node name="World" type="Node2D"]
+[node name="World2D" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_x3c2i")
 
