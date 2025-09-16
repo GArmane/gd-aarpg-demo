@@ -3,10 +3,9 @@ extends Node
 
 func start_game(main_scene: String) -> void:
 	var player := PlayerManager.setup_player()
-	var gui := GUIController.setup_gui(player)
 	var level := await LevelManager.load_level(main_scene)
 	level.spawn_player_at_spawn_point(player)
-	level.attach_gui(gui)
+	level.attach_gui(GUIController.setup_gui(player))
 
 
 func travel_to_level(
@@ -15,6 +14,10 @@ func travel_to_level(
 	target_transition_area: String,
 	position_offset: Vector2,
 ) -> void:
+	# Forcefully unparent player and GUI instance before a level is cleaned.
+	GUIController.unparent_gui()
+	PlayerManager.unparent_player()
+	# Load and setup new level.
 	var level := await LevelManager.load_level(level_path)
 	level.spawn_player_at_transition_area(player, target_transition_area, position_offset)
 	level.attach_gui(GUIController.get_current_gui())

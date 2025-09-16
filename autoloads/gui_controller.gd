@@ -15,3 +15,11 @@ func setup_gui(player: Player) -> GUI:
 	_current_gui = _gui_scene.instantiate()
 	_current_gui.setup_player(player)
 	return _current_gui
+
+
+func unparent_gui() -> GUI:
+	var gui := get_current_gui()
+	var parent = gui.get_parent()
+	if parent != null:
+		parent.remove_child(gui)
+	return gui

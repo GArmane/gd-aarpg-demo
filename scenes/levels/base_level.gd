@@ -23,7 +23,7 @@ func spawn_player_at_spawn_point(player: Player) -> void:
 
 ## Spawn a instanced player in based on a transition area.
 ## [player]: should be an instanced player.
-## [target_transition]: should be a valid transition area child.
+## [target_area_transition]: should be a valid transition area child.
 ## [position_offset]: should be the position in reference to the transition area which
 ## the player is going to spawn.
 ##
@@ -31,30 +31,23 @@ func spawn_player_at_spawn_point(player: Player) -> void:
 ## Otherwise returns spawn player at designated transition area.
 func spawn_player_at_transition_area(
 	player: Player,
-	target_transition: String,
+	target_area_transition: String,
 	position_offset: Vector2,
 ) -> void:
-	var transition = find_child(target_transition, true) as LevelTransition
-	assert(transition != null, "(%s): transition area not found" % name)
+	var transition = find_child(target_area_transition, true) as AreaTransition
+	assert(transition != null, "(%s): area transition not found" % name)
 	add_child(player)
 	transition.place_player(player, position_offset)
-
-
-## Cleanup level and free resources.
-func free_level() -> void:
-	queue_free()
 
 
 func _ready() -> void:
 	y_sort_enabled = true
 
 
-func _on_transition_area_travel_to(
+func _on_area_transition_travel_to(
 	level: String,
 	player: Player,
 	target_transition: String,
 	position_offset: Vector2,
 ) -> void:
-	remove_child(player)
-	remove_child(GUIController.get_current_gui())
 	GameController.travel_to_level(level, player, target_transition, position_offset)

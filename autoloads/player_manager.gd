@@ -14,3 +14,11 @@ func get_current_player() -> Player:
 func setup_player() -> Player:
 	_current_player = _player_scene.instantiate()
 	return _current_player
+
+
+func unparent_player() -> Player:
+	var player := get_current_player()
+	var parent = player.get_parent()
+	if parent != null:
+		parent.remove_child(player)
+	return player

@@ -1,10 +1,10 @@
 @tool
-class_name LevelTransition extends Area2D
+class_name AreaTransition extends Area2D
 
-signal travel_to(level, player, target_transition, offset)
+signal travel_to(level, player, target_area_transition, offset)
 
 @export_file("*.tscn") var level
-@export var target_transition_area: String = "LevelTransition"
+@export var target_area_transition: String = "AreaTransition"
 
 @export_category("Collision Area Settings")
 @export_range(1, 12, 1, "or_greater") var size := 1:
@@ -66,4 +66,4 @@ func _update_collision_shape() -> void:
 
 
 func _on_body_entered(player: Player) -> void:
-	travel_to.emit(level, player, target_transition_area, _get_body_offset(player))
+	travel_to.emit(level, player, target_area_transition, _get_body_offset(player))

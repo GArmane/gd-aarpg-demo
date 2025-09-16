@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://btt0bkps2e7t2" path="res://actors/slime/slime.tscn" id="6_v75rj"]
 [ext_resource type="Texture2D" uid="uid://dw27puoe1pawy" path="res://actors/slime/sprites/slime.png" id="7_8sx15"]
 [ext_resource type="PackedScene" uid="uid://bqhiyry5b66aa" path="res://props/sprites/Bush01.tscn" id="8_8i6yb"]
-[ext_resource type="PackedScene" uid="uid://copbpewupkbro" path="res://components/transition/level_transition.tscn" id="9_uog5e"]
+[ext_resource type="PackedScene" uid="uid://copbpewupkbro" path="res://components/transition/area_transition.tscn" id="9_uog5e"]
 
 [node name="World" type="Node2D" node_paths=PackedStringArray("player_spawn_point")]
 y_sort_enabled = true
@@ -85,10 +85,10 @@ position = Vector2(467, 112)
 [node name="Bush14" parent="Props" instance=ExtResource("8_8i6yb")]
 position = Vector2(80, 112)
 
-[node name="TransitionToTestDev2" parent="." instance=ExtResource("9_uog5e")]
+[node name="AreaTransition" parent="." instance=ExtResource("9_uog5e")]
 position = Vector2(0, 464)
 level = "uid://dt0tcdjp5ty4u"
-target_transition_area = "TransitionToTestDev"
+target_area_transition = "AreaTransition"
 size = 3
 
-[connection signal="travel_to" from="TransitionToTestDev2" to="." method="_on_transition_area_travel_to"]
+[connection signal="travel_to" from="AreaTransition" to="." method="_on_area_transition_travel_to"]
