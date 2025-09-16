@@ -1,15 +1,32 @@
-[gd_scene load_steps=4 format=3 uid="uid://caobf38rc8egb"]
+[gd_scene load_steps=5 format=3 uid="uid://caobf38rc8egb"]
 
 [ext_resource type="PackedScene" uid="uid://ctj3fr05y0gdi" path="res://gui/debug/debug_hud.tscn" id="1_ioifv"]
 [ext_resource type="Script" uid="uid://bykbyc4an1mdr" path="res://gui/gui.gd" id="1_q46mf"]
 [ext_resource type="PackedScene" uid="uid://2m8iv274top" path="res://gui/player-hud/player_hud.tscn" id="2_q46mf"]
+[ext_resource type="PackedScene" uid="uid://cw2l3oe6dey3h" path="res://gui/scene-transition/scene_transition.tscn" id="4_n360k"]
 
 [node name="GUI" type="Control"]
 layout_mode = 3
-anchors_preset = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_q46mf")
 
-[node name="DebugHUD" parent="." instance=ExtResource("1_ioifv")]
+[node name="Debug" type="CanvasLayer" parent="."]
+layer = 3
+
+[node name="DebugHUD" parent="Debug" instance=ExtResource("1_ioifv")]
+unique_name_in_owner = true
+
+[node name="HUDs" type="CanvasLayer" parent="."]
 layer = 2
 
-[node name="PlayerHUD" parent="." instance=ExtResource("2_q46mf")]
+[node name="PlayerHUD" parent="HUDs" instance=ExtResource("2_q46mf")]
+unique_name_in_owner = true
+
+[node name="Overlays" type="CanvasLayer" parent="."]
+
+[node name="SceneTransition" parent="Overlays" instance=ExtResource("4_n360k")]
+unique_name_in_owner = true

@@ -1,4 +1,4 @@
-class_name PlayerHUD extends CanvasLayer
+class_name PlayerHUD extends Control
 
 
 func setup_player(player: Player) -> void:

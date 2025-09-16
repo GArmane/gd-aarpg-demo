@@ -1,7 +1,7 @@
 extends Node
 
-signal level_load_started
-signal level_loaded
+signal level_load_started(level_path: String)
+signal level_loaded(current_scene: Node2D)
 signal tilemap_bounds_changed(bounds: TilemapLayerBounds)
 
 var current_scene: Node2D:

@@ -3,8 +3,15 @@
 [ext_resource type="Script" uid="uid://e7jcm7anks0i" path="res://gui/player-hud/player_hud.gd" id="1_0npua"]
 [ext_resource type="PackedScene" uid="uid://vbilvk3vph8h" path="res://gui/player-hud/health-display/health_display.tscn" id="2_o17gi"]
 
-[node name="PlayerHUD" type="CanvasLayer"]
+[node name="PlayerHUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_0npua")
 
 [node name="PlayerHealthControl" parent="." instance=ExtResource("2_o17gi")]
 unique_name_in_owner = true
+layout_mode = 1

@@ -1,4 +1,4 @@
-class_name DebugLayer extends CanvasLayer
+class_name DebugLayer extends Control
 
 
 func setup_player(player: Player) -> void:
