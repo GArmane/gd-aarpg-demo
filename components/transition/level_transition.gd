@@ -64,4 +64,4 @@ func _update_collision_shape() -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
-	GlobalLevelManager.change_to_level(body, level, target_transition_area, _get_body_offset(body))
+	LevelManager.change_to_level(body, level, target_transition_area, _get_body_offset(body))

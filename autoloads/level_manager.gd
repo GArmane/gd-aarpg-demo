@@ -1,4 +1,4 @@
-class_name LevelManager extends Node
+extends Node
 
 signal level_load_started
 signal level_loaded

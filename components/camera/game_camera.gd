@@ -2,8 +2,9 @@ class_name GameCamera extends Camera2D
 
 
 func _ready():
-	GlobalLevelManager.tilemap_bounds_changed.connect(update_limits)
-	update_limits(GlobalLevelManager.current_tilemap_bounds)
+	LevelManager.tilemap_bounds_changed.connect(update_limits)
+	if LevelManager.current_tilemap_bounds != null:
+		update_limits(LevelManager.current_tilemap_bounds)
 
 
 func update_limits(bounds: TilemapLayerBounds) -> void:

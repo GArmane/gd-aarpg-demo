@@ -2,7 +2,7 @@ class_name LevelTileMap extends TileMapLayer
 
 
 func _ready() -> void:
-	GlobalLevelManager.change_tilemap_bounds(get_tilemap_bounds())
+	LevelManager.change_tilemap_bounds(get_tilemap_bounds())
 
 
 func get_tilemap_bounds() -> TilemapLayerBounds:

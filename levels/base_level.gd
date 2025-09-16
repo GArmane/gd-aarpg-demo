@@ -2,8 +2,8 @@ class_name BaseLevel extends Node2D
 
 
 func _ready() -> void:
-	GlobalLevelManager.level_load_started.connect(_on_level_load_started)
-	GlobalLevelManager.level_loaded.connect(_on_level_loaded)
+	LevelManager.level_load_started.connect(_on_level_load_started)
+	LevelManager.level_loaded.connect(_on_level_loaded)
 	y_sort_enabled = true
 
 

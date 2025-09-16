@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://1wudjg2ogp8c" path="res://actors/player/player.tscn" id="5_ucg7n"]
 [ext_resource type="Texture2D" uid="uid://duudsnvdn0ng4" path="res://actors/player/sprites/sprite-sheet.png" id="6_5dwok"]
 [ext_resource type="Texture2D" uid="uid://dw27puoe1pawy" path="res://actors/slime/sprites/slime.png" id="7_2do3s"]
-[ext_resource type="PackedScene" uid="uid://tbf5j4i8ibai" path="res://components/spawner/spawner.tscn" id="7_5dwok"]
+[ext_resource type="PackedScene" uid="uid://tbf5j4i8ibai" path="res://components/spawners/point/spawn_point.tscn" id="7_5dwok"]
 [ext_resource type="PackedScene" uid="uid://btt0bkps2e7t2" path="res://actors/slime/slime.tscn" id="7_ucg7n"]
 [ext_resource type="PackedScene" uid="uid://copbpewupkbro" path="res://components/transition/level_transition.tscn" id="11_t2q1u"]
 
@@ -28,6 +28,7 @@ tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAEAAAAAAAIAAAAAAAI
 [node name="PlayerSpawn" parent="." instance=ExtResource("7_5dwok")]
 position = Vector2(275, 406)
 scene = ExtResource("5_ucg7n")
+autospawn = true
 
 [node name="Sprite2D" type="Sprite2D" parent="PlayerSpawn"]
 modulate = Color(0, 1, 0, 0.588235)
