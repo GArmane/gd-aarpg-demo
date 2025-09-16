@@ -1,7 +1,7 @@
 class_name PlayerHUD extends CanvasLayer
 
 
-func set_player(player: Player) -> void:
+func setup_player(player: Player) -> void:
 	player.health_points_changed.connect(
 		func(_old_value, new_value): %PlayerHealthControl.set_health_points(new_value)
 	)

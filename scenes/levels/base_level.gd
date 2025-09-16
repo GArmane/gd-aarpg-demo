@@ -3,6 +3,13 @@ class_name BaseLevel extends Node2D
 @export var player_spawn_point: Marker2D
 
 
+## Attach a GUI instance to current level for rendering.
+## [gui]: should be a initialized GUI node.
+func attach_gui(gui: GUI) -> void:
+	add_child(gui)
+	move_child(gui, 0)
+
+
 ## Spawn a instanced player in the default scene player spawn point.
 ## [player]: should be an instanced player.
 ##
@@ -49,4 +56,5 @@ func _on_transition_area_travel_to(
 	position_offset: Vector2,
 ) -> void:
 	remove_child(player)
+	remove_child(GUIController.get_current_gui())
 	GameController.travel_to_level(level, player, target_transition, position_offset)

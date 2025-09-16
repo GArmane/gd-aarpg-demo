@@ -1,15 +1,16 @@
 [gd_scene load_steps=4 format=3 uid="uid://ctj3fr05y0gdi"]
 
-[ext_resource type="Script" uid="uid://dok2aaa5i2tfk" path="res://gui/debug/debug_layer.gd" id="1_ebt1x"]
+[ext_resource type="Script" uid="uid://dok2aaa5i2tfk" path="res://gui/debug/debug_hud.gd" id="1_ebt1x"]
 [ext_resource type="PackedScene" uid="uid://dkr80d2pi0d41" path="res://addons/guide/debugger/guide_debugger.tscn" id="2_di4ms"]
 [ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="3_2oh3o"]
 
-[node name="DebugLayer" type="CanvasLayer"]
+[node name="DebugHUD" type="CanvasLayer"]
 visible = false
 script = ExtResource("1_ebt1x")
 
 [node name="GuideDebugger" parent="." instance=ExtResource("2_di4ms")]
+unique_name_in_owner = true
 
 [node name="StateChartDebugger" parent="." instance=ExtResource("3_2oh3o")]
+unique_name_in_owner = true
 offset_left = 257.0
-initial_node_to_watch = NodePath("../../../Player")

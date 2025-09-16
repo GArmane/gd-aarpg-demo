@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 GameController="*res://autoloads/game_controller.gd"
 LevelManager="*res://autoloads/level_manager.gd"
 PlayerManager="*res://autoloads/player_manager.gd"
+GUIController="*res://autoloads/gui_controller.gd"
 GUIDE="*res://addons/guide/guide.gd"
 
 [display]
