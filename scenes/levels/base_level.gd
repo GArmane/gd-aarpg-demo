@@ -1,5 +1,7 @@
 class_name BaseLevel extends Node2D
 
+signal actor_traveling_to(level, actor, target_area_transition, position_offset)
+
 @export var spawn_point: Marker2D
 
 
@@ -46,7 +48,7 @@ func _ready() -> void:
 func _on_area_transition_travel_to(
 	level: String,
 	actor: Actor2D,
-	target_area: String,
+	target_area_transition: String,
 	position_offset: Vector2,
 ) -> void:
-	GameController.travel_to_level(level, actor, target_area, position_offset)
+	actor_traveling_to.emit(level, actor, target_area_transition, position_offset)
