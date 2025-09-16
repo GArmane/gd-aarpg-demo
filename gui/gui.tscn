@@ -4,7 +4,9 @@
 [ext_resource type="Script" uid="uid://bykbyc4an1mdr" path="res://gui/gui.gd" id="1_q46mf"]
 [ext_resource type="PackedScene" uid="uid://2m8iv274top" path="res://gui/player-hud/player_hud.tscn" id="2_q46mf"]
 
-[node name="GUI" type="Node"]
+[node name="GUI" type="Control"]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_q46mf")
 
 [node name="DebugHUD" parent="." instance=ExtResource("1_ioifv")]

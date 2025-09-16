@@ -1,4 +1,4 @@
-class_name GUI extends Node
+class_name GUI extends Control
 
 var _player: Player
 
