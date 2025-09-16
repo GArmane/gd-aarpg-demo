@@ -1,5 +1,6 @@
-[gd_scene load_steps=10 format=4 uid="uid://ovs7lvvfl4nx"]
+[gd_scene load_steps=12 format=4 uid="uid://ovs7lvvfl4nx"]
 
+[ext_resource type="Script" uid="uid://dpn82xqv2ueef" path="res://levels/base_level.gd" id="1_cxclo"]
 [ext_resource type="PackedScene" uid="uid://ctj3fr05y0gdi" path="res://gui/debug/debug_layer.tscn" id="1_ucg7n"]
 [ext_resource type="PackedScene" uid="uid://cm63mk8ap754y" path="res://tile-maps/grass-01/grass_01.tscn" id="3_d8hcq"]
 [ext_resource type="PackedScene" uid="uid://2m8iv274top" path="res://gui/player-hud/player_hud.tscn" id="4_2do3s"]
@@ -9,9 +10,11 @@
 [ext_resource type="Texture2D" uid="uid://dw27puoe1pawy" path="res://actors/slime/sprites/slime.png" id="7_2do3s"]
 [ext_resource type="PackedScene" uid="uid://tbf5j4i8ibai" path="res://components/spawner/spawner.tscn" id="7_5dwok"]
 [ext_resource type="PackedScene" uid="uid://btt0bkps2e7t2" path="res://actors/slime/slime.tscn" id="7_ucg7n"]
+[ext_resource type="PackedScene" uid="uid://copbpewupkbro" path="res://components/transition/level_transition.tscn" id="11_t2q1u"]
 
 [node name="World" type="Node2D"]
 y_sort_enabled = true
+script = ExtResource("1_cxclo")
 
 [node name="UI" type="Node" parent="."]
 
@@ -25,7 +28,6 @@ tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAEAAAAAAAIAAAAAAAI
 [node name="PlayerSpawn" parent="." instance=ExtResource("7_5dwok")]
 position = Vector2(275, 406)
 scene = ExtResource("5_ucg7n")
-autospawn = true
 
 [node name="Sprite2D" type="Sprite2D" parent="PlayerSpawn"]
 modulate = Color(0, 1, 0, 0.588235)
@@ -90,5 +92,8 @@ position = Vector2(467, 112)
 [node name="Bush14" parent="Props" instance=ExtResource("5_d8hcq")]
 position = Vector2(80, 112)
 
-[connection signal="spawned" from="PlayerSpawn" to="UI/PlayerHUD" method="set_player"]
-[connection signal="spawned" from="SlimeSpawn" to="UI/PlayerHUD" method="set_player"]
+[node name="TransitionToTestDev2" parent="." instance=ExtResource("11_t2q1u")]
+position = Vector2(0, 464)
+level = "uid://dt0tcdjp5ty4u"
+target_transition_area = "TransitionToTestDev"
+size = 3

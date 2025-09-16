@@ -9,7 +9,7 @@ signal spawned(scene: Node2D)
 
 func spawn() -> void:
 	if not scene:
-		push_error("Spawnee not defined.")
+		push_error("Scene to spawn not defined.")
 		return
 	var instance = scene.instantiate()
 	get_parent().add_child(instance)
