@@ -11,14 +11,16 @@ config_version=5
 [application]
 
 config/name="AARPG Demo"
-run/main_scene="uid://ovs7lvvfl4nx"
+run/main_scene="uid://vpu43au1ws3g"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-GUIDE="*res://addons/guide/guide.gd"
+GameController="*res://autoloads/game_controller.gd"
 LevelManager="*res://autoloads/level_manager.gd"
+PlayerManager="*res://autoloads/player_manager.gd"
+GUIDE="*res://addons/guide/guide.gd"
 
 [display]
 

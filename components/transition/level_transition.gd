@@ -1,6 +1,8 @@
 @tool
 class_name LevelTransition extends Area2D
 
+signal travel_to(level, player, target_transition, offset)
+
 @export_file("*.tscn") var level
 @export var target_transition_area: String = "LevelTransition"
 
@@ -16,8 +18,8 @@ class_name LevelTransition extends Area2D
 @onready var _collision_shape_2d := $CollisionShape2D
 
 
-func place_body(body: Node2D, offset: Vector2) -> void:
-	body.global_position = global_position + offset
+func place_player(player: Player, offset: Vector2) -> void:
+	player.global_position = global_position + offset
 
 
 func _ready() -> void:
@@ -63,5 +65,5 @@ func _update_collision_shape() -> void:
 	_collision_shape_2d.position = new_pos
 
 
-func _on_body_entered(body: Node2D) -> void:
-	LevelManager.change_to_level(body, level, target_transition_area, _get_body_offset(body))
+func _on_body_entered(player: Player) -> void:
+	travel_to.emit(level, player, target_transition_area, _get_body_offset(player))

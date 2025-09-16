@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=4 uid="uid://dt0tcdjp5ty4u"]
 
 [ext_resource type="PackedScene" uid="uid://2m8iv274top" path="res://gui/player-hud/player_hud.tscn" id="1_f4ru3"]
-[ext_resource type="Script" uid="uid://dpn82xqv2ueef" path="res://levels/base_level.gd" id="1_x3c2i"]
+[ext_resource type="Script" uid="uid://dpn82xqv2ueef" path="res://scenes/levels/base_level.gd" id="1_x3c2i"]
 [ext_resource type="PackedScene" uid="uid://ctj3fr05y0gdi" path="res://gui/debug/debug_layer.tscn" id="2_1pal0"]
 [ext_resource type="PackedScene" uid="uid://cm63mk8ap754y" path="res://tile-maps/grass-01/grass_01.tscn" id="3_fyli1"]
 [ext_resource type="PackedScene" uid="uid://copbpewupkbro" path="res://components/transition/level_transition.tscn" id="8_r3bxm"]
@@ -25,3 +25,5 @@ level = "uid://ovs7lvvfl4nx"
 target_transition_area = "TransitionToTestDev2"
 size = 3
 side = 2
+
+[connection signal="travel_to" from="TransitionToTestDev" to="." method="_on_transition_area_travel_to"]

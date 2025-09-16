@@ -1,100 +1,102 @@
-[gd_scene load_steps=12 format=4 uid="uid://ovs7lvvfl4nx"]
+[gd_scene load_steps=11 format=4 uid="uid://ovs7lvvfl4nx"]
 
-[ext_resource type="Script" uid="uid://dpn82xqv2ueef" path="res://levels/base_level.gd" id="1_cxclo"]
-[ext_resource type="PackedScene" uid="uid://ctj3fr05y0gdi" path="res://gui/debug/debug_layer.tscn" id="1_ucg7n"]
-[ext_resource type="PackedScene" uid="uid://cm63mk8ap754y" path="res://tile-maps/grass-01/grass_01.tscn" id="3_d8hcq"]
-[ext_resource type="PackedScene" uid="uid://2m8iv274top" path="res://gui/player-hud/player_hud.tscn" id="4_2do3s"]
-[ext_resource type="PackedScene" uid="uid://bqhiyry5b66aa" path="res://props/sprites/Bush01.tscn" id="5_d8hcq"]
-[ext_resource type="PackedScene" uid="uid://1wudjg2ogp8c" path="res://actors/player/player.tscn" id="5_ucg7n"]
-[ext_resource type="Texture2D" uid="uid://duudsnvdn0ng4" path="res://actors/player/sprites/sprite-sheet.png" id="6_5dwok"]
-[ext_resource type="Texture2D" uid="uid://dw27puoe1pawy" path="res://actors/slime/sprites/slime.png" id="7_2do3s"]
-[ext_resource type="PackedScene" uid="uid://tbf5j4i8ibai" path="res://components/spawners/point/spawn_point.tscn" id="7_5dwok"]
-[ext_resource type="PackedScene" uid="uid://btt0bkps2e7t2" path="res://actors/slime/slime.tscn" id="7_ucg7n"]
-[ext_resource type="PackedScene" uid="uid://copbpewupkbro" path="res://components/transition/level_transition.tscn" id="11_t2q1u"]
+[ext_resource type="Script" uid="uid://dpn82xqv2ueef" path="res://scenes/levels/base_level.gd" id="1_c8tsn"]
+[ext_resource type="PackedScene" uid="uid://ctj3fr05y0gdi" path="res://gui/debug/debug_layer.tscn" id="2_7phkf"]
+[ext_resource type="PackedScene" uid="uid://2m8iv274top" path="res://gui/player-hud/player_hud.tscn" id="3_7d7cb"]
+[ext_resource type="PackedScene" uid="uid://cm63mk8ap754y" path="res://tile-maps/grass-01/grass_01.tscn" id="4_7yvdk"]
+[ext_resource type="Texture2D" uid="uid://duudsnvdn0ng4" path="res://actors/player/sprites/sprite-sheet.png" id="5_7phkf"]
+[ext_resource type="PackedScene" uid="uid://tbf5j4i8ibai" path="res://components/spawners/point/spawn_point.tscn" id="5_ro2d8"]
+[ext_resource type="PackedScene" uid="uid://btt0bkps2e7t2" path="res://actors/slime/slime.tscn" id="6_v75rj"]
+[ext_resource type="Texture2D" uid="uid://dw27puoe1pawy" path="res://actors/slime/sprites/slime.png" id="7_8sx15"]
+[ext_resource type="PackedScene" uid="uid://bqhiyry5b66aa" path="res://props/sprites/Bush01.tscn" id="8_8i6yb"]
+[ext_resource type="PackedScene" uid="uid://copbpewupkbro" path="res://components/transition/level_transition.tscn" id="9_uog5e"]
 
-[node name="World" type="Node2D"]
+[node name="World" type="Node2D" node_paths=PackedStringArray("player_spawn_point")]
 y_sort_enabled = true
-script = ExtResource("1_cxclo")
+script = ExtResource("1_c8tsn")
+player_spawn_point = NodePath("PlayerSpawn")
 
 [node name="UI" type="Node" parent="."]
 
-[node name="DebugLayer" parent="UI" instance=ExtResource("1_ucg7n")]
+[node name="DebugLayer" parent="UI" instance=ExtResource("2_7phkf")]
 
-[node name="PlayerHUD" parent="UI" instance=ExtResource("4_2do3s")]
+[node name="PlayerHUD" parent="UI" instance=ExtResource("3_7d7cb")]
 
-[node name="TileMap" parent="." instance=ExtResource("3_d8hcq")]
+[node name="TileMap" parent="." instance=ExtResource("4_7yvdk")]
 tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAEAAAAAAAIAAAAAAAIAAAAAAAMAAAAAAAMAAAABAAAAAAABAAAAAAABAAEAAAABAAEAAAABAAIAAAABAAIAAAABAAMAAAABAAMAAAACAAAAAAAEAAEAAAACAAEAAAAEAAEAAAACAAIAAAAFAAIAAAACAAMAAAACAAMAAAADAAAAAAADAAAAAAADAAEAAAADAAEAAAADAAIAAAAGAAMAAAADAAMAAAADAAMAAAAEAAAAAAAAAAAAAAAEAAEAAAAAAAEAAAAEAAIAAAAGAAMAAAAEAAMAAAAAAAMAAAAFAAAAAAABAAAAAAAFAAEAAAABAAEAAAAFAAIAAAAGAAMAAAAFAAMAAAABAAMAAAAGAAAAAAACAAAAAAAGAAEAAAACAAEAAAAGAAIAAAAGAAMAAAAGAAMAAAACAAMAAAAHAAAAAAADAAAAAAAHAAEAAAADAAEAAAAHAAIAAAAGAAMAAAAHAAMAAAADAAMAAAAAAAQAAAALAAYAAAAAAAUAAAACAAUAAAAAAAYAAAACAAYAAAAAAAcAAAAAAAcAAFABAAQAAAALAAYAAAABAAUAAAADAAUAAAABAAYAAAADAAYAAAABAAcAAAAAAAYAAFACAAQAAAAMAAYAAAACAAUAAAAEAAUAAAACAAYAAAAEAAYAAAACAAcAAAAAAAUAAFADAAQAAAANAAYAAAADAAUAAAAEAAUAAAADAAYAAAANAAcAAAADAAcAAAAAAAQAAFAEAAQAAAALAAYAAAAEAAUAAAACAAUAAAAEAAYAAAALAAcAAAAEAAcAAAAAAAMAAAAFAAQAAAAMAAYAAAAFAAUAAAADAAUAAAAFAAYAAAAMAAcAAAAFAAcAAAABAAMAAAAGAAQAAAANAAYAAAAGAAUAAAAEAAUAAAAGAAYAAAANAAcAAAAGAAcAAAACAAMAAAAHAAQAAAAHAAQAAAAHAAUAAAAHAAUAAAAHAAYAAAAHAAYAAAAHAAcAAAADAAMAAAAIAAAAAAAAAAAAAAAIAAEAAAAAAAEAAAAIAAIAAAAGAAAAAAAIAAMAAAAEAAEAAAAJAAAAAAABAAAAAAAJAAEAAAABAAEAAAAJAAIAAAAGAAMAAAAJAAMAAAABAAMAAAAKAAAAAAACAAAAAAAKAAEAAAACAAEAAAAKAAIAAAAGAAMAAAAKAAMAAAACAAMAAAALAAAAAAADAAAAAAALAAEAAAADAAEAAAALAAIAAAAGAAMAAAALAAMAAAADAAMAAAAIAAQAAAAEAAEAAAAIAAUAAAAEAAEAAAAIAAYAAAAEAAEAAAAIAAcAAAAEAAEAAAAJAAQAAAAIAAQAAAAJAAUAAAAIAAUAAAAJAAYAAAAIAAYAAAAJAAcAAAABAAMAAAAKAAQAAAALAAYAAAAKAAUAAAACAAUAAAAKAAYAAAALAAcAAAAKAAcAAAACAAMAAAALAAQAAAAMAAYAAAALAAUAAAADAAUAAAALAAYAAAAMAAcAAAALAAcAAAADAAMAAAAAAAgAAAABAAcAAFAAAAkAAAACAAcAAFAAAAoAAAADAAcAAFAAAAsAAAAEAAcAAFABAAgAAAABAAYAAFABAAkAAAACAAYAAFABAAoAAAADAAYAAFABAAsAAAAEAAYAAFACAAgAAAABAAUAAFACAAkAAAACAAUAAFACAAoAAAADAAUAAFACAAsAAAAEAAUAAFADAAgAAAABAAQAAFADAAkAAAACAAQAAFADAAoAAAADAAQAAFADAAsAAAAEAAQAAFAEAAgAAAAAAAAAAAAEAAkAAAAAAAEAAAAEAAoAAAAAAAIAAAAEAAsAAAAAAAMAAAAFAAgAAAABAAAAAAAFAAkAAAABAAEAAAAFAAoAAAABAAIAAAAFAAsAAAABAAMAAAAGAAgAAAACAAAAAAAGAAkAAAACAAEAAAAGAAoAAAAFAAAAAAAGAAsAAAAEAAEAAAAHAAgAAAADAAAAAAAHAAkAAAAFAAAAAAAHAAoAAAAGAAIAAAAHAAsAAAADAAMAAAAIAAgAAAAEAAEAAAAIAAkAAAAHAAEAAAAIAAoAAAAHAAEAAAAIAAsAAAAEAAEAAAAJAAgAAAABAAAAAAAJAAkAAAABAAEAAAAJAAoAAAABAAIAAAAJAAsAAAABAAMAAAAKAAgAAAACAAAAAAAKAAkAAAACAAEAAAAKAAoAAAACAAIAAAAKAAsAAAACAAMAAAALAAgAAAADAAAAAAALAAkAAAADAAEAAAALAAoAAAADAAIAAAALAAsAAAADAAMAAAAMAAgAAAAAAAAAAAAMAAkAAAAAAAEAAAAMAAoAAAAAAAIAAAAMAAsAAAAAAAMAAAANAAgAAAAKAAUAAAANAAkAAAAKAAYAAAANAAoAAAAKAAcAAAANAAsAAAABAAMAAAAOAAgAAAALAAUAAAAOAAkAAAALAAYAAAAOAAoAAAALAAcAAAAOAAsAAAACAAMAAAAPAAgAAAAMAAUAAAAPAAkAAAAMAAYAAAAPAAoAAAAMAAcAAAAPAAsAAAADAAMAAAAMAAQAAAANAAYAAAAMAAUAAAAEAAUAAAAMAAYAAAANAAcAAAAMAAcAAAAAAAMAAAANAAQAAAALAAYAAAANAAUAAAACAAUAAAANAAYAAAALAAcAAAANAAcAAAAKAAQAAAAOAAQAAAAMAAYAAAAOAAUAAAADAAUAAAAOAAYAAAAMAAcAAAAOAAcAAAALAAQAAAAPAAQAAAANAAYAAAAPAAUAAAAEAAUAAAAPAAYAAAANAAcAAAAPAAcAAAAMAAQAAAAMAAAAAAAAAAAAAAAMAAEAAAAAAAEAAAAMAAIAAAAGAAMAAAAMAAMAAAAAAAMAAAANAAAAAAABAAAAAAANAAEAAAABAAEAAAANAAIAAAAHAAMAAAANAAMAAAABAAMAAAAOAAAAAAACAAAAAAAOAAEAAAACAAEAAAAOAAIAAAACAAIAAAAOAAMAAAACAAMAAAAPAAAAAAADAAAAAAAPAAEAAAADAAEAAAAPAAIAAAADAAIAAAAPAAMAAAADAAMAAAAQAAAAAAAAAAAAAAAQAAEAAAAAAAEAAAAQAAIAAAAAAAIAAAAQAAMAAAAAAAMAAAARAAAAAAABAAAAAAARAAEAAAABAAEAAAARAAIAAAABAAIAAAARAAMAAAABAAMAAAASAAAAAAACAAAAAAASAAEAAAACAAEAAAASAAIAAAACAAIAAAASAAMAAAACAAMAAAATAAAAAAAOAAUAAAATAAEAAAAOAAUAAAATAAIAAAAOAAUAAAATAAMAAAAOAAUAAAAQAAQAAAALAAYAAAAQAAUAAAACAAUAAAAQAAYAAAALAAcAAAAQAAcAAAANAAQAAAARAAQAAAAMAAYAAAARAAUAAAADAAUAAAARAAYAAAAMAAcAAAARAAcAAAAOAAQAAAASAAQAAAANAAYAAAASAAUAAAAEAAUAAAASAAcAAAACAAMAAAATAAQAAAAOAAYAAAATAAUAAAAJAAcAAAATAAYAAAAKAAcAAGATAAcAAAADAAMAAAAQAAgAAAANAAUAAAAQAAkAAAANAAYAAAAQAAoAAAANAAcAAAAQAAsAAAAAAAMAAAARAAgAAAAOAAUAAAARAAkAAAAOAAYAAAARAAoAAAAOAAcAAAARAAsAAAABAAMAAAASAAgAAAACAAAAAAASAAkAAAACAAEAAAASAAoAAAACAAIAAAASAAsAAAACAAMAAAATAAgAAAADAAAAAAATAAkAAAADAAEAAAATAAoAAAADAAIAAAATAAsAAAADAAMAAAAQAAwAAAAAAAAAAAAQAA0AAAAGAAMAAAAQAA4AAAAAAAIAAAAQAA8AAAAAAAMAAAARAAwAAAABAAAAAAARAA0AAAAHAAAAAAARAA4AAAAFAAIAAAARAA8AAAABAAMAAAASAAwAAAACAAAAAAASAA0AAAACAAEAAAASAA4AAAAGAAMAAAASAA8AAAACAAMAAAATAAwAAAADAAAAAAATAA0AAAADAAEAAAATAA4AAAAGAAMAAAATAA8AAAADAAMAAAAMAAwAAAAHAAAAAAAMAA0AAAAFAAIAAAAMAA4AAAAAAAIAAAAMAA8AAAAAAAMAAAANAAwAAAABAAAAAAANAA0AAAAGAAMAAAANAA4AAAABAAIAAAANAA8AAAABAAMAAAAOAAwAAAACAAAAAAAOAA0AAAAGAAMAAAAOAA4AAAACAAIAAAAOAA8AAAACAAMAAAAPAAwAAAADAAAAAAAPAA0AAAAGAAMAAAAPAA4AAAADAAIAAAAPAA8AAAADAAMAAAAIAAwAAAAFAAEAAAAIAA0AAAAEAAEAAAAIAA4AAAAHAAIAAAAIAA8AAAAAAAMAAAAJAAwAAAAGAAMAAAAJAA0AAAABAAEAAAAJAA4AAAABAAIAAAAJAA8AAAABAAMAAAAKAAwAAAAGAAMAAAAKAA0AAAACAAEAAAAKAA4AAAACAAIAAAAKAA8AAAACAAMAAAALAAwAAAAGAAMAAAALAA0AAAADAAEAAAALAA4AAAADAAIAAAALAA8AAAADAAMAAAAEAAwAAAAFAAAAAAAEAA0AAAAEAAEAAAAEAA4AAAAGAAIAAAAEAA8AAAAAAAMAAAAFAAwAAAAGAAMAAAAFAA0AAAABAAEAAAAFAA4AAAAGAAMAAAAFAA8AAAABAAMAAAAGAAwAAAAHAAIAAAAGAA0AAAACAAEAAAAGAA4AAAAGAAMAAAAGAA8AAAACAAMAAAAHAAwAAAADAAAAAAAHAA0AAAADAAEAAAAHAA4AAAAGAAMAAAAHAA8AAAADAAMAAAAAAAwAAAAFAAcAAFAAAA0AAAAGAAcAAFAAAA4AAAAGAAMAAAAAAA8AAAAAAAMAAAABAAwAAAAFAAYAAFABAA0AAAAGAAYAAFABAA4AAAAGAAMAAAABAA8AAAABAAMAAAACAAwAAAAFAAUAAFACAA0AAAAGAAUAAFACAA4AAAAGAAMAAAACAA8AAAACAAMAAAADAAwAAAAFAAQAAFADAA0AAAAGAAQAAFADAA4AAAAGAAMAAAADAA8AAAADAAMAAAASAAYAAAALAAcAAAA=")
 
-[node name="PlayerSpawn" parent="." instance=ExtResource("7_5dwok")]
-position = Vector2(275, 406)
-scene = ExtResource("5_ucg7n")
-autospawn = true
+[node name="PlayerSpawn" parent="." instance=ExtResource("5_ro2d8")]
+position = Vector2(80, 48)
 
 [node name="Sprite2D" type="Sprite2D" parent="PlayerSpawn"]
 modulate = Color(0, 1, 0, 0.588235)
-texture = ExtResource("6_5dwok")
+position = Vector2(0, 4.76837e-07)
+scale = Vector2(0.625, 0.625)
+texture = ExtResource("5_7phkf")
 hframes = 16
 vframes = 3
 
-[node name="SlimeSpawn" parent="." instance=ExtResource("7_5dwok")]
+[node name="SlimeSpawn" parent="." instance=ExtResource("5_ro2d8")]
 position = Vector2(160, 352)
-scene = ExtResource("7_ucg7n")
+scene = ExtResource("6_v75rj")
 autospawn = true
 
 [node name="Sprite2D" type="Sprite2D" parent="SlimeSpawn"]
 modulate = Color(0, 1, 0, 0.588235)
 position = Vector2(0, -15)
-texture = ExtResource("7_2do3s")
+texture = ExtResource("7_8sx15")
 hframes = 16
 vframes = 2
 
 [node name="Props" type="Node2D" parent="."]
 y_sort_enabled = true
 
-[node name="Bush01" parent="Props" instance=ExtResource("5_d8hcq")]
+[node name="Bush01" parent="Props" instance=ExtResource("8_8i6yb")]
 position = Vector2(257, 320)
 
-[node name="Bush02" parent="Props" instance=ExtResource("5_d8hcq")]
+[node name="Bush02" parent="Props" instance=ExtResource("8_8i6yb")]
 position = Vector2(192, 432)
 
-[node name="Bush03" parent="Props" instance=ExtResource("5_d8hcq")]
+[node name="Bush03" parent="Props" instance=ExtResource("8_8i6yb")]
 position = Vector2(435, 400)
 
-[node name="Bush04" parent="Props" instance=ExtResource("5_d8hcq")]
+[node name="Bush04" parent="Props" instance=ExtResource("8_8i6yb")]
 position = Vector2(392, 256)
 
-[node name="Bush05" parent="Props" instance=ExtResource("5_d8hcq")]
+[node name="Bush05" parent="Props" instance=ExtResource("8_8i6yb")]
 position = Vector2(368, 278)
 
-[node name="Bush06" parent="Props" instance=ExtResource("5_d8hcq")]
+[node name="Bush06" parent="Props" instance=ExtResource("8_8i6yb")]
 position = Vector2(403, 304)
 
-[node name="Bush07" parent="Props" instance=ExtResource("5_d8hcq")]
+[node name="Bush07" parent="Props" instance=ExtResource("8_8i6yb")]
 position = Vector2(368, 432)
 
-[node name="Bush08" parent="Props" instance=ExtResource("5_d8hcq")]
+[node name="Bush08" parent="Props" instance=ExtResource("8_8i6yb")]
 position = Vector2(200, 224)
 
-[node name="Bush09" parent="Props" instance=ExtResource("5_d8hcq")]
+[node name="Bush09" parent="Props" instance=ExtResource("8_8i6yb")]
 position = Vector2(144, 224)
 
-[node name="Bush10" parent="Props" instance=ExtResource("5_d8hcq")]
+[node name="Bush10" parent="Props" instance=ExtResource("8_8i6yb")]
 position = Vector2(88, 224)
 
-[node name="Bush11" parent="Props" instance=ExtResource("5_d8hcq")]
+[node name="Bush11" parent="Props" instance=ExtResource("8_8i6yb")]
 position = Vector2(528, 40)
 
-[node name="Bush12" parent="Props" instance=ExtResource("5_d8hcq")]
+[node name="Bush12" parent="Props" instance=ExtResource("8_8i6yb")]
 position = Vector2(552, 103)
 
-[node name="Bush13" parent="Props" instance=ExtResource("5_d8hcq")]
+[node name="Bush13" parent="Props" instance=ExtResource("8_8i6yb")]
 position = Vector2(467, 112)
 
-[node name="Bush14" parent="Props" instance=ExtResource("5_d8hcq")]
+[node name="Bush14" parent="Props" instance=ExtResource("8_8i6yb")]
 position = Vector2(80, 112)
 
-[node name="TransitionToTestDev2" parent="." instance=ExtResource("11_t2q1u")]
+[node name="TransitionToTestDev2" parent="." instance=ExtResource("9_uog5e")]
 position = Vector2(0, 464)
 level = "uid://dt0tcdjp5ty4u"
 target_transition_area = "TransitionToTestDev"
 size = 3
+
+[connection signal="travel_to" from="TransitionToTestDev2" to="." method="_on_transition_area_travel_to"]

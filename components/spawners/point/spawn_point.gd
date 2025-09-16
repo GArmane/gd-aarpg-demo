@@ -1,5 +1,5 @@
 @icon("res://assets/icon-godot-node/node-2D/icon_flag.png")
-class_name Spawner extends Node2D
+class_name Spawner extends Marker2D
 
 signal spawned(scene: Node2D)
 
