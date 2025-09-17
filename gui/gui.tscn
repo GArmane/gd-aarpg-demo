@@ -1,8 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://caobf38rc8egb"]
+[gd_scene load_steps=9 format=3 uid="uid://caobf38rc8egb"]
 
 [ext_resource type="PackedScene" uid="uid://ctj3fr05y0gdi" path="res://gui/debug/debug_hud.tscn" id="1_ioifv"]
 [ext_resource type="Script" uid="uid://bykbyc4an1mdr" path="res://gui/gui.gd" id="1_q46mf"]
+[ext_resource type="PackedScene" uid="uid://degtm708x3vlb" path="res://gui/pause-menu/pause_menu.tscn" id="2_hp187"]
 [ext_resource type="PackedScene" uid="uid://2m8iv274top" path="res://gui/player-hud/player_hud.tscn" id="2_q46mf"]
+[ext_resource type="Resource" uid="uid://bg7eucmhyny70" path="res://gui/input/menu_mode.tres" id="2_ytf3d"]
+[ext_resource type="Resource" uid="uid://dc7mpvaugfjwr" path="res://gui/input/pause_action.tres" id="3_bk7cs"]
+[ext_resource type="Resource" uid="uid://brsd54pg4ghrv" path="res://gui/input/debug_action.tres" id="4_kvi6p"]
 [ext_resource type="PackedScene" uid="uid://cw2l3oe6dey3h" path="res://gui/scene-transition/scene_transition.tscn" id="4_n360k"]
 
 [node name="GUI" type="Control"]
@@ -13,6 +17,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_q46mf")
+_menu_mode = ExtResource("2_ytf3d")
+_debug_action = ExtResource("4_kvi6p")
+_pause_action = ExtResource("3_bk7cs")
 
 [node name="Debug" type="CanvasLayer" parent="."]
 layer = 3
@@ -25,6 +32,12 @@ layer = 2
 
 [node name="PlayerHUD" parent="HUDs" instance=ExtResource("2_q46mf")]
 unique_name_in_owner = true
+
+[node name="Pause Menu" type="CanvasLayer" parent="."]
+process_mode = 3
+visible = false
+
+[node name="PauseMenu" parent="Pause Menu" instance=ExtResource("2_hp187")]
 
 [node name="Overlays" type="CanvasLayer" parent="."]
 
