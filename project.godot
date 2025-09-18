@@ -38,7 +38,7 @@ version_control/autoload_on_startup=true
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/beautify-code-on-save/addons/beautify_code_on_save/plugin.cfg", "res://addons/gd-types/plugin.cfg", "res://addons/godot_state_charts/plugin.cfg", "res://addons/guide/plugin.cfg")
+enabled=PackedStringArray("res://addons/beautify_code_on_save/plugin.cfg", "res://addons/gd-types/plugin.cfg", "res://addons/godot_state_charts/plugin.cfg", "res://addons/guide/plugin.cfg")
 
 [input]
 
