@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="GUIDEAction" load_steps=2 format=3 uid="uid://brsd54pg4ghrv"]
 
-[ext_resource type="Script" uid="uid://cluhc11vixkf1" path="res://addons/guide/guide_action.gd" id="1_kxx84"]
+[ext_resource type="Script" uid="uid://cluhc11vixkf1" path="res://addons/guide/guide_action.gd" id="1_0d4dx"]
 
 [resource]
-script = ExtResource("1_kxx84")
-name = &""
+script = ExtResource("1_0d4dx")
+name = &"Toggle Debug"
 action_value_type = 0
 block_lower_priority_actions = true
 emit_as_godot_actions = false

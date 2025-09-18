@@ -2,6 +2,9 @@
 
 class_name Player extends Actor2D
 
+signal active
+signal pause
+
 @export var state_configuration = {
 	"Idle":
 	{
@@ -25,17 +28,14 @@ class_name Player extends Actor2D
 	},
 }
 
-@export var _game_mode: GUIDEMappingContext
+@export var _pause_action: GUIDEAction
 @export var _move_action: GUIDEAction
 @export var _attack_action: GUIDEAction
 
 
 func _on_root_state_entered() -> void:
-	GUIDE.enable_mapping_context(_game_mode)
-
-
-func _on_root_state_exited() -> void:
-	GUIDE.disable_mapping_context(_game_mode)
+	_pause_action.triggered.connect(func(): pause.emit())
+	active.emit()
 
 
 func _on_idle_state_entered() -> void:

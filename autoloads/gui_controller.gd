@@ -13,6 +13,6 @@ func get_current_gui() -> GUI:
 ## Setup GUI.
 func setup_gui(player: Player) -> GUI:
 	_current_gui = _gui_scene.instantiate()
-	_current_gui.setup_player(player)
+	_current_gui.setup(player)
 	add_sibling.call_deferred(_current_gui)
 	return _current_gui

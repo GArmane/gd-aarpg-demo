@@ -4,10 +4,10 @@
 [ext_resource type="Script" uid="uid://bykbyc4an1mdr" path="res://gui/gui.gd" id="1_q46mf"]
 [ext_resource type="PackedScene" uid="uid://degtm708x3vlb" path="res://gui/pause-menu/pause_menu.tscn" id="2_hp187"]
 [ext_resource type="PackedScene" uid="uid://2m8iv274top" path="res://gui/player-hud/player_hud.tscn" id="2_q46mf"]
-[ext_resource type="Resource" uid="uid://bg7eucmhyny70" path="res://gui/input/menu_mode.tres" id="2_ytf3d"]
-[ext_resource type="Resource" uid="uid://dc7mpvaugfjwr" path="res://gui/input/pause_action.tres" id="3_bk7cs"]
-[ext_resource type="Resource" uid="uid://brsd54pg4ghrv" path="res://gui/input/debug_action.tres" id="4_kvi6p"]
+[ext_resource type="Resource" uid="uid://be146lb73a8yl" path="res://input/game-mode/pause.tres" id="3_bk7cs"]
+[ext_resource type="Resource" uid="uid://brsd54pg4ghrv" path="res://input/debug-mode/debug_action.tres" id="4_kvi6p"]
 [ext_resource type="PackedScene" uid="uid://cw2l3oe6dey3h" path="res://gui/scene-transition/scene_transition.tscn" id="4_n360k"]
+[ext_resource type="Resource" uid="uid://doq8p18kenyvi" path="res://input/pause-mode/unpause.tres" id="4_xqkfk"]
 
 [node name="GUI" type="Control"]
 layout_mode = 3
@@ -17,29 +17,33 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_q46mf")
-_menu_mode = ExtResource("2_ytf3d")
 _debug_action = ExtResource("4_kvi6p")
 _pause_action = ExtResource("3_bk7cs")
+_unpause_action = ExtResource("4_xqkfk")
 
-[node name="Debug" type="CanvasLayer" parent="."]
+[node name="DebugLayer" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
 layer = 3
 
-[node name="DebugHUD" parent="Debug" instance=ExtResource("1_ioifv")]
+[node name="DebugHUD" parent="DebugLayer" instance=ExtResource("1_ioifv")]
 unique_name_in_owner = true
 
-[node name="HUDs" type="CanvasLayer" parent="."]
+[node name="HUDLayer" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
 layer = 2
 
-[node name="PlayerHUD" parent="HUDs" instance=ExtResource("2_q46mf")]
+[node name="PlayerHUD" parent="HUDLayer" instance=ExtResource("2_q46mf")]
 unique_name_in_owner = true
 
-[node name="Pause Menu" type="CanvasLayer" parent="."]
+[node name="PauseLayer" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
 process_mode = 3
 visible = false
 
-[node name="PauseMenu" parent="Pause Menu" instance=ExtResource("2_hp187")]
+[node name="PauseMenu" parent="PauseLayer" instance=ExtResource("2_hp187")]
 
-[node name="Overlays" type="CanvasLayer" parent="."]
+[node name="OverlayLayer" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
 
-[node name="SceneTransition" parent="Overlays" instance=ExtResource("4_n360k")]
+[node name="SceneTransition" parent="OverlayLayer" instance=ExtResource("4_n360k")]
 unique_name_in_owner = true
