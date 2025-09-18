@@ -17,6 +17,8 @@ func _ready() -> void:
 	# Setup HUD elements
 	%DebugHUD.setup_player(_player)
 	%PlayerHUD.setup_player(_player)
+	# Setup canvas layers
+	%DebugLayer.visible = (%DebugHUD.state != DebugHUD.State.HIDDEN)
 	# Setup actions
 	_debug_action.triggered.connect(_on_debug_action_triggered)
 	_pause_action.triggered.connect(_on_pause_action_triggered)
@@ -29,7 +31,8 @@ func _ready() -> void:
 
 
 func _on_debug_action_triggered() -> void:
-	%DebugHUD.toggle()
+	var state = %DebugHUD.toggle()
+	%DebugLayer.visible = (state != DebugHUD.State.HIDDEN)
 
 
 func _on_pause_action_triggered() -> void:

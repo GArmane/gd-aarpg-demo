@@ -1,4 +1,4 @@
-class_name DebugLayer extends Control
+class_name DebugHUD extends Control
 
 enum State { HIDDEN, SHOW_GUIDE, SHOW_STATE_CHART }
 
@@ -19,8 +19,9 @@ func setup_player(player: Player) -> void:
 	%StateChartDebugger.debug_node(player)
 
 
-func toggle() -> void:
+func toggle() -> State:
 	state = ((state + 1) % State.size()) as State
+	return state
 
 
 func _show_elements(elements: Array[Control] = []):

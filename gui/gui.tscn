@@ -24,6 +24,7 @@ _unpause_action = ExtResource("4_xqkfk")
 [node name="DebugLayer" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
 layer = 3
+visible = false
 
 [node name="DebugHUD" parent="DebugLayer" instance=ExtResource("1_ioifv")]
 unique_name_in_owner = true
