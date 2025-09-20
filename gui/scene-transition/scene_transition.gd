@@ -1,8 +1,5 @@
 class_name SceneTransition extends Control
 
-signal fade_started
-signal fade_finished
-
 @onready var _fade := false:
 	set(value):
 		_fade = value
@@ -14,8 +11,6 @@ signal fade_finished
 
 
 func toggle() -> bool:
-	fade_started.emit()
 	_fade = !_fade
 	await %AnimationPlayer.animation_finished
-	fade_finished.emit()
 	return _fade

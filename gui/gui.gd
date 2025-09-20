@@ -14,8 +14,7 @@ func setup(player: Player) -> void:
 
 
 func toggle_scene_transition():
-	%SceneTransition.toggle()
-	await %SceneTransition.fade_finished
+	await %SceneTransition.toggle()
 
 
 func _ready() -> void:
