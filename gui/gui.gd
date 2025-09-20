@@ -25,6 +25,7 @@ func _ready() -> void:
 	%DebugLayer.visible = (%DebugHUD.state != DebugHUD.State.HIDDEN)
 	%OverlayLayer.visible = true
 	# Setup actions
+	%PauseMenu.close_menu.connect(_on_unpause_action_triggered)
 	_debug_action.triggered.connect(_on_debug_action_triggered)
 	_pause_action.triggered.connect(_on_pause_action_triggered)
 	_unpause_action.triggered.connect(_on_unpause_action_triggered)
@@ -38,9 +39,11 @@ func _on_debug_action_triggered() -> void:
 func _on_pause_action_triggered() -> void:
 	%DebugLayer.visible = false
 	%PauseLayer.visible = true
+	%PauseMenu.show_menu()
 
 
 func _on_unpause_action_triggered() -> void:
 	%DebugLayer.visible = true
 	%PauseLayer.visible = false
+	%PauseMenu.hide_menu()
 	unpause.emit()

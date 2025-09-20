@@ -42,6 +42,7 @@ process_mode = 3
 visible = false
 
 [node name="PauseMenu" parent="PauseLayer" instance=ExtResource("2_hp187")]
+unique_name_in_owner = true
 
 [node name="OverlayLayer" type="CanvasLayer" parent="."]
 unique_name_in_owner = true

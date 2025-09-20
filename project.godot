@@ -17,12 +17,13 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-GameController="*res://autoloads/game_controller.gd"
+SignalLens="*res://addons/signal_lens/autoload/signal_lens_autoload.gd"
+GUIDE="*res://addons/guide/guide.gd"
 LevelManager="*res://autoloads/level_manager.gd"
+SaveManager="*res://autoloads/save_manager.gd"
 PlayerManager="*res://autoloads/player_manager.gd"
 GUIController="*res://autoloads/gui_controller.gd"
-GUIDE="*res://addons/guide/guide.gd"
-SignalLens="*res://addons/signal_lens/autoload/signal_lens_autoload.gd"
+GameController="*res://autoloads/game_controller.gd"
 
 [display]
 
@@ -43,6 +44,16 @@ enabled=PackedStringArray("res://addons/beautify_code_on_save/plugin.cfg", "res:
 
 [input]
 
+ui_debug={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194342,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
+}
+ui_pause={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194305,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
+}
 player_up={
 "deadzone": 0.2,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":87,"key_label":0,"unicode":119,"location":0,"echo":false,"script":null)
@@ -66,16 +77,6 @@ player_right={
 player_attack={
 "deadzone": 0.2,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":32,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
-]
-}
-ui_debug={
-"deadzone": 0.2,
-"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194342,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
-]
-}
-ui_pause={
-"deadzone": 0.2,
-"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194305,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
 ]
 }
 
