@@ -7,10 +7,11 @@ extends Node
 
 
 func start_game(main_scene: String) -> void:
+	# Connect to event bus.
+	EventBus.pause.connect(_switch_to_pause_mode)
 	# Setup player.
 	var player := PlayerManager.setup_player()
 	player.active.connect(_switch_to_game_mode)
-	player.pause.connect(_switch_to_pause_mode)
 
 	# Setup GUI.
 	var gui = GUIController.setup_gui(player)

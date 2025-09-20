@@ -3,7 +3,6 @@
 class_name Player extends Actor2D
 
 signal active
-signal pause
 
 @export var state_configuration = {
 	"Idle":
@@ -34,7 +33,7 @@ signal pause
 
 
 func _on_root_state_entered() -> void:
-	_pause_action.triggered.connect(func(): pause.emit())
+	_pause_action.triggered.connect(func(): EventBus.pause.emit())
 	active.emit()
 
 

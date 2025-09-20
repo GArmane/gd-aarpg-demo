@@ -1,10 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://caobf38rc8egb"]
+[gd_scene load_steps=8 format=3 uid="uid://caobf38rc8egb"]
 
 [ext_resource type="PackedScene" uid="uid://ctj3fr05y0gdi" path="res://gui/debug/debug_hud.tscn" id="1_ioifv"]
 [ext_resource type="Script" uid="uid://bykbyc4an1mdr" path="res://gui/gui.gd" id="1_q46mf"]
 [ext_resource type="PackedScene" uid="uid://degtm708x3vlb" path="res://gui/pause-menu/pause_menu.tscn" id="2_hp187"]
 [ext_resource type="PackedScene" uid="uid://2m8iv274top" path="res://gui/player-hud/player_hud.tscn" id="2_q46mf"]
-[ext_resource type="Resource" uid="uid://be146lb73a8yl" path="res://input/game-mode/pause.tres" id="3_bk7cs"]
 [ext_resource type="Resource" uid="uid://brsd54pg4ghrv" path="res://input/debug-mode/debug_action.tres" id="4_kvi6p"]
 [ext_resource type="PackedScene" uid="uid://cw2l3oe6dey3h" path="res://gui/scene-transition/scene_transition.tscn" id="4_n360k"]
 [ext_resource type="Resource" uid="uid://doq8p18kenyvi" path="res://input/pause-mode/unpause.tres" id="4_xqkfk"]
@@ -18,7 +17,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_q46mf")
 _debug_action = ExtResource("4_kvi6p")
-_pause_action = ExtResource("3_bk7cs")
 _unpause_action = ExtResource("4_xqkfk")
 
 [node name="DebugLayer" type="CanvasLayer" parent="."]
