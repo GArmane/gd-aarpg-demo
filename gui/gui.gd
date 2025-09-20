@@ -1,7 +1,5 @@
 class_name GUI extends Control
 
-signal unpause
-
 @export var _debug_action: GUIDEAction
 @export var _unpause_action: GUIDEAction
 
@@ -23,17 +21,21 @@ func _ready() -> void:
 	# Setup canvas layers
 	%DebugLayer.visible = (%DebugHUD.state != DebugHUD.State.HIDDEN)
 	%OverlayLayer.visible = true
-	# Setup actions
-	%PauseMenu.close_menu.connect(_on_unpause_action_triggered)
-	_debug_action.triggered.connect(_on_debug_action_triggered)
-	_unpause_action.triggered.connect(_on_unpause_action_triggered)
 	# Connect to event bus
 	EventBus.pause.connect(_on_event_bus_pause_triggered)
+	EventBus.unpause.connect(_on_event_bus_unpause_triggered)
+	# Setup actions
+	_debug_action.triggered.connect(_on_debug_action_triggered)
+	_unpause_action.triggered.connect(_on_unpause_action_triggered)
 
 
 func _on_debug_action_triggered() -> void:
 	var state = %DebugHUD.toggle()
 	%DebugLayer.visible = (state != DebugHUD.State.HIDDEN)
+
+
+func _on_unpause_action_triggered() -> void:
+	EventBus.unpause.emit()
 
 
 func _on_event_bus_pause_triggered() -> void:
@@ -42,8 +44,7 @@ func _on_event_bus_pause_triggered() -> void:
 	%PauseMenu.show_menu()
 
 
-func _on_unpause_action_triggered() -> void:
+func _on_event_bus_unpause_triggered() -> void:
 	%DebugLayer.visible = true
 	%PauseLayer.visible = false
 	%PauseMenu.hide_menu()
-	unpause.emit()

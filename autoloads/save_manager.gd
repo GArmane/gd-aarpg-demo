@@ -20,7 +20,7 @@ var _current_save := {
 
 func load_game() -> void:
 	game_loaded.emit()
-	print("Game loaded: %s" % _get_file_path())
+	print("(%s): game loaded: %s" % [name, _get_file_path()])
 
 
 func save_game() -> void:
@@ -28,7 +28,7 @@ func save_game() -> void:
 	var json = JSON.stringify(_current_save)
 	file.store_line(json)
 
-	print("Game saved: %s" % _get_file_path())
+	print("(%s): game saved: %s" % [name, _get_file_path()])
 	game_saved.emit()
 
 

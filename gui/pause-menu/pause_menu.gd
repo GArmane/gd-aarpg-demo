@@ -1,7 +1,5 @@
 extends Control
 
-signal close_menu
-
 
 func _ready() -> void:
 	hide_menu()
@@ -18,9 +16,9 @@ func show_menu() -> void:
 
 func _on_save_button_pressed() -> void:
 	SaveManager.save_game()
-	close_menu.emit()
+	EventBus.unpause.emit()
 
 
 func _on_load_button_pressed() -> void:
 	SaveManager.load_game()
-	close_menu.emit()
+	EventBus.unpause.emit()

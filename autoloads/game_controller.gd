@@ -9,14 +9,12 @@ extends Node
 func start_game(main_scene: String) -> void:
 	# Connect to event bus.
 	EventBus.pause.connect(_switch_to_pause_mode)
+	EventBus.unpause.connect(_switch_to_game_mode)
 	# Setup player.
 	var player := PlayerManager.setup_player()
 	player.active.connect(_switch_to_game_mode)
-
 	# Setup GUI.
 	var gui = GUIController.setup_gui(player)
-	gui.unpause.connect(_switch_to_game_mode)
-
 	# Load and setup level.
 	var level := await LevelManager.load_level(main_scene)
 	level.actor_traveling_to.connect(_on_actor_travelling_to)
