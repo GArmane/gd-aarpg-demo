@@ -22,6 +22,7 @@ LevelManager="*res://autoloads/level_manager.gd"
 PlayerManager="*res://autoloads/player_manager.gd"
 GUIController="*res://autoloads/gui_controller.gd"
 GUIDE="*res://addons/guide/guide.gd"
+SignalLens="*res://addons/signal_lens/autoload/signal_lens_autoload.gd"
 
 [display]
 
@@ -38,7 +39,7 @@ version_control/autoload_on_startup=true
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/beautify_code_on_save/plugin.cfg", "res://addons/gd-types/plugin.cfg", "res://addons/godot_state_charts/plugin.cfg", "res://addons/guide/plugin.cfg")
+enabled=PackedStringArray("res://addons/beautify_code_on_save/plugin.cfg", "res://addons/gd-types/plugin.cfg", "res://addons/godot_state_charts/plugin.cfg", "res://addons/guide/plugin.cfg", "res://addons/signal_lens/plugin.cfg")
 
 [input]
 
