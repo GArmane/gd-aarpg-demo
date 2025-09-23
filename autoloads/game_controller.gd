@@ -14,7 +14,7 @@ func _ready() -> void:
 
 func start_game(main_scene: String) -> void:
 	# Setup player.
-	var player := PlayerManager.setup_player()
+	var player := PlayerManager.create_player_chracter()
 	player.active.connect(_switch_to_game_mode)
 	# Setup GUI.
 	var gui = GUIController.setup_gui(player)
@@ -68,7 +68,7 @@ func _on_actor_travelling_to(
 ## Executed while save/load, TODO: refactor with composition
 func _on_save_manager_game_loaded(save_data: Dictionary) -> void:
 	# Setup player.
-	var player := PlayerManager.setup_player()
+	var player := PlayerManager.create_player_chracter()
 	player.active.connect(_switch_to_game_mode)
 	player.health_points = save_data.player.health_points
 	player.max_health_points = save_data.player.max_health_points
