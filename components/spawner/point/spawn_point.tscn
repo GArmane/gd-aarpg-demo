@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://tbf5j4i8ibai"]
 
-[ext_resource type="Script" uid="uid://dleoj4dbkuyf3" path="res://components/spawners/point/spawn_point.gd" id="1_p74aj"]
+[ext_resource type="Script" uid="uid://dleoj4dbkuyf3" path="res://components/spawner/point/spawn_point.gd" id="1_p74aj"]
 
 [node name="Spawner" type="Marker2D"]
 script = ExtResource("1_p74aj")
