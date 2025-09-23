@@ -1,16 +1,16 @@
 class_name SceneTransition extends Control
 
-@onready var _fade := false:
+signal transition_started
+signal transition_ended
+
+@onready var fade := false:
 	set(value):
-		_fade = value
-		match _fade:
+		transition_started.emit()
+		fade = value
+		match fade:
 			true:
 				%AnimationPlayer.play("Scene Transitions/fade_in")
 			false:
 				%AnimationPlayer.play("Scene Transitions/fade_out")
-
-
-func toggle() -> bool:
-	_fade = !_fade
-	await %AnimationPlayer.animation_finished
-	return _fade
+		await %AnimationPlayer.animation_finished
+		transition_ended.emit()

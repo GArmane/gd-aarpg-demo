@@ -22,7 +22,7 @@ func start_game(main_scene: String) -> void:
 	var level := await LevelManager.load_level(main_scene)
 	level.actor_traveling_to.connect(_on_actor_travelling_to)
 	level.spawn_actor_at_spawn_point(player)
-	await gui.toggle_scene_transition()
+	await gui.set_scene_transition(true)
 
 
 func _switch_input_game_modes(
@@ -54,15 +54,15 @@ func _on_actor_travelling_to(
 		return
 	# Hide current level.
 	var gui = GUIController.get_current_gui()
-	await gui.toggle_scene_transition()
+	await gui.set_scene_transition(false)
 	# Forcefully unparent player before a level is cleaned.
 	PlayerManager.unparent_player()
 	# Load and setup new level.
 	var level := await LevelManager.load_level(level_path)
-	level.spawn_player_at_transition_area(actor, target_transition_area, position_offset)
+	level.spawn_actor_at_transition_area(actor, target_transition_area, position_offset)
 	level.actor_traveling_to.connect(_on_actor_travelling_to)
 	# Show current level.
-	await gui.toggle_scene_transition()
+	await gui.set_scene_transition(true)
 
 
 ## Executed while save/load, TODO: refactor with composition
@@ -75,11 +75,9 @@ func _on_save_manager_game_loaded(save_data: Dictionary) -> void:
 	# Load and setup level.
 	var level := await LevelManager.load_level(save_data["scene_path"])
 	level.actor_traveling_to.connect(_on_actor_travelling_to)
-	level.spawn_player_at_global_position(
+	level.spawn_actor_at_global_position(
 		player, Vector2(save_data.player.position_x, save_data.player.position_y)
 	)
 	# Setup GUI.
 	var gui = GUIController.setup_gui(player)
-	# FIXME: set better default behaviour for GUI, maybe save state??
-	await gui.toggle_scene_transition()
-	await gui.toggle_scene_transition()
+	await gui.set_scene_transition(true)

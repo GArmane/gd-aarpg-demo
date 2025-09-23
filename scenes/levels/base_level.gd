@@ -7,7 +7,7 @@ signal actor_traveling_to(level, actor, target_area_transition, position_offset)
 
 ## Spawn an instanced actor at designated global position.
 ## [actor]: should be an instanced actor.
-func spawn_player_at_global_position(actor: Actor2D, target_position: Vector2) -> void:
+func spawn_actor_at_global_position(actor: Actor2D, target_position: Vector2) -> void:
 	add_child(actor)
 	actor.global_position = target_position
 
@@ -19,7 +19,7 @@ func spawn_player_at_global_position(actor: Actor2D, target_position: Vector2) -
 ## Otherwise returns spawned actor at designated spawn point.
 func spawn_actor_at_spawn_point(actor: Actor2D) -> void:
 	assert(spawn_point != null, "(%s): spawn point not defined" % name)
-	spawn_player_at_global_position(actor, spawn_point.global_position)
+	spawn_actor_at_global_position(actor, spawn_point.global_position)
 
 
 ## Spawn an instanced actor in based on a transition area.
@@ -29,7 +29,7 @@ func spawn_actor_at_spawn_point(actor: Actor2D) -> void:
 ##
 ## If a transition area is not found, errors out with a message.
 ## Otherwise returns spawned actor at designated transition area.
-func spawn_player_at_transition_area(
+func spawn_actor_at_transition_area(
 	actor: Actor2D,
 	target_area_transition: String,
 	position_offset: Vector2,

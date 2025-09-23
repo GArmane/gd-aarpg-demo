@@ -1,5 +1,8 @@
 extends Node
 
+signal game_load_started
+signal game_save_started
+
 signal game_loaded(save_data: Dictionary)
 signal game_saved(save_data: Dictionary)
 
@@ -19,6 +22,7 @@ var _current_save := {
 
 
 func load_game() -> void:
+	game_load_started.emit()
 	var file := FileAccess.open(_get_file_path(), FileAccess.READ)
 	var json := JSON.new()
 	json.parse(file.get_line())
@@ -27,6 +31,7 @@ func load_game() -> void:
 
 
 func save_game() -> void:
+	game_save_started.emit()
 	# Create new structure merging current save data with current game data.
 	var new_data := _update_player_data(_update_scene_path(_current_save))
 	# Open save file and complete operation. TODO: error recovery.

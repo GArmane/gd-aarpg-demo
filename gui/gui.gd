@@ -10,8 +10,9 @@ func setup(player: Player) -> void:
 	_player = player
 
 
-func toggle_scene_transition():
-	await %SceneTransition.toggle()
+func set_scene_transition(state := true):
+	%SceneTransition.fade = state
+	await %SceneTransition.transition_ended
 
 
 func _ready() -> void:
