@@ -15,8 +15,8 @@ enum State { HIDDEN, SHOW_GUIDE, SHOW_STATE_CHART }
 				_show_elements([%StateChartDebugger])
 
 
-func setup_player(player: Player) -> void:
-	%StateChartDebugger.debug_node(player)
+func attach_actor(actor: Actor2D) -> void:
+	%StateChartDebugger.debug_node(actor)
 
 
 func toggle() -> State:

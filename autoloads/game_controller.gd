@@ -13,15 +13,15 @@ func _ready() -> void:
 
 
 func start_game(main_scene: String) -> void:
-	# Setup player.
+	# Initialize player.
 	var player := PlayerManager.create_player_chracter()
 	player.active.connect(_switch_to_game_mode)
-	# Setup GUI.
-	var gui = GUIController.setup_gui(player)
 	# Load and setup level.
 	var level := await LevelManager.load_level(main_scene)
 	level.actor_traveling_to.connect(_on_actor_travelling_to)
 	level.spawn_actor_at_spawn_point(player)
+	# Initialize GUI.
+	var gui = GUIController.create_gui().attach_player(player)
 	await gui.set_scene_transition(true)
 
 
@@ -67,7 +67,7 @@ func _on_actor_travelling_to(
 
 ## Executed while save/load, TODO: refactor with composition
 func _on_save_manager_game_loaded(save_data: Dictionary) -> void:
-	# Setup player.
+	# Initialize player.
 	var player := PlayerManager.create_player_chracter()
 	player.active.connect(_switch_to_game_mode)
 	player.health_points = save_data.player.health_points
@@ -78,6 +78,6 @@ func _on_save_manager_game_loaded(save_data: Dictionary) -> void:
 	level.spawn_actor_at_global_position(
 		player, Vector2(save_data.player.position_x, save_data.player.position_y)
 	)
-	# Setup GUI.
-	var gui = GUIController.setup_gui(player)
+	# Initialize GUI.
+	var gui = GUIController.create_gui().attach_player(player)
 	await gui.set_scene_transition(true)

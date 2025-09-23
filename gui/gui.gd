@@ -3,22 +3,20 @@ class_name GUI extends Control
 @export var _debug_action: GUIDEAction
 @export var _unpause_action: GUIDEAction
 
-var _player: Player
+
+func attach_player(player: Player) -> GUI:
+	%DebugHUD.attach_actor(player)
+	%PlayerHUD.attach_player(player)
+	return self
 
 
-func setup(player: Player) -> void:
-	_player = player
-
-
-func set_scene_transition(state := true):
+func set_scene_transition(state := true) -> void:
 	%SceneTransition.fade = state
 	await %SceneTransition.transition_ended
 
 
 func _ready() -> void:
 	# Setup HUD elements
-	%DebugHUD.setup_player(_player)
-	%PlayerHUD.setup_player(_player)
 	# Setup canvas layers
 	%DebugLayer.visible = (%DebugHUD.state != DebugHUD.State.HIDDEN)
 	%OverlayLayer.visible = true
