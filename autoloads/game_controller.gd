@@ -12,17 +12,27 @@ func _ready() -> void:
 	SaveManager.game_loaded.connect(_on_save_manager_game_loaded)
 
 
-func start_game(main_scene: String) -> void:
-	# Initialize player.
-	var player := PlayerManager.create_player_chracter()
-	player.active.connect(_on_player_active)
-	# Load and setup level.
-	var level := await LevelManager.load_level(main_scene)
+func start_game(scene_path: String) -> void:
+	# Initialize GUI and fade out.
+	var gui = GUIController.get_current_gui()
+	await gui.set_scene_transition(false)
+	# Initialize game, load and setup level.
+	var player := _initialize_player()
+	var level := await LevelManager.load_level(scene_path)
 	level.actor_traveling_to.connect(_on_actor_travelling_to)
 	level.spawn_actor_at_spawn_point(player)
-	# Initialize GUI.
-	var gui = GUIController.get_current_gui().attach_player(player)
+	# Setup GUI and fade in.
+	gui.attach_player(player)
 	await gui.set_scene_transition(true)
+
+
+func _initialize_player(save_data: Dictionary = {}) -> Player:
+	var player := PlayerManager.create_player_chracter()
+	player.active.connect(_on_player_active)
+	if not save_data.is_empty():
+		player.health_points = save_data.health_points
+		player.max_health_points = save_data.max_health_points
+	return player
 
 
 func _switch_input_game_modes(
@@ -79,18 +89,16 @@ func _on_event_bus_unpause() -> void:
 
 ## Executed while save/load, TODO: refactor with composition
 func _on_save_manager_game_loaded(save_data: Dictionary) -> void:
+	# Get GUI and fade out.
 	var gui = GUIController.get_current_gui()
 	await gui.set_scene_transition(false)
-	# Initialize player.
-	var player := PlayerManager.create_player_chracter()
-	player.active.connect(_on_player_active)
-	player.health_points = save_data.player.health_points
-	player.max_health_points = save_data.player.max_health_points
-	# Load and setup level.
+	# Initialize game, load and setup level.
+	var player := _initialize_player(save_data.player)
 	var level := await LevelManager.load_level(save_data["scene_path"])
 	level.actor_traveling_to.connect(_on_actor_travelling_to)
 	level.spawn_actor_at_global_position(
 		player, Vector2(save_data.player.position_x, save_data.player.position_y)
 	)
+	# Setup GUI and fade in.
 	gui.attach_player(player)
 	await gui.set_scene_transition(true)

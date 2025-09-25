@@ -8,5 +8,5 @@ var _current_gui: GUI
 func get_current_gui() -> GUI:
 	if _current_gui == null:
 		_current_gui = _gui_scene.instantiate()
-		add_sibling(_current_gui)
+		add_sibling.call_deferred(_current_gui)
 	return _current_gui
