@@ -92,6 +92,5 @@ func _on_save_manager_game_loaded(save_data: Dictionary) -> void:
 	level.spawn_actor_at_global_position(
 		player, Vector2(save_data.player.position_x, save_data.player.position_y)
 	)
-	# Initialize GUI.
 	gui.attach_player(player)
 	await gui.set_scene_transition(true)
