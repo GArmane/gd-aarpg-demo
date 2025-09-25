@@ -5,9 +5,9 @@ signal unpause
 
 
 func _ready() -> void:
-	for event in [pause, unpause]:
-		event.connect(_log_event(event.get_name()))
+	for p_signal in [pause, unpause]:
+		p_signal.connect(func(): _log_event(p_signal.get_name()))
 
 
-func _log_event(event: String) -> Callable:
-	return func(): print("(%s): %s event triggered" % [name, event])
+func _log_event(event_name: String) -> void:
+	print("(%s): %s emitted" % [name, event_name])

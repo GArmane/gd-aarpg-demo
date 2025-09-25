@@ -7,21 +7,21 @@ extends Node
 
 
 func _ready() -> void:
-	EventBus.pause.connect(_switch_to_pause_mode)
-	EventBus.unpause.connect(_switch_to_game_mode)
+	EventBus.pause.connect(_on_event_bus_pause)
+	EventBus.unpause.connect(_on_event_bus_unpause)
 	SaveManager.game_loaded.connect(_on_save_manager_game_loaded)
 
 
 func start_game(main_scene: String) -> void:
 	# Initialize player.
 	var player := PlayerManager.create_player_chracter()
-	player.active.connect(_switch_to_game_mode)
+	player.active.connect(_on_player_active)
 	# Load and setup level.
 	var level := await LevelManager.load_level(main_scene)
 	level.actor_traveling_to.connect(_on_actor_travelling_to)
 	level.spawn_actor_at_spawn_point(player)
 	# Initialize GUI.
-	var gui = GUIController.create_gui().attach_player(player)
+	var gui = GUIController.get_current_gui().attach_player(player)
 	await gui.set_scene_transition(true)
 
 
@@ -65,11 +65,23 @@ func _on_actor_travelling_to(
 	await gui.set_scene_transition(true)
 
 
+func _on_player_active() -> void:
+	_switch_to_game_mode()
+
+
+func _on_event_bus_pause() -> void:
+	_switch_to_pause_mode()
+
+
+func _on_event_bus_unpause() -> void:
+	_switch_to_game_mode()
+
+
 ## Executed while save/load, TODO: refactor with composition
 func _on_save_manager_game_loaded(save_data: Dictionary) -> void:
 	# Initialize player.
 	var player := PlayerManager.create_player_chracter()
-	player.active.connect(_switch_to_game_mode)
+	player.active.connect(_on_player_active)
 	player.health_points = save_data.player.health_points
 	player.max_health_points = save_data.player.max_health_points
 	# Load and setup level.
@@ -79,5 +91,5 @@ func _on_save_manager_game_loaded(save_data: Dictionary) -> void:
 		player, Vector2(save_data.player.position_x, save_data.player.position_y)
 	)
 	# Initialize GUI.
-	var gui = GUIController.create_gui().attach_player(player)
+	var gui = GUIController.get_current_gui().attach_player(player)
 	await gui.set_scene_transition(true)

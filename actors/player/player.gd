@@ -32,8 +32,13 @@ signal active
 @export var _attack_action: GUIDEAction
 
 
+func _on_pause_action_triggered() -> void:
+	EventBus.pause.emit()
+
+
+#region StateChart
 func _on_root_state_entered() -> void:
-	_pause_action.triggered.connect(func(): EventBus.pause.emit())
+	_pause_action.triggered.connect(_on_pause_action_triggered)
 	active.emit()
 
 
@@ -113,3 +118,5 @@ func _on_stunned_state_physics_processing(delta: float) -> void:
 
 func _on_stunned_state_exited() -> void:
 	cardinal_direction *= -1
+
+#endregion
