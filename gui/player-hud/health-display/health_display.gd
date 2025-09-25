@@ -22,4 +22,4 @@ func set_max_health_points(value: int) -> Array:
 
 func _reset_icons() -> void:
 	for icon in %IconContainer.get_children():
-		icon.queue_free()
+		icon.free()

@@ -91,5 +91,5 @@ func _on_save_manager_game_loaded(save_data: Dictionary) -> void:
 		player, Vector2(save_data.player.position_x, save_data.player.position_y)
 	)
 	# Initialize GUI.
-	var gui = GUIController.get_current_gui().attach_player(player)
-	await gui.set_scene_transition(true)
+	GUIController.get_current_gui().attach_player(player)
+	GUIController.get_current_gui().set_scene_transition(true)
