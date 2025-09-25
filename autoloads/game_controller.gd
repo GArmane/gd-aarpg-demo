@@ -79,6 +79,8 @@ func _on_event_bus_unpause() -> void:
 
 ## Executed while save/load, TODO: refactor with composition
 func _on_save_manager_game_loaded(save_data: Dictionary) -> void:
+	var gui = GUIController.get_current_gui()
+	await gui.set_scene_transition(false)
 	# Initialize player.
 	var player := PlayerManager.create_player_chracter()
 	player.active.connect(_on_player_active)
@@ -91,5 +93,5 @@ func _on_save_manager_game_loaded(save_data: Dictionary) -> void:
 		player, Vector2(save_data.player.position_x, save_data.player.position_y)
 	)
 	# Initialize GUI.
-	GUIController.get_current_gui().attach_player(player)
-	GUIController.get_current_gui().set_scene_transition(true)
+	gui.attach_player(player)
+	await gui.set_scene_transition(true)
