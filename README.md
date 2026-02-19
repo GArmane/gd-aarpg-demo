@@ -10,7 +10,7 @@ This is a game made for learning purposes only!
 
 This project is comprised of the following languages and libraries:
 
-- Engine: [Godot 4.4](https://godotengine.org/)
+- Engine: [Godot 4.6](https://godotengine.org/)
 - Linter & Formater: [GDScript Toolkit](https://github.com/GArmane/godot-gdscript-toolkit)
 - Beautify: [Beautify Code On Save](https://github.com/GArmane/gd-beautify-code-on-save)
 
