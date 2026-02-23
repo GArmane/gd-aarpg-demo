@@ -7,9 +7,11 @@ func _ready() -> void:
 
 func hide_menu() -> void:
 	visible = false
+	%InventoryHUD.clear_inventory()
 
 
 func show_menu() -> void:
+	%InventoryHUD.update_inventory()
 	%SaveButton.grab_focus()
 	visible = true
 

@@ -1,22 +1,7 @@
 [gd_scene format=3 uid="uid://degtm708x3vlb"]
 
 [ext_resource type="Script" uid="uid://dqv6j8x4u4xmo" path="res://gui/pause-menu/pause_menu.gd" id="1_327ao"]
-[ext_resource type="Texture2D" uid="uid://kku286k3hjqc" path="res://gui/inventory-menu/inventory_items.png" id="2_6cmys"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_kt6wg"]
-atlas = ExtResource("2_6cmys")
-region = Rect2(96, 0, 32, 32)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_u66l6"]
-content_margin_left = 10.0
-content_margin_top = 10.0
-content_margin_right = 10.0
-content_margin_bottom = 10.0
-texture = SubResource("AtlasTexture_kt6wg")
-texture_margin_left = 14.0
-texture_margin_top = 14.0
-texture_margin_right = 14.0
-texture_margin_bottom = 14.0
+[ext_resource type="PackedScene" uid="uid://cswrl0pr454vd" path="res://gui/inventory-hud/inventory_hud.tscn" id="2_6cmys"]
 
 [node name="PauseMenu" type="Control" unique_id=1886937379]
 layout_mode = 3
@@ -66,18 +51,13 @@ custom_minimum_size = Vector2(75, 0)
 layout_mode = 2
 text = "Load"
 
-[node name="InventoryPanel" type="PanelContainer" parent="." unique_id=1253445655]
+[node name="InventoryHUD" parent="." unique_id=129776412 instance=ExtResource("2_6cmys")]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = 16.0
 offset_top = 48.0
-offset_right = 44.0
-offset_bottom = 76.0
-theme_override_styles/panel = SubResource("StyleBoxTexture_u66l6")
-
-[node name="InventoryGrid" type="GridContainer" parent="InventoryPanel" unique_id=890945758]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-columns = 4
+offset_right = 68.0
+offset_bottom = 100.0
 
 [connection signal="pressed" from="SaveLoadButtons/SaveButton" to="." method="_on_save_button_pressed"]
 [connection signal="pressed" from="SaveLoadButtons/LoadButton" to="." method="_on_load_button_pressed"]
