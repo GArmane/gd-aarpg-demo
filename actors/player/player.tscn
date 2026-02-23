@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://1wudjg2ogp8c"]
+[gd_scene format=3 uid="uid://1wudjg2ogp8c"]
 
 [ext_resource type="Texture2D" uid="uid://duudsnvdn0ng4" path="res://actors/player/sprites/sprite-sheet.png" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://gfqy1u7rvdfs" path="res://actors/player/player.gd" id="1_rkbax"]
@@ -851,7 +851,7 @@ height = 16.0
 radius = 8.0
 height = 42.0
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" unique_id=1024496006]
 collision_layer = 4
 motion_mode = 1
 script = ExtResource("1_rkbax")
@@ -861,150 +861,144 @@ _attack_action = ExtResource("4_pxnim")
 health_points = 4
 max_health_points = 4
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1652821765]
 unique_name_in_owner = true
-libraries = {
-&"": SubResource("AnimationLibrary_g1dw6"),
-&"Combat": SubResource("AnimationLibrary_rt46e"),
-&"Movement": SubResource("AnimationLibrary_rgyib")
-}
-autoplay = "RESET"
+libraries/ = SubResource("AnimationLibrary_g1dw6")
+libraries/Combat = SubResource("AnimationLibrary_rt46e")
+libraries/Movement = SubResource("AnimationLibrary_rgyib")
+autoplay = &"RESET"
 
-[node name="AnimationPlayerFX" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayerFX" type="AnimationPlayer" parent="." unique_id=586285369]
 unique_name_in_owner = true
-libraries = {
-&"Effects": SubResource("AnimationLibrary_ctwkf")
-}
+libraries/Effects = SubResource("AnimationLibrary_ctwkf")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=558335541]
 unique_name_in_owner = true
-pitch_scale = 505.15
-max_polyphony = 4
 
-[node name="GameCamera" type="Camera2D" parent="."]
+[node name="GameCamera" type="Camera2D" parent="." unique_id=1370127443]
 script = ExtResource("7_rt46e")
 metadata/_custom_type_script = "uid://c2617wgbmg014"
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1700127984]
 unique_name_in_owner = true
 texture = ExtResource("1_oul6g")
 hframes = 16
 vframes = 3
 
-[node name="AttackSlashFX" type="Sprite2D" parent="Sprite2D"]
+[node name="AttackSlashFX" type="Sprite2D" parent="Sprite2D" unique_id=1002727096]
 unique_name_in_owner = true
 visible = false
 show_behind_parent = true
 texture = ExtResource("6_fwwnh")
 hframes = 12
 
-[node name="ShadowFX" type="Sprite2D" parent="Sprite2D"]
+[node name="ShadowFX" type="Sprite2D" parent="Sprite2D" unique_id=950865733]
 modulate = Color(0, 0, 0, 0.784314)
 show_behind_parent = true
 position = Vector2(0, 21)
 texture = ExtResource("8_16fba")
 
-[node name="Hitbox" parent="Sprite2D" instance=ExtResource("9_7aotg")]
+[node name="Hitbox" parent="Sprite2D" unique_id=103186292 instance=ExtResource("9_7aotg")]
 collision_mask = 34
 monitoring = false
 force = 300.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Hitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Hitbox" unique_id=39327078]
 shape = SubResource("CapsuleShape2D_7aotg")
 debug_color = Color(1, 0, 0, 0.392157)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=343490828]
 unique_name_in_owner = true
 position = Vector2(0, 16)
 shape = SubResource("CapsuleShape2D_g1dw6")
 
-[node name="Hurtbox" parent="." instance=ExtResource("11_rt46e")]
+[node name="Hurtbox" parent="." unique_id=2122782072 instance=ExtResource("11_rt46e")]
 collision_layer = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=836436307]
 shape = SubResource("CapsuleShape2D_rt46e")
 debug_color = Color(1, 1, 0, 0.419608)
 
-[node name="StateChart" type="Node" parent="."]
+[node name="StateChart" type="Node" parent="." unique_id=264237481]
 unique_name_in_owner = true
 script = ExtResource("10_7aotg")
 metadata/_custom_type_script = "uid://couw105c3bde4"
 
-[node name="Root" type="Node" parent="StateChart"]
+[node name="Root" type="Node" parent="StateChart" unique_id=986672872]
 script = ExtResource("5_boad6")
 initial_state = NodePath("Active")
 
-[node name="Active" type="Node" parent="StateChart/Root"]
+[node name="Active" type="Node" parent="StateChart/Root" unique_id=414245146]
 script = ExtResource("5_boad6")
 initial_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="StateChart/Root/Active"]
+[node name="Idle" type="Node" parent="StateChart/Root/Active" unique_id=102668082]
 script = ExtResource("6_rgyib")
 
-[node name="ToWalking" type="Node" parent="StateChart/Root/Active/Idle"]
+[node name="ToWalking" type="Node" parent="StateChart/Root/Active/Idle" unique_id=1977938715]
 script = ExtResource("7_boad6")
 to = NodePath("../../Walking")
 event = &"Walking"
 delay_in_seconds = "0.0"
 
-[node name="ToAttacking" type="Node" parent="StateChart/Root/Active/Idle"]
+[node name="ToAttacking" type="Node" parent="StateChart/Root/Active/Idle" unique_id=1994603436]
 script = ExtResource("7_boad6")
 to = NodePath("../../Attacking")
 event = &"Attacking"
 delay_in_seconds = "0.0"
 
-[node name="ToStunned" type="Node" parent="StateChart/Root/Active/Idle"]
+[node name="ToStunned" type="Node" parent="StateChart/Root/Active/Idle" unique_id=377788513]
 script = ExtResource("7_boad6")
 to = NodePath("../../../Stunned")
 event = &"Stunned"
 delay_in_seconds = "0.0"
 
-[node name="Walking" type="Node" parent="StateChart/Root/Active"]
+[node name="Walking" type="Node" parent="StateChart/Root/Active" unique_id=823899803]
 script = ExtResource("6_rgyib")
 
-[node name="ToIdle" type="Node" parent="StateChart/Root/Active/Walking"]
+[node name="ToIdle" type="Node" parent="StateChart/Root/Active/Walking" unique_id=1448605747]
 script = ExtResource("7_boad6")
 to = NodePath("../../Idle")
 event = &"Idle"
 delay_in_seconds = "0.0"
 
-[node name="ToAttacking" type="Node" parent="StateChart/Root/Active/Walking"]
+[node name="ToAttacking" type="Node" parent="StateChart/Root/Active/Walking" unique_id=834384080]
 script = ExtResource("7_boad6")
 to = NodePath("../../Attacking")
 event = &"Attacking"
 delay_in_seconds = "0.0"
 
-[node name="ToStunned" type="Node" parent="StateChart/Root/Active/Walking"]
+[node name="ToStunned" type="Node" parent="StateChart/Root/Active/Walking" unique_id=859802079]
 script = ExtResource("7_boad6")
 to = NodePath("../../../Stunned")
 event = &"Stunned"
 delay_in_seconds = "0.0"
 
-[node name="Attacking" type="Node" parent="StateChart/Root/Active"]
+[node name="Attacking" type="Node" parent="StateChart/Root/Active" unique_id=1439274189]
 script = ExtResource("6_rgyib")
 
-[node name="ToIdle" type="Node" parent="StateChart/Root/Active/Attacking"]
+[node name="ToIdle" type="Node" parent="StateChart/Root/Active/Attacking" unique_id=1295948924]
 script = ExtResource("7_boad6")
 to = NodePath("../../Idle")
 event = &"Idle"
 delay_in_seconds = "0.0"
 
-[node name="ToWalking" type="Node" parent="StateChart/Root/Active/Attacking"]
+[node name="ToWalking" type="Node" parent="StateChart/Root/Active/Attacking" unique_id=1551088530]
 script = ExtResource("7_boad6")
 to = NodePath("../../Walking")
 event = &"Walking"
 delay_in_seconds = "0.0"
 
-[node name="ToStunned" type="Node" parent="StateChart/Root/Active/Attacking"]
+[node name="ToStunned" type="Node" parent="StateChart/Root/Active/Attacking" unique_id=1671213805]
 script = ExtResource("7_boad6")
 to = NodePath("../../../Stunned")
 event = &"Stunned"
 delay_in_seconds = "0.0"
 
-[node name="Stunned" type="Node" parent="StateChart/Root"]
+[node name="Stunned" type="Node" parent="StateChart/Root" unique_id=984059406]
 script = ExtResource("6_rgyib")
 
-[node name="ToIdle" type="Node" parent="StateChart/Root/Stunned"]
+[node name="ToIdle" type="Node" parent="StateChart/Root/Stunned" unique_id=56101059]
 script = ExtResource("7_boad6")
 to = NodePath("../../Active/Idle")
 event = &"Idle"
