@@ -2,7 +2,6 @@
 
 [ext_resource type="Texture2D" uid="uid://kku286k3hjqc" path="res://gui/inventory-hud/inventory_items.png" id="1_socjb"]
 [ext_resource type="Script" uid="uid://cd0hg8pjjy4sg" path="res://gui/inventory-hud/inventory_hud.gd" id="2_lsmp5"]
-[ext_resource type="Resource" uid="uid://cqkp51srntp4l" path="res://actors/player/player_inventory.tres" id="3_cu2te"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kt6wg"]
 atlas = ExtResource("1_socjb")
@@ -24,7 +23,6 @@ offset_right = 52.0
 offset_bottom = 52.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_u66l6")
 script = ExtResource("2_lsmp5")
-data = ExtResource("3_cu2te")
 
 [node name="GridContainer" type="GridContainer" parent="." unique_id=1954376086]
 unique_name_in_owner = true

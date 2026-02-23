@@ -2,7 +2,10 @@ class_name InventoryUI extends Control
 
 const INVENTORY_SLOT = preload("res://gui/inventory-hud/inventory_slot.tscn")
 
-@export var data: InventoryData
+@export var data: InventoryData:
+	set(value):
+		data = value
+		update_inventory()
 
 
 func _ready() -> void:
@@ -15,5 +18,7 @@ func clear_inventory() -> void:
 
 
 func update_inventory() -> void:
-	for s in data.slots:
-		%GridContainer.add_child(INVENTORY_SLOT.instantiate())
+	for slot in data.slots:
+		var new_slot = INVENTORY_SLOT.instantiate()
+		new_slot.data = slot
+		%GridContainer.add_child(new_slot)

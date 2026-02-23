@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dqv6j8x4u4xmo" path="res://gui/pause-menu/pause_menu.gd" id="1_327ao"]
 [ext_resource type="PackedScene" uid="uid://cswrl0pr454vd" path="res://gui/inventory-hud/inventory_hud.tscn" id="2_6cmys"]
+[ext_resource type="Resource" uid="uid://e166dtu6p0r4" path="res://gui/inventory-hud/debug_inventory.tres" id="3_kt6wg"]
 
 [node name="PauseMenu" type="Control" unique_id=1886937379]
 layout_mode = 3
@@ -58,6 +59,7 @@ offset_left = 16.0
 offset_top = 48.0
 offset_right = 68.0
 offset_bottom = 100.0
+data = ExtResource("3_kt6wg")
 
 [connection signal="pressed" from="SaveLoadButtons/SaveButton" to="." method="_on_save_button_pressed"]
 [connection signal="pressed" from="SaveLoadButtons/LoadButton" to="." method="_on_load_button_pressed"]

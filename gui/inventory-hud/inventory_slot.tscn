@@ -1,28 +1,25 @@
 [gd_scene format=3 uid="uid://b3fu0ljxd0wwq"]
 
-[ext_resource type="Texture2D" uid="uid://kku286k3hjqc" path="res://gui/inventory-hud/inventory_items.png" id="1_3uapy"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3uapy"]
-atlas = ExtResource("1_3uapy")
-region = Rect2(0, 0, 32, 32)
+[ext_resource type="Script" uid="uid://cdk5e48vxhitw" path="res://gui/inventory-hud/inventory_slot.gd" id="1_ikq25"]
 
 [node name="InventorySlot" type="Button" unique_id=1679192164]
 custom_minimum_size = Vector2(32, 32)
 offset_right = 32.0
 offset_bottom = 32.0
 size_flags_horizontal = 0
+script = ExtResource("1_ikq25")
 
 [node name="ItemTexture" type="TextureRect" parent="." unique_id=109351776]
+unique_name_in_owner = true
 layout_mode = 0
 offset_right = 32.0
 offset_bottom = 32.0
-texture = SubResource("AtlasTexture_3uapy")
 stretch_mode = 3
 
 [node name="QuantityLabel" type="Label" parent="." unique_id=461628496]
+unique_name_in_owner = true
 layout_mode = 0
 offset_right = 32.0
 offset_bottom = 12.0
 theme_override_font_sizes/font_size = 8
-text = "99"
 horizontal_alignment = 2
