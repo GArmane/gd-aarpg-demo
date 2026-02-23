@@ -1,8 +1,24 @@
-[gd_scene load_steps=2 format=3 uid="uid://degtm708x3vlb"]
+[gd_scene format=3 uid="uid://degtm708x3vlb"]
 
 [ext_resource type="Script" uid="uid://dqv6j8x4u4xmo" path="res://gui/pause-menu/pause_menu.gd" id="1_327ao"]
+[ext_resource type="Texture2D" uid="uid://kku286k3hjqc" path="res://gui/inventory-menu/inventory_items.png" id="2_6cmys"]
 
-[node name="PauseMenu" type="Control"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_kt6wg"]
+atlas = ExtResource("2_6cmys")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_u66l6"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+texture = SubResource("AtlasTexture_kt6wg")
+texture_margin_left = 14.0
+texture_margin_top = 14.0
+texture_margin_right = 14.0
+texture_margin_bottom = 14.0
+
+[node name="PauseMenu" type="Control" unique_id=1886937379]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,44 +27,57 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_327ao")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=700824056]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = 32.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.141176, 0.141176, 0.141176, 0.823529)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -64.0
-offset_top = -33.0
-offset_right = 64.0
-offset_bottom = 33.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Label" type="Label" parent="VBoxContainer"]
-layout_mode = 2
+[node name="Label" type="Label" parent="." unique_id=930460404]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 16.0
+offset_right = 160.0
+offset_bottom = 39.0
 text = "[Paused]"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SaveButton" type="Button" parent="VBoxContainer"]
+[node name="SaveLoadButtons" type="HBoxContainer" parent="." unique_id=943934593]
+layout_mode = 1
+offset_left = 16.0
+offset_top = 224.0
+offset_right = 176.0
+offset_bottom = 255.0
+
+[node name="SaveButton" type="Button" parent="SaveLoadButtons" unique_id=1629287766]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(75, 0)
 layout_mode = 2
 text = "Save"
 
-[node name="LoadButton" type="Button" parent="VBoxContainer"]
+[node name="LoadButton" type="Button" parent="SaveLoadButtons" unique_id=1324027467]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(75, 0)
 layout_mode = 2
 text = "Load"
 
-[connection signal="pressed" from="VBoxContainer/SaveButton" to="." method="_on_save_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/LoadButton" to="." method="_on_load_button_pressed"]
+[node name="InventoryPanel" type="PanelContainer" parent="." unique_id=1253445655]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 48.0
+offset_right = 44.0
+offset_bottom = 76.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_u66l6")
+
+[node name="InventoryGrid" type="GridContainer" parent="InventoryPanel" unique_id=890945758]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+columns = 4
+
+[connection signal="pressed" from="SaveLoadButtons/SaveButton" to="." method="_on_save_button_pressed"]
+[connection signal="pressed" from="SaveLoadButtons/LoadButton" to="." method="_on_load_button_pressed"]
