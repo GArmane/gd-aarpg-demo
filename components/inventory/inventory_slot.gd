@@ -5,3 +5,7 @@ class_name InventorySlot extends Resource
 @export_range(0, 255) var quantity: int = 0:
 	set(value):
 		quantity = clampi(value, 0, 255)
+
+var description:
+	get():
+		return item.description if item != null else ""

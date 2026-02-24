@@ -1,13 +1,13 @@
 [gd_scene format=3 uid="uid://bel6inc0ufkve"]
 
-[ext_resource type="Script" uid="uid://dru2pi2lksq3k" path="res://gui/inventory-hud/inventory_slot.gd" id="1_ikq25"]
+[ext_resource type="Script" uid="uid://dru2pi2lksq3k" path="res://gui/inventory-hud/inventory_button.gd" id="1_rdeq1"]
 
-[node name="InventorySlot" type="Button" unique_id=1679192164]
+[node name="InventoryButton" type="Button" unique_id=1679192164]
 custom_minimum_size = Vector2(32, 32)
 offset_right = 32.0
 offset_bottom = 32.0
 size_flags_horizontal = 0
-script = ExtResource("1_ikq25")
+script = ExtResource("1_rdeq1")
 
 [node name="ItemTexture" type="TextureRect" parent="." unique_id=109351776]
 unique_name_in_owner = true

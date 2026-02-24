@@ -22,7 +22,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.141176, 0.141176, 0.141176, 0.823529)
 
-[node name="Label" type="Label" parent="." unique_id=930460404]
+[node name="PauseLabel" type="Label" parent="." unique_id=930460404]
 layout_mode = 0
 offset_left = 32.0
 offset_top = 16.0
@@ -31,6 +31,26 @@ offset_bottom = 39.0
 text = "[Paused]"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="InventoryHUD" parent="." unique_id=129776412 instance=ExtResource("2_6cmys")]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 16.0
+offset_top = 48.0
+offset_right = 68.0
+offset_bottom = 100.0
+
+[node name="InventoryDescription" type="Label" parent="." unique_id=984303668]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 16.0
+offset_top = 144.0
+offset_right = 168.0
+offset_bottom = 209.0
+theme_override_font_sizes/font_size = 10
+text = "[Item Description]"
+horizontal_alignment = 1
+autowrap_mode = 2
 
 [node name="SaveLoadButtons" type="HBoxContainer" parent="." unique_id=943934593]
 layout_mode = 1
@@ -51,13 +71,7 @@ custom_minimum_size = Vector2(75, 0)
 layout_mode = 2
 text = "Load"
 
-[node name="InventoryHUD" parent="." unique_id=129776412 instance=ExtResource("2_6cmys")]
-unique_name_in_owner = true
-layout_mode = 0
-offset_left = 16.0
-offset_top = 48.0
-offset_right = 68.0
-offset_bottom = 100.0
-
+[connection signal="item_selected" from="InventoryHUD" to="." method="_on_inventory_hud_item_selected"]
+[connection signal="no_item_selected" from="InventoryHUD" to="." method="_on_inventory_hud_no_item_selected"]
 [connection signal="pressed" from="SaveLoadButtons/SaveButton" to="." method="_on_save_button_pressed"]
 [connection signal="pressed" from="SaveLoadButtons/LoadButton" to="." method="_on_load_button_pressed"]

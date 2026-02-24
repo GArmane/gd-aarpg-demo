@@ -2,6 +2,7 @@ extends Control
 
 
 func _ready() -> void:
+	%InventoryDescription.text = ""
 	hide_menu()
 
 
@@ -16,6 +17,14 @@ func hide_menu() -> void:
 func show_menu() -> void:
 	%SaveButton.grab_focus()
 	visible = true
+
+
+func _on_inventory_hud_item_selected(ref: InventoryButton) -> void:
+	%InventoryDescription.text = ref.data.description
+
+
+func _on_inventory_hud_no_item_selected() -> void:
+	%InventoryDescription.text = ""
 
 
 func _on_save_button_pressed() -> void:
