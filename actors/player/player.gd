@@ -3,6 +3,7 @@
 class_name Player extends Actor2D
 
 signal active
+signal inventory_changed(ref: Inventory)
 
 @export var state_configuration = {
 	"Idle":
@@ -30,6 +31,7 @@ signal active
 @export var _pause_action: GUIDEAction
 @export var _move_action: GUIDEAction
 @export var _attack_action: GUIDEAction
+@export var _inventory: Inventory
 
 
 func _on_pause_action_triggered() -> void:
@@ -40,6 +42,7 @@ func _on_pause_action_triggered() -> void:
 func _on_root_state_entered() -> void:
 	_pause_action.triggered.connect(_on_pause_action_triggered)
 	active.emit()
+	inventory_changed.emit(_inventory)
 
 
 func _on_idle_state_entered() -> void:

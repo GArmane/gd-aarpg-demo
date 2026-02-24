@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://caobf38rc8egb"]
+[gd_scene format=3 uid="uid://caobf38rc8egb"]
 
 [ext_resource type="PackedScene" uid="uid://ctj3fr05y0gdi" path="res://gui/debug/debug_hud.tscn" id="1_ioifv"]
 [ext_resource type="Script" uid="uid://bykbyc4an1mdr" path="res://gui/gui.gd" id="1_q46mf"]
@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cw2l3oe6dey3h" path="res://gui/scene-transition/scene_transition.tscn" id="4_n360k"]
 [ext_resource type="Resource" uid="uid://doq8p18kenyvi" path="res://input/pause-mode/unpause.tres" id="4_xqkfk"]
 
-[node name="GUI" type="Control"]
+[node name="GUI" type="Control" unique_id=744887320]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -19,32 +19,32 @@ script = ExtResource("1_q46mf")
 _debug_action = ExtResource("4_kvi6p")
 _unpause_action = ExtResource("4_xqkfk")
 
-[node name="DebugLayer" type="CanvasLayer" parent="."]
+[node name="DebugLayer" type="CanvasLayer" parent="." unique_id=130512205]
 unique_name_in_owner = true
 layer = 3
 visible = false
 
-[node name="DebugHUD" parent="DebugLayer" instance=ExtResource("1_ioifv")]
+[node name="DebugHUD" parent="DebugLayer" unique_id=1294509092 instance=ExtResource("1_ioifv")]
 unique_name_in_owner = true
 
-[node name="HUDLayer" type="CanvasLayer" parent="."]
+[node name="HUDLayer" type="CanvasLayer" parent="." unique_id=1370080430]
 unique_name_in_owner = true
 layer = 2
 
-[node name="PlayerHUD" parent="HUDLayer" instance=ExtResource("2_q46mf")]
+[node name="PlayerHUD" parent="HUDLayer" unique_id=1590663209 instance=ExtResource("2_q46mf")]
 unique_name_in_owner = true
 
-[node name="PauseLayer" type="CanvasLayer" parent="."]
+[node name="PauseLayer" type="CanvasLayer" parent="." unique_id=395769157]
 unique_name_in_owner = true
 process_mode = 3
 visible = false
 
-[node name="PauseMenu" parent="PauseLayer" instance=ExtResource("2_hp187")]
+[node name="PauseMenu" parent="PauseLayer" unique_id=1369741678 instance=ExtResource("2_hp187")]
 unique_name_in_owner = true
 process_mode = 2
 
-[node name="OverlayLayer" type="CanvasLayer" parent="."]
+[node name="OverlayLayer" type="CanvasLayer" parent="." unique_id=1975743493]
 unique_name_in_owner = true
 
-[node name="SceneTransition" parent="OverlayLayer" instance=ExtResource("4_n360k")]
+[node name="SceneTransition" parent="OverlayLayer" unique_id=1194183075 instance=ExtResource("4_n360k")]
 unique_name_in_owner = true

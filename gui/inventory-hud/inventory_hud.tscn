@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://cswrl0pr454vd"]
+[gd_scene format=3 uid="uid://bpnta6f0sd5bg"]
 
-[ext_resource type="Texture2D" uid="uid://kku286k3hjqc" path="res://gui/inventory-hud/inventory_items.png" id="1_socjb"]
+[ext_resource type="Texture2D" uid="uid://nf7fkghmyg2n" path="res://gui/inventory-hud/inventory_items.png" id="1_socjb"]
 [ext_resource type="Script" uid="uid://cd0hg8pjjy4sg" path="res://gui/inventory-hud/inventory_hud.gd" id="2_lsmp5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kt6wg"]

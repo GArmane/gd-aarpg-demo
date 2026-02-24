@@ -5,13 +5,15 @@ func _ready() -> void:
 	hide_menu()
 
 
+func attach_player(player: Player) -> void:
+	player.inventory_changed.connect(func(inventory): %InventoryHUD.data = inventory)
+
+
 func hide_menu() -> void:
 	visible = false
-	%InventoryHUD.clear_inventory()
 
 
 func show_menu() -> void:
-	%InventoryHUD.update_inventory()
 	%SaveButton.grab_focus()
 	visible = true
 

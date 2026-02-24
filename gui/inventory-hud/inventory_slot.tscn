@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://b3fu0ljxd0wwq"]
+[gd_scene format=3 uid="uid://bel6inc0ufkve"]
 
-[ext_resource type="Script" uid="uid://cdk5e48vxhitw" path="res://gui/inventory-hud/inventory_slot.gd" id="1_ikq25"]
+[ext_resource type="Script" uid="uid://dru2pi2lksq3k" path="res://gui/inventory-hud/inventory_slot.gd" id="1_ikq25"]
 
 [node name="InventorySlot" type="Button" unique_id=1679192164]
 custom_minimum_size = Vector2(32, 32)

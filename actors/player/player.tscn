@@ -6,16 +6,64 @@
 [ext_resource type="Resource" uid="uid://be146lb73a8yl" path="res://input/game-mode/pause.tres" id="2_rt46e"]
 [ext_resource type="Resource" uid="uid://bf14bejt1d6x2" path="res://input/game-mode/attack.tres" id="4_pxnim"]
 [ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="5_boad6"]
+[ext_resource type="Script" uid="uid://cupk5vpjmox38" path="res://components/inventory/inventory.gd" id="5_qrxv1"]
 [ext_resource type="AudioStream" uid="uid://bedtfa1kdlgb8" path="res://actors/player/audio/sword_swoosh.wav" id="5_vxcs8"]
+[ext_resource type="Script" uid="uid://cgbio5n8xulu5" path="res://components/inventory/inventory_slot.gd" id="6_dqf5y"]
 [ext_resource type="Texture2D" uid="uid://bwb323mswpe82" path="res://actors/player/sprites/attack-slash-fx.png" id="6_fwwnh"]
 [ext_resource type="AudioStream" uid="uid://bn6smj6jjsoso" path="res://actors/player/audio/hit_player.wav" id="6_k67x5"]
 [ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="6_rgyib"]
 [ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="7_boad6"]
+[ext_resource type="Resource" uid="uid://dgcyc5xo63nvy" path="res://components/item/potion.tres" id="7_ctwkf"]
 [ext_resource type="Script" uid="uid://c2617wgbmg014" path="res://components/camera/game_camera.gd" id="7_rt46e"]
 [ext_resource type="Texture2D" uid="uid://yjadre666npo" path="res://actors/player/sprites/shadow.png" id="8_16fba"]
+[ext_resource type="Resource" uid="uid://cwofhyab80hp2" path="res://components/item/gem.tres" id="8_icg72"]
 [ext_resource type="PackedScene" uid="uid://w7txpjedkngh" path="res://components/hitbox/hitbox.tscn" id="9_7aotg"]
+[ext_resource type="Resource" uid="uid://b24xqua5uyc5u" path="res://components/item/stone.tres" id="9_lj3dd"]
 [ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="10_7aotg"]
 [ext_resource type="PackedScene" uid="uid://biba33ekj332o" path="res://components/hurtbox/hurtbox.tscn" id="11_rt46e"]
+
+[sub_resource type="Resource" id="Resource_nsxbo"]
+script = ExtResource("6_dqf5y")
+item = ExtResource("7_ctwkf")
+quantity = 3
+metadata/_custom_type_script = "uid://cgbio5n8xulu5"
+
+[sub_resource type="Resource" id="Resource_yeioo"]
+script = ExtResource("6_dqf5y")
+item = ExtResource("8_icg72")
+quantity = 2
+metadata/_custom_type_script = "uid://cgbio5n8xulu5"
+
+[sub_resource type="Resource" id="Resource_qct7d"]
+script = ExtResource("6_dqf5y")
+item = ExtResource("9_lj3dd")
+quantity = 1
+metadata/_custom_type_script = "uid://cgbio5n8xulu5"
+
+[sub_resource type="Resource" id="Resource_2vokq"]
+script = ExtResource("6_dqf5y")
+metadata/_custom_type_script = "uid://cgbio5n8xulu5"
+
+[sub_resource type="Resource" id="Resource_tpopl"]
+script = ExtResource("6_dqf5y")
+metadata/_custom_type_script = "uid://cgbio5n8xulu5"
+
+[sub_resource type="Resource" id="Resource_0nck3"]
+script = ExtResource("6_dqf5y")
+metadata/_custom_type_script = "uid://cgbio5n8xulu5"
+
+[sub_resource type="Resource" id="Resource_1c637"]
+script = ExtResource("6_dqf5y")
+metadata/_custom_type_script = "uid://cgbio5n8xulu5"
+
+[sub_resource type="Resource" id="Resource_4ihbh"]
+script = ExtResource("6_dqf5y")
+metadata/_custom_type_script = "uid://cgbio5n8xulu5"
+
+[sub_resource type="Resource" id="Resource_otn2r"]
+script = ExtResource("5_qrxv1")
+slots = Array[ExtResource("6_dqf5y")]([SubResource("Resource_nsxbo"), SubResource("Resource_yeioo"), SubResource("Resource_qct7d"), SubResource("Resource_2vokq"), SubResource("Resource_tpopl"), SubResource("Resource_0nck3"), SubResource("Resource_1c637"), SubResource("Resource_4ihbh")])
+metadata/_custom_type_script = "uid://cupk5vpjmox38"
 
 [sub_resource type="Animation" id="Animation_g1dw6"]
 length = 0.001
@@ -858,6 +906,7 @@ script = ExtResource("1_rkbax")
 _pause_action = ExtResource("2_rt46e")
 _move_action = ExtResource("2_g1dw6")
 _attack_action = ExtResource("4_pxnim")
+_inventory = SubResource("Resource_otn2r")
 health_points = 4
 max_health_points = 4
 
