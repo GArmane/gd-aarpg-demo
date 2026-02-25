@@ -2,12 +2,11 @@ extends Control
 
 
 func _ready() -> void:
-	%InventoryDescription.text = ""
 	hide_menu()
 
 
 func attach_player(player: Player) -> void:
-	player.inventory_changed.connect(func(inventory): %InventoryHUD.data = inventory)
+	%InventoryMenu.attach_player(player)
 
 
 func hide_menu() -> void:
@@ -17,14 +16,6 @@ func hide_menu() -> void:
 func show_menu() -> void:
 	%SaveButton.grab_focus()
 	visible = true
-
-
-func _on_inventory_hud_item_selected(ref: InventoryButton) -> void:
-	%InventoryDescription.text = ref.data.description
-
-
-func _on_inventory_hud_no_item_selected() -> void:
-	%InventoryDescription.text = ""
 
 
 func _on_save_button_pressed() -> void:

@@ -1,4 +1,4 @@
-@icon("res://assets/icon-godot-node/control/icon_bag.png")
+@icon("res://assets/icon-godot-node/control/icon_grid.png")
 class_name InventoryUI extends Control
 
 signal no_item_selected
