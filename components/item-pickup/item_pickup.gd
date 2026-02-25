@@ -1,0 +1,32 @@
+@tool
+@icon("res://assets/icon-godot-node/node-2D/icon_money_bag.png")
+class_name ItemPickup extends Node2D
+
+@export var item: Item:
+	set(value):
+		item = value
+		_update_texture()
+
+
+func _ready() -> void:
+	_update_texture()
+
+	if Engine.is_editor_hint():
+		return
+
+
+func _update_texture() -> void:
+	%ItemSprite.texture = item.texture if item != null else null
+
+
+func _on_area_2d_body_entered(body: Player) -> void:
+	var inventory = body.get_inventory()
+	if inventory == null or inventory.add_item(item) != OK:
+		return
+
+	%Area2D.set_deferred("monitorable", false)
+	%Area2D.set_deferred("monitoring", false)
+	%ItemSprite.visible = false
+	%PickupSound.play()
+	await %PickupSound.finished
+	queue_free()

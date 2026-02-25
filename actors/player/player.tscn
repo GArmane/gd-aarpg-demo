@@ -13,56 +13,47 @@
 [ext_resource type="AudioStream" uid="uid://bn6smj6jjsoso" path="res://actors/player/audio/hit_player.wav" id="6_k67x5"]
 [ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="6_rgyib"]
 [ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="7_boad6"]
-[ext_resource type="Resource" uid="uid://dgcyc5xo63nvy" path="res://components/item/potion.tres" id="7_ctwkf"]
 [ext_resource type="Script" uid="uid://c2617wgbmg014" path="res://components/camera/game_camera.gd" id="7_rt46e"]
 [ext_resource type="Texture2D" uid="uid://yjadre666npo" path="res://actors/player/sprites/shadow.png" id="8_16fba"]
-[ext_resource type="Resource" uid="uid://cwofhyab80hp2" path="res://components/item/gem.tres" id="8_icg72"]
 [ext_resource type="PackedScene" uid="uid://w7txpjedkngh" path="res://components/hitbox/hitbox.tscn" id="9_7aotg"]
-[ext_resource type="Resource" uid="uid://b24xqua5uyc5u" path="res://components/item/stone.tres" id="9_lj3dd"]
 [ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="10_7aotg"]
 [ext_resource type="PackedScene" uid="uid://biba33ekj332o" path="res://components/hurtbox/hurtbox.tscn" id="11_rt46e"]
 
+[sub_resource type="Resource" id="Resource_qrxv1"]
+script = ExtResource("6_dqf5y")
+metadata/_custom_type_script = "uid://cgbio5n8xulu5"
+
+[sub_resource type="Resource" id="Resource_dqf5y"]
+script = ExtResource("6_dqf5y")
+metadata/_custom_type_script = "uid://cgbio5n8xulu5"
+
+[sub_resource type="Resource" id="Resource_ctwkf"]
+script = ExtResource("6_dqf5y")
+metadata/_custom_type_script = "uid://cgbio5n8xulu5"
+
+[sub_resource type="Resource" id="Resource_icg72"]
+script = ExtResource("6_dqf5y")
+metadata/_custom_type_script = "uid://cgbio5n8xulu5"
+
+[sub_resource type="Resource" id="Resource_lj3dd"]
+script = ExtResource("6_dqf5y")
+metadata/_custom_type_script = "uid://cgbio5n8xulu5"
+
 [sub_resource type="Resource" id="Resource_nsxbo"]
 script = ExtResource("6_dqf5y")
-item = ExtResource("7_ctwkf")
-quantity = 3
 metadata/_custom_type_script = "uid://cgbio5n8xulu5"
 
 [sub_resource type="Resource" id="Resource_yeioo"]
 script = ExtResource("6_dqf5y")
-item = ExtResource("8_icg72")
-quantity = 2
 metadata/_custom_type_script = "uid://cgbio5n8xulu5"
 
 [sub_resource type="Resource" id="Resource_qct7d"]
-script = ExtResource("6_dqf5y")
-item = ExtResource("9_lj3dd")
-quantity = 1
-metadata/_custom_type_script = "uid://cgbio5n8xulu5"
-
-[sub_resource type="Resource" id="Resource_2vokq"]
-script = ExtResource("6_dqf5y")
-metadata/_custom_type_script = "uid://cgbio5n8xulu5"
-
-[sub_resource type="Resource" id="Resource_tpopl"]
-script = ExtResource("6_dqf5y")
-metadata/_custom_type_script = "uid://cgbio5n8xulu5"
-
-[sub_resource type="Resource" id="Resource_0nck3"]
-script = ExtResource("6_dqf5y")
-metadata/_custom_type_script = "uid://cgbio5n8xulu5"
-
-[sub_resource type="Resource" id="Resource_1c637"]
-script = ExtResource("6_dqf5y")
-metadata/_custom_type_script = "uid://cgbio5n8xulu5"
-
-[sub_resource type="Resource" id="Resource_4ihbh"]
 script = ExtResource("6_dqf5y")
 metadata/_custom_type_script = "uid://cgbio5n8xulu5"
 
 [sub_resource type="Resource" id="Resource_otn2r"]
 script = ExtResource("5_qrxv1")
-slots = Array[ExtResource("6_dqf5y")]([SubResource("Resource_nsxbo"), SubResource("Resource_yeioo"), SubResource("Resource_qct7d"), SubResource("Resource_2vokq"), SubResource("Resource_tpopl"), SubResource("Resource_0nck3"), SubResource("Resource_1c637"), SubResource("Resource_4ihbh")])
+slots = Array[ExtResource("6_dqf5y")]([SubResource("Resource_qrxv1"), SubResource("Resource_dqf5y"), SubResource("Resource_ctwkf"), SubResource("Resource_icg72"), SubResource("Resource_lj3dd"), SubResource("Resource_nsxbo"), SubResource("Resource_yeioo"), SubResource("Resource_qct7d")])
 metadata/_custom_type_script = "uid://cupk5vpjmox38"
 
 [sub_resource type="Animation" id="Animation_g1dw6"]
@@ -923,6 +914,7 @@ libraries/Effects = SubResource("AnimationLibrary_ctwkf")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=558335541]
 unique_name_in_owner = true
+max_polyphony = 4
 
 [node name="GameCamera" type="Camera2D" parent="." unique_id=1370127443]
 script = ExtResource("7_rt46e")

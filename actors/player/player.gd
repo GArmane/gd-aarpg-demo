@@ -3,7 +3,6 @@
 class_name Player extends Actor2D
 
 signal active
-signal inventory_changed(ref: Inventory)
 
 @export var state_configuration = {
 	"Idle":
@@ -38,11 +37,18 @@ func _on_pause_action_triggered() -> void:
 	EventBus.pause.emit()
 
 
+#region Inventory Management
+func get_inventory() -> Inventory:
+	return _inventory
+
+
+#endregion
+
+
 #region StateChart
 func _on_root_state_entered() -> void:
 	_pause_action.triggered.connect(_on_pause_action_triggered)
 	active.emit()
-	inventory_changed.emit(_inventory)
 
 
 func _on_idle_state_entered() -> void:
