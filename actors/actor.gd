@@ -11,10 +11,6 @@ const CARDINAL_DIRECTION = {
 	Vector2.UP: "Up",
 }
 
-@export_category("Movement")
-@export_range(0.0, 100.0, 0.5) var move_speed: float = 100.0
-@export_range(0.0, 20.00, 0.5) var deacceleration_speed: float = 10.0
-
 var cardinal_direction := Vector2.DOWN:
 	set(value):
 		var old_cardinal_direction = cardinal_direction
@@ -35,7 +31,12 @@ func update_animation(anim_key):
 	%Sprite2D.scale.x = -1 if cardinal_direction in [Vector2.LEFT, Vector2.DOWN] else 1
 
 
-func update_movement(delta: float, direction := Vector2.ZERO) -> Vector2:
+func update_movement(
+	delta: float,
+	move_speed: float,
+	deacceleration_speed: float,
+	direction := Vector2.ZERO,
+) -> Vector2:
 	if direction != Vector2.ZERO:
 		velocity = direction.normalized() * move_speed
 

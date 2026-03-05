@@ -42,7 +42,7 @@ func _on_idle_state_physics_processing(delta: float) -> void:
 	if %WanderingTimer.is_stopped():
 		%StateChart.send_event(state_configuration["Idle"]["timer_transition_to"])
 	else:
-		update_movement(delta)
+		update_movement(delta, %StatSheet.move_speed.value, %StatSheet.deacceleration_speed.value)
 
 
 func _on_wandering_state_entered() -> void:
@@ -60,7 +60,12 @@ func _on_wandering_state_physics_processing(delta: float) -> void:
 	if %WanderingTimer.is_stopped():
 		%StateChart.send_event(state_configuration["Wandering"]["timer_transition_to"])
 	else:
-		update_movement(delta, cardinal_direction)
+		update_movement(
+			delta,
+			%StatSheet.move_speed.value,
+			%StatSheet.deacceleration_speed.value,
+			cardinal_direction
+		)
 
 
 func _on_stat_sheet_health_points_changed(value) -> void:
@@ -82,7 +87,7 @@ func _on_stunned_state_physics_processing(delta: float) -> void:
 	if not %AnimationPlayer.is_playing():
 		%StateChart.send_event(state_configuration["Idle"]["event"])
 		return
-	update_movement(delta)
+	update_movement(delta, %StatSheet.move_speed.value, %StatSheet.deacceleration_speed.value)
 
 
 func _on_stunned_state_exited() -> void:

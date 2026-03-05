@@ -902,6 +902,16 @@ script = ExtResource("20_ctwkf")
 value = 4
 metadata/_custom_type_script = "uid://covovq7nmdm2f"
 
+[sub_resource type="Resource" id="Resource_0nck3"]
+script = ExtResource("20_ctwkf")
+value = 100.0
+metadata/_custom_type_script = "uid://covovq7nmdm2f"
+
+[sub_resource type="Resource" id="Resource_1c637"]
+script = ExtResource("20_ctwkf")
+value = 10.0
+metadata/_custom_type_script = "uid://covovq7nmdm2f"
+
 [node name="Player" type="CharacterBody2D" unique_id=1024496006]
 collision_layer = 4
 motion_mode = 1
@@ -1060,6 +1070,8 @@ unique_name_in_owner = true
 script = ExtResource("19_otn2r")
 health_points = SubResource("Resource_2vokq")
 max_health_points = SubResource("Resource_tpopl")
+move_speed = SubResource("Resource_0nck3")
+deacceleration_speed = SubResource("Resource_1c637")
 metadata/_custom_type_script = "uid://cd32mx70vnotr"
 
 [connection signal="damaged" from="Hurtbox" to="." method="_on_hurtbox_damaged"]

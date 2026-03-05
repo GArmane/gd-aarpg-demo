@@ -56,7 +56,7 @@ func _on_idle_state_entered() -> void:
 
 
 func _on_idle_state_physics_processing(delta: float) -> void:
-	update_movement(delta)
+	update_movement(delta, %StatSheet.move_speed.value, %StatSheet.deacceleration_speed.value)
 
 
 func _on_idle_state_processing(_delta: float) -> void:
@@ -76,7 +76,12 @@ func _on_walking_state_entered() -> void:
 
 
 func _on_walking_state_physics_processing(delta: float) -> void:
-	update_movement(delta, _move_action.value_axis_2d)
+	update_movement(
+		delta,
+		%StatSheet.move_speed.value,
+		%StatSheet.deacceleration_speed.value,
+		_move_action.value_axis_2d
+	)
 
 
 func _on_walking_state_processing(_delta: float) -> void:
@@ -95,7 +100,7 @@ func _on_attacking_state_entered() -> void:
 
 
 func _on_attacking_state_physics_processing(delta: float) -> void:
-	update_movement(delta)
+	update_movement(delta, %StatSheet.move_speed.value, %StatSheet.deacceleration_speed.value)
 
 
 func _on_attacking_state_processing(_delta: float) -> void:
@@ -122,7 +127,7 @@ func _on_stunned_state_physics_processing(delta: float) -> void:
 	if not %AnimationPlayer.is_playing():
 		%StateChart.send_event(state_configuration["Idle"]["event"])
 		return
-	update_movement(delta)
+	update_movement(delta, %StatSheet.move_speed.value, %StatSheet.deacceleration_speed.value)
 
 
 func _on_stunned_state_exited() -> void:

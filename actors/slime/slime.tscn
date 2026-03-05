@@ -1176,12 +1176,21 @@ script = ExtResource("15_8waee")
 value = 3
 metadata/_custom_type_script = "uid://covovq7nmdm2f"
 
+[sub_resource type="Resource" id="Resource_u8n2a"]
+script = ExtResource("15_8waee")
+value = 30.0
+metadata/_custom_type_script = "uid://covovq7nmdm2f"
+
+[sub_resource type="Resource" id="Resource_8waee"]
+script = ExtResource("15_8waee")
+value = 10.0
+metadata/_custom_type_script = "uid://covovq7nmdm2f"
+
 [node name="Slime" type="CharacterBody2D" unique_id=1294776106]
 collision_layer = 16
 collision_mask = 5
 motion_mode = 1
 script = ExtResource("1_qfp8a")
-move_speed = 30.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=416294792]
 unique_name_in_owner = true
@@ -1303,6 +1312,8 @@ unique_name_in_owner = true
 script = ExtResource("14_u8n2a")
 health_points = SubResource("Resource_ixqqg")
 max_health_points = SubResource("Resource_ixmak")
+move_speed = SubResource("Resource_u8n2a")
+deacceleration_speed = SubResource("Resource_8waee")
 metadata/_custom_type_script = "uid://cd32mx70vnotr"
 
 [connection signal="damaged" from="Hurtbox" to="." method="_on_hurtbox_damaged"]
