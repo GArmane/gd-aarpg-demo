@@ -7,7 +7,7 @@ func _ready() -> void:
 
 
 func attach_player(player: Player) -> void:
-	var inventory = player.get_inventory()
+	var inventory = player.inventory
 	%InventoryHUD.data = inventory
 	inventory.changed.connect(func(): %InventoryHUD.data = inventory)
 

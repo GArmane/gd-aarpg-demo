@@ -27,6 +27,14 @@ signal active
 	},
 }
 
+@export var stat_sheet: StatSheet:
+	get():
+		return %StatSheet
+
+@export var inventory: Inventory:
+	get():
+		return _inventory
+
 @export var _pause_action: GUIDEAction
 @export var _move_action: GUIDEAction
 @export var _attack_action: GUIDEAction
@@ -35,14 +43,6 @@ signal active
 
 func _on_pause_action_triggered() -> void:
 	EventBus.pause.emit()
-
-
-#region Inventory Management
-func get_inventory() -> Inventory:
-	return _inventory
-
-
-#endregion
 
 
 #region StateChart
@@ -107,7 +107,7 @@ func _on_attacking_state_processing(_delta: float) -> void:
 
 
 func _on_hurtbox_damaged(damage: int, knockback_direction: Vector2, knockback_force: float) -> void:
-	apply_damage(damage)
+	%StatSheet.apply_damage(damage)
 	if damage > 0:
 		apply_force(knockback_direction, knockback_force, knockback_direction * -1)
 		%StateChart.send_event(state_configuration["Stunned"]["event"])

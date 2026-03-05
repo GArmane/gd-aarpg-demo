@@ -20,8 +20,7 @@ func _update_texture() -> void:
 
 
 func _on_area_2d_body_entered(body: Player) -> void:
-	var inventory = body.get_inventory()
-	if inventory == null or inventory.add_item(item) != OK:
+	if body.inventory == null or body.inventory.add_item(item) != OK:
 		return
 
 	%Area2D.set_deferred("monitorable", false)

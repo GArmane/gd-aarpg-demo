@@ -27,11 +27,11 @@ func start_game(scene_path: String) -> void:
 
 
 func _initialize_player(save_data: Dictionary = {}) -> Player:
+	# TODO: better player initialization logic.
 	var player := PlayerManager.create_player_chracter()
 	player.active.connect(_on_player_active)
 	if not save_data.is_empty():
-		player.health_points = save_data.health_points
-		player.max_health_points = save_data.max_health_points
+		player.stat_sheet.set_hp(save_data.health_points, save_data.max_health_points)
 	return player
 
 
