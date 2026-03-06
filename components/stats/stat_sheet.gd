@@ -56,4 +56,8 @@ func set_deacceleration_speed(value: float = 10.0) -> StatSheet:
 #region Health points functions.
 func apply_damage(qtd: int) -> void:
 	health_points.value -= abs(qtd)
+
+
+func apply_heal(qtd: int) -> void:
+	health_points.value += abs(qtd)
 #endregion
