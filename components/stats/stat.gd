@@ -1,4 +1,4 @@
-@icon("res://assets/icon-godot-node/node/icon_gear.png")
+@icon("res://assets/icon-godot-node/node/icon_stat.png")
 class_name Stat extends Resource
 
 @export var value: Variant:
