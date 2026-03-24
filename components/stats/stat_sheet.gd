@@ -24,14 +24,14 @@ func _ready():
 
 
 #region Builders
-func set_hp(hp: int, max_hp: int) -> StatSheet:
+func set_hp(hp: int = 3, max_hp: int = 3) -> StatSheet:
 	assert(hp <= max_hp, "health points should not be greater than maximum health points")
 	assert(max_hp >= 0, "max health points should not be negative")
 
-	health_points = Stat.new().initialize(hp)
+	health_points = Stat.new(hp)
 	health_points.changed.connect(func(): health_points_changed.emit(health_points.value))
 
-	max_health_points = Stat.new().initialize(max_hp)
+	max_health_points = Stat.new(max_hp)
 	max_health_points.changed.connect(
 		func(): max_health_points_changed.emit(max_health_points.value)
 	)
@@ -40,13 +40,13 @@ func set_hp(hp: int, max_hp: int) -> StatSheet:
 
 func set_move_speed(value: float = 100.0) -> StatSheet:
 	assert(value >= 0, "move speed should not be less than 0.")
-	move_speed = Stat.new().initialize(value)
+	move_speed = Stat.new(value)
 	return self
 
 
 func set_deacceleration_speed(value: float = 10.0) -> StatSheet:
 	assert(value >= 0, "deacceleration speed should not be less than 0.")
-	deacceleration_speed = Stat.new().initialize(value)
+	deacceleration_speed = Stat.new(value)
 	return self
 
 
@@ -56,8 +56,4 @@ func set_deacceleration_speed(value: float = 10.0) -> StatSheet:
 #region Health points functions.
 func apply_damage(qtd: int) -> void:
 	health_points.value -= abs(qtd)
-
-
-func apply_heal(qtd: int) -> void:
-	health_points.value += abs(qtd)
 #endregion

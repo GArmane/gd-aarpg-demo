@@ -7,6 +7,5 @@ class_name Stat extends Resource
 		emit_changed()
 
 
-func initialize(n_value: Variant):
-	value = n_value
-	return self
+func _init(p_value: Variant = null) -> void:
+	value = p_value
