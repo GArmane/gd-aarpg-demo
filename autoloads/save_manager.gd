@@ -60,8 +60,8 @@ func _update_player_data(save_data: Dictionary) -> Dictionary:
 			{
 				"player":
 				{
-					health_points = player.stat_sheet.health_points.value,
-					max_health_points = player.stat_sheet.max_health_points.value,
+					health_points = player.stat_sheet.health_points,
+					max_health_points = player.stat_sheet.max_health_points,
 					position_x = player.global_position.x,
 					position_y = player.global_position.y,
 				}

@@ -27,18 +27,18 @@ signal active
 	},
 }
 
-@export var stat_sheet: StatSheet:
-	get():
-		return %StatSheet
-
-@export var inventory: Inventory:
-	get():
-		return _inventory
-
 @export var _pause_action: GUIDEAction
 @export var _move_action: GUIDEAction
 @export var _attack_action: GUIDEAction
 @export var _inventory: Inventory
+
+var stat_sheet: StatSheet:
+	get():
+		return %StatSheet
+
+var inventory: Inventory:
+	get():
+		return _inventory
 
 
 func _on_pause_action_triggered() -> void:
@@ -56,7 +56,7 @@ func _on_idle_state_entered() -> void:
 
 
 func _on_idle_state_physics_processing(delta: float) -> void:
-	update_movement(delta, %StatSheet.move_speed.value, %StatSheet.deacceleration_speed.value)
+	update_movement(delta, %StatSheet.move_speed, %StatSheet.deacceleration_speed)
 
 
 func _on_idle_state_processing(_delta: float) -> void:
@@ -77,10 +77,7 @@ func _on_walking_state_entered() -> void:
 
 func _on_walking_state_physics_processing(delta: float) -> void:
 	update_movement(
-		delta,
-		%StatSheet.move_speed.value,
-		%StatSheet.deacceleration_speed.value,
-		_move_action.value_axis_2d
+		delta, %StatSheet.move_speed, %StatSheet.deacceleration_speed, _move_action.value_axis_2d
 	)
 
 
@@ -100,7 +97,7 @@ func _on_attacking_state_entered() -> void:
 
 
 func _on_attacking_state_physics_processing(delta: float) -> void:
-	update_movement(delta, %StatSheet.move_speed.value, %StatSheet.deacceleration_speed.value)
+	update_movement(delta, %StatSheet.move_speed, %StatSheet.deacceleration_speed)
 
 
 func _on_attacking_state_processing(_delta: float) -> void:
@@ -127,7 +124,7 @@ func _on_stunned_state_physics_processing(delta: float) -> void:
 	if not %AnimationPlayer.is_playing():
 		%StateChart.send_event(state_configuration["Idle"]["event"])
 		return
-	update_movement(delta, %StatSheet.move_speed.value, %StatSheet.deacceleration_speed.value)
+	update_movement(delta, %StatSheet.move_speed, %StatSheet.deacceleration_speed)
 
 
 func _on_stunned_state_exited() -> void:

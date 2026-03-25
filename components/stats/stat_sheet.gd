@@ -2,58 +2,49 @@
 class_name StatSheet extends Node
 
 #region Signals
-signal health_points_changed(value)
-signal max_health_points_changed(value)
+signal changed
 #endregion
 
 #region Attributes
-@export var health_points: Stat
-@export var max_health_points: Stat
-@export var move_speed: Stat
-@export var deacceleration_speed: Stat
+@export_range(0, 20) var health_points: int:
+	set(value):
+		health_points = value
+		changed.emit()
+@export_range(0, 20) var max_health_points: int:
+	set(value):
+		assert(value >= 0, "max_health_points should not be negative")
+		max_health_points = value
+		changed.emit()
+@export_range(0.0, 100.0, 0.5) var move_speed: float:
+	set(value):
+		assert(value >= 0, "move_speed should not be less than 0.")
+		move_speed = value
+		changed.emit()
+@export_range(0.0, 100.0, 0.5) var deacceleration_speed: float:
+	set(value):
+		assert(value >= 0, "deacceleration_speed should not be less than 0.")
+		deacceleration_speed = value
+		changed.emit()
+@export_range(0, 10) var base_damage: int:
+	set(value):
+		assert(value >= 0, "base_damage should not be less than 0.")
+		base_damage = value
+		changed.emit()
+@export_range(0, 10.0, 0.5) var knockback_force: float:
+	set(value):
+		assert(value >= 0, "knockback_force should not be less than 0.")
+		knockback_force = value
+		changed.emit()
 #endregion
 
-
-#region Engine callbacks
-func _ready():
-	health_points.changed.connect(func(): health_points_changed.emit(health_points.value))
-	health_points.changed.connect(func(): max_health_points_changed.emit(health_points.value))
-
-
-#endregion
-
-
-#region Builders
-func set_hp(hp: int = 3, max_hp: int = 3) -> StatSheet:
-	assert(hp <= max_hp, "health points should not be greater than maximum health points")
-	assert(max_hp >= 0, "max health points should not be negative")
-
-	health_points = Stat.new(hp)
-	health_points.changed.connect(func(): health_points_changed.emit(health_points.value))
-
-	max_health_points = Stat.new(max_hp)
-	max_health_points.changed.connect(
-		func(): max_health_points_changed.emit(max_health_points.value)
-	)
-	return self
-
-
-func set_move_speed(value: float = 100.0) -> StatSheet:
-	assert(value >= 0, "move speed should not be less than 0.")
-	move_speed = Stat.new(value)
-	return self
-
-
-func set_deacceleration_speed(value: float = 10.0) -> StatSheet:
-	assert(value >= 0, "deacceleration speed should not be less than 0.")
-	deacceleration_speed = Stat.new(value)
-	return self
-
-
+#region Derived Attributes
+var damage: int:
+	get():
+		return base_damage
 #endregion
 
 
 #region Health points functions.
 func apply_damage(qtd: int) -> void:
-	health_points.value -= abs(qtd)
+	health_points -= abs(qtd)
 #endregion

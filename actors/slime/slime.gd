@@ -29,7 +29,7 @@ class_name Slime extends Actor2D
 
 
 func _on_root_state_entered() -> void:
-	%StateChart.set_expression_property("health_points", %StatSheet.health_points.value)
+	%StateChart.set_expression_property("health_points", %StatSheet.health_points)
 
 
 func _on_idle_state_entered() -> void:
@@ -42,7 +42,7 @@ func _on_idle_state_physics_processing(delta: float) -> void:
 	if %WanderingTimer.is_stopped():
 		%StateChart.send_event(state_configuration["Idle"]["timer_transition_to"])
 	else:
-		update_movement(delta, %StatSheet.move_speed.value, %StatSheet.deacceleration_speed.value)
+		update_movement(delta, %StatSheet.move_speed, %StatSheet.deacceleration_speed)
 
 
 func _on_wandering_state_entered() -> void:
@@ -61,20 +61,18 @@ func _on_wandering_state_physics_processing(delta: float) -> void:
 		%StateChart.send_event(state_configuration["Wandering"]["timer_transition_to"])
 	else:
 		update_movement(
-			delta,
-			%StatSheet.move_speed.value,
-			%StatSheet.deacceleration_speed.value,
-			cardinal_direction
+			delta, %StatSheet.move_speed, %StatSheet.deacceleration_speed, cardinal_direction
 		)
 
 
-func _on_stat_sheet_health_points_changed(value) -> void:
-	%StateChart.set_expression_property("health_points", %StatSheet.health_points.value)
+func _on_stat_sheet_changed() -> void:
+	if %StateChart.get_expression_property("health_points") != %StatSheet.health_points:
+		%StateChart.set_expression_property("health_points", %StatSheet.health_points)
 
 
 func _on_hurtbox_damaged(damage: int, knockback_direction: Vector2, knockback_force: float) -> void:
 	%StatSheet.apply_damage(damage)
-	if %StatSheet.health_points.value > 0:
+	if %StatSheet.health_points > 0:
 		apply_force(knockback_direction, knockback_force, knockback_direction * -1)
 		%StateChart.send_event(state_configuration["Stunned"]["event"])
 
@@ -87,7 +85,7 @@ func _on_stunned_state_physics_processing(delta: float) -> void:
 	if not %AnimationPlayer.is_playing():
 		%StateChart.send_event(state_configuration["Idle"]["event"])
 		return
-	update_movement(delta, %StatSheet.move_speed.value, %StatSheet.deacceleration_speed.value)
+	update_movement(delta, %StatSheet.move_speed, %StatSheet.deacceleration_speed)
 
 
 func _on_stunned_state_exited() -> void:

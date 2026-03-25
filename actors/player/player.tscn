@@ -19,7 +19,6 @@
 [ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="10_7aotg"]
 [ext_resource type="PackedScene" uid="uid://biba33ekj332o" path="res://components/hurtbox/hurtbox.tscn" id="11_rt46e"]
 [ext_resource type="Script" uid="uid://cd32mx70vnotr" path="res://components/stats/stat_sheet.gd" id="19_otn2r"]
-[ext_resource type="Script" uid="uid://covovq7nmdm2f" path="res://components/stats/stat.gd" id="20_ctwkf"]
 
 [sub_resource type="Resource" id="Resource_qrxv1"]
 script = ExtResource("6_dqf5y")
@@ -892,26 +891,6 @@ height = 16.0
 radius = 8.0
 height = 42.0
 
-[sub_resource type="Resource" id="Resource_2vokq"]
-script = ExtResource("20_ctwkf")
-value = 4
-metadata/_custom_type_script = "uid://covovq7nmdm2f"
-
-[sub_resource type="Resource" id="Resource_tpopl"]
-script = ExtResource("20_ctwkf")
-value = 4
-metadata/_custom_type_script = "uid://covovq7nmdm2f"
-
-[sub_resource type="Resource" id="Resource_0nck3"]
-script = ExtResource("20_ctwkf")
-value = 100.0
-metadata/_custom_type_script = "uid://covovq7nmdm2f"
-
-[sub_resource type="Resource" id="Resource_1c637"]
-script = ExtResource("20_ctwkf")
-value = 10.0
-metadata/_custom_type_script = "uid://covovq7nmdm2f"
-
 [node name="Player" type="CharacterBody2D" unique_id=1024496006]
 collision_layer = 4
 motion_mode = 1
@@ -1068,10 +1047,12 @@ delay_in_seconds = "0.0"
 [node name="StatSheet" type="Node" parent="." unique_id=1290130835]
 unique_name_in_owner = true
 script = ExtResource("19_otn2r")
-health_points = SubResource("Resource_2vokq")
-max_health_points = SubResource("Resource_tpopl")
-move_speed = SubResource("Resource_0nck3")
-deacceleration_speed = SubResource("Resource_1c637")
+health_points = 4
+max_health_points = 4
+move_speed = 100.0
+deacceleration_speed = 10.0
+base_damage = 1
+knockback_force = 1.0
 metadata/_custom_type_script = "uid://cd32mx70vnotr"
 
 [connection signal="damaged" from="Hurtbox" to="." method="_on_hurtbox_damaged"]

@@ -14,7 +14,6 @@
 [ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="8_c4wmr"]
 [ext_resource type="Script" uid="uid://le5w1cm0ul8p" path="res://addons/godot_state_charts/expression_guard.gd" id="12_odhwe"]
 [ext_resource type="Script" uid="uid://cd32mx70vnotr" path="res://components/stats/stat_sheet.gd" id="14_u8n2a"]
-[ext_resource type="Script" uid="uid://covovq7nmdm2f" path="res://components/stats/stat.gd" id="15_8waee"]
 
 [sub_resource type="Animation" id="Animation_ypj56"]
 length = 0.001
@@ -1166,26 +1165,6 @@ script = ExtResource("12_odhwe")
 expression = "health_points == 0"
 metadata/_custom_type_script = "uid://le5w1cm0ul8p"
 
-[sub_resource type="Resource" id="Resource_ixqqg"]
-script = ExtResource("15_8waee")
-value = 3
-metadata/_custom_type_script = "uid://covovq7nmdm2f"
-
-[sub_resource type="Resource" id="Resource_ixmak"]
-script = ExtResource("15_8waee")
-value = 3
-metadata/_custom_type_script = "uid://covovq7nmdm2f"
-
-[sub_resource type="Resource" id="Resource_u8n2a"]
-script = ExtResource("15_8waee")
-value = 30.0
-metadata/_custom_type_script = "uid://covovq7nmdm2f"
-
-[sub_resource type="Resource" id="Resource_8waee"]
-script = ExtResource("15_8waee")
-value = 10.0
-metadata/_custom_type_script = "uid://covovq7nmdm2f"
-
 [node name="Slime" type="CharacterBody2D" unique_id=1294776106]
 collision_layer = 16
 collision_mask = 5
@@ -1310,10 +1289,12 @@ script = ExtResource("6_4skca")
 [node name="StatSheet" type="Node" parent="." unique_id=2051654806]
 unique_name_in_owner = true
 script = ExtResource("14_u8n2a")
-health_points = SubResource("Resource_ixqqg")
-max_health_points = SubResource("Resource_ixmak")
-move_speed = SubResource("Resource_u8n2a")
-deacceleration_speed = SubResource("Resource_8waee")
+health_points = 3
+max_health_points = 3
+move_speed = 30.0
+deacceleration_speed = 10.0
+base_damage = 1
+knockback_force = 1.0
 metadata/_custom_type_script = "uid://cd32mx70vnotr"
 
 [connection signal="damaged" from="Hurtbox" to="." method="_on_hurtbox_damaged"]
@@ -1326,4 +1307,4 @@ metadata/_custom_type_script = "uid://cd32mx70vnotr"
 [connection signal="state_exited" from="StateChart/Root/Stunned" to="." method="_on_stunned_state_exited"]
 [connection signal="state_physics_processing" from="StateChart/Root/Stunned" to="." method="_on_stunned_state_physics_processing"]
 [connection signal="state_entered" from="StateChart/Root/Dead" to="." method="_on_dead_state_entered"]
-[connection signal="health_points_changed" from="StatSheet" to="." method="_on_stat_sheet_health_points_changed"]
+[connection signal="changed" from="StatSheet" to="." method="_on_stat_sheet_changed"]

@@ -31,7 +31,8 @@ func _initialize_player(save_data: Dictionary = {}) -> Player:
 	var player := PlayerManager.create_player_chracter()
 	player.active.connect(_on_player_active)
 	if not save_data.is_empty():
-		player.stat_sheet.set_hp(save_data.health_points, save_data.max_health_points)
+		player.stat_sheet.health_points = save_data.health_points
+		player.stat_sheet.max_health_points = save_data.max_health_points
 	return player
 
 
