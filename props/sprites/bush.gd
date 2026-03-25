@@ -1,9 +1,5 @@
 extends Node2D
 
 
-func _on_hurtbox_damaged(
-	_damage: int,
-	_knockback_direction: Vector2,
-	_knockback_force: float,
-) -> void:
+func _on_hurtbox_damaged(_source: Hitbox, _target: Hurtbox, _data: Variant) -> void:
 	queue_free()

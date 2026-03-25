@@ -30,7 +30,7 @@ signal changed
 		assert(value >= 0, "base_damage should not be less than 0.")
 		base_damage = value
 		changed.emit()
-@export_range(0, 10.0, 0.5) var knockback_force: float:
+@export_range(0, 500.0, 0.5) var knockback_force: float:
 	set(value):
 		assert(value >= 0, "knockback_force should not be less than 0.")
 		knockback_force = value

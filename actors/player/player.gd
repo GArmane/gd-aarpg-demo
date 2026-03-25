@@ -108,11 +108,17 @@ func _on_attacking_state_processing(_delta: float) -> void:
 			%StateChart.send_event(state_configuration["Idle"]["event"])
 
 
-func _on_hurtbox_damaged(damage: int, knockback_direction: Vector2, knockback_force: float) -> void:
-	%StatSheet.apply_damage(damage)
-	if damage > 0:
-		apply_force(knockback_direction, knockback_force, knockback_direction * -1)
-		%StateChart.send_event(state_configuration["Stunned"]["event"])
+func _on_hurtbox_damaged(source: Hitbox, _target: Hurtbox, data: Variant) -> void:
+	# TODO: Should emit signal to a combat system
+	var sheet: StatSheet = source.get_node(data)
+	%StatSheet.apply_damage(sheet.damage)
+	# TODO: Knockback should be calculated by combat system and applied as an effect.
+	var knockback_direction: Vector2 = (
+		source.get_parent().global_position.direction_to(global_position).normalized()
+	)
+	apply_force(knockback_direction, sheet.knockback_force, knockback_direction * -1)
+	%StateChart.send_event(state_configuration["Stunned"]["event"])
+	# TODO: Go to dead state
 
 
 func _on_stunned_state_entered() -> void:

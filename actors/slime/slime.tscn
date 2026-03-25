@@ -5,12 +5,12 @@
 [ext_resource type="AudioStream" uid="uid://bppf6475qok60" path="res://actors/slime/audios/stun_hit.wav" id="2_aojdn"]
 [ext_resource type="Texture2D" uid="uid://f62fys208nw0" path="res://actors/slime/sprites/shadow.png" id="2_qfp8a"]
 [ext_resource type="AudioStream" uid="uid://cklpotp7l25t7" path="res://actors/slime/audios/death.wav" id="3_c4wmr"]
-[ext_resource type="PackedScene" uid="uid://biba33ekj332o" path="res://components/hurtbox/hurtbox.tscn" id="4_4skca"]
+[ext_resource type="PackedScene" uid="uid://biba33ekj332o" path="res://components/hit-detection/hurtbox.tscn" id="4_4skca"]
 [ext_resource type="Texture2D" uid="uid://cc2wvoyrgcjcp" path="res://actors/slime/sprites/death-fx.png" id="5_0cxnd"]
 [ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="5_cjasg"]
 [ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="6_4skca"]
 [ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="7_cjasg"]
-[ext_resource type="PackedScene" uid="uid://w7txpjedkngh" path="res://components/hitbox/hitbox.tscn" id="7_ow7r1"]
+[ext_resource type="PackedScene" uid="uid://w7txpjedkngh" path="res://components/hit-detection/hitbox.tscn" id="7_ow7r1"]
 [ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="8_c4wmr"]
 [ext_resource type="Script" uid="uid://le5w1cm0ul8p" path="res://addons/godot_state_charts/expression_guard.gd" id="12_odhwe"]
 [ext_resource type="Script" uid="uid://cd32mx70vnotr" path="res://components/stats/stat_sheet.gd" id="14_u8n2a"]
@@ -1207,7 +1207,7 @@ shape = SubResource("CapsuleShape2D_0cxnd")
 [node name="Hitbox" parent="." unique_id=2101184336 instance=ExtResource("7_ow7r1")]
 position = Vector2(0, -3)
 collision_mask = 8
-force = 200.0
+data = NodePath("../StatSheet")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1671416314]
 shape = SubResource("CircleShape2D_4wybk")
@@ -1294,7 +1294,7 @@ max_health_points = 3
 move_speed = 30.0
 deacceleration_speed = 10.0
 base_damage = 1
-knockback_force = 1.0
+knockback_force = 300.0
 metadata/_custom_type_script = "uid://cd32mx70vnotr"
 
 [connection signal="damaged" from="Hurtbox" to="." method="_on_hurtbox_damaged"]

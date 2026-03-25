@@ -70,10 +70,16 @@ func _on_stat_sheet_changed() -> void:
 		%StateChart.set_expression_property("health_points", %StatSheet.health_points)
 
 
-func _on_hurtbox_damaged(damage: int, knockback_direction: Vector2, knockback_force: float) -> void:
-	%StatSheet.apply_damage(damage)
+func _on_hurtbox_damaged(source: Hitbox, _target: Hurtbox, data: Variant) -> void:
+	# TODO: Should emit signal to a combat system
+	var sheet: StatSheet = source.get_node(data)
+	%StatSheet.apply_damage(sheet.damage)
+	# TODO: Knockback should be calculated by combat system and applied as an effect.
 	if %StatSheet.health_points > 0:
-		apply_force(knockback_direction, knockback_force, knockback_direction * -1)
+		var knockback_direction: Vector2 = (
+			source.get_parent().global_position.direction_to(global_position).normalized()
+		)
+		apply_force(knockback_direction, sheet.knockback_force, knockback_direction * -1)
 		%StateChart.send_event(state_configuration["Stunned"]["event"])
 
 

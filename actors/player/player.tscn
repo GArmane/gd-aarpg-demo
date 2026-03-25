@@ -15,9 +15,9 @@
 [ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="7_boad6"]
 [ext_resource type="Script" uid="uid://c2617wgbmg014" path="res://components/camera/game_camera.gd" id="7_rt46e"]
 [ext_resource type="Texture2D" uid="uid://yjadre666npo" path="res://actors/player/sprites/shadow.png" id="8_16fba"]
-[ext_resource type="PackedScene" uid="uid://w7txpjedkngh" path="res://components/hitbox/hitbox.tscn" id="9_7aotg"]
+[ext_resource type="PackedScene" uid="uid://w7txpjedkngh" path="res://components/hit-detection/hitbox.tscn" id="9_7aotg"]
 [ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="10_7aotg"]
-[ext_resource type="PackedScene" uid="uid://biba33ekj332o" path="res://components/hurtbox/hurtbox.tscn" id="11_rt46e"]
+[ext_resource type="PackedScene" uid="uid://biba33ekj332o" path="res://components/hit-detection/hurtbox.tscn" id="11_rt46e"]
 [ext_resource type="Script" uid="uid://cd32mx70vnotr" path="res://components/stats/stat_sheet.gd" id="19_otn2r"]
 
 [sub_resource type="Resource" id="Resource_qrxv1"]
@@ -941,7 +941,7 @@ texture = ExtResource("8_16fba")
 [node name="Hitbox" parent="Sprite2D" unique_id=103186292 instance=ExtResource("9_7aotg")]
 collision_mask = 34
 monitoring = false
-force = 300.0
+data = NodePath("../../StatSheet")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Hitbox" unique_id=39327078]
 shape = SubResource("CapsuleShape2D_7aotg")
@@ -1052,7 +1052,7 @@ max_health_points = 4
 move_speed = 100.0
 deacceleration_speed = 10.0
 base_damage = 1
-knockback_force = 1.0
+knockback_force = 300.0
 metadata/_custom_type_script = "uid://cd32mx70vnotr"
 
 [connection signal="damaged" from="Hurtbox" to="." method="_on_hurtbox_damaged"]
