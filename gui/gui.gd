@@ -11,6 +11,11 @@ func attach_player(player: Player) -> GUI:
 	return self
 
 
+func play_audio(stream: AudioStream) -> void:
+	%GUIAudio.stream = stream
+	%GUIAudio.play()
+
+
 func set_scene_transition(state := true) -> void:
 	%SceneTransition.fade = state
 	await %SceneTransition.transition_ended

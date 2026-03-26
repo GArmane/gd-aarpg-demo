@@ -48,3 +48,6 @@ unique_name_in_owner = true
 
 [node name="SceneTransition" parent="OverlayLayer" unique_id=1194183075 instance=ExtResource("4_n360k")]
 unique_name_in_owner = true
+
+[node name="GUIAudio" type="AudioStreamPlayer" parent="." unique_id=676210190]
+unique_name_in_owner = true
