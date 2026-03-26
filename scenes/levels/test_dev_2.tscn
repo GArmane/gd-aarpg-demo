@@ -3,9 +3,9 @@
 [ext_resource type="Script" uid="uid://dpn82xqv2ueef" path="res://scenes/levels/base_level.gd" id="1_x3c2i"]
 [ext_resource type="PackedScene" uid="uid://cm63mk8ap754y" path="res://tile-maps/grass-01/grass_01.tscn" id="3_fyli1"]
 [ext_resource type="PackedScene" uid="uid://ypmkr8osfjs5" path="res://components/item-pickup/item_pickup.tscn" id="4_i2gpr"]
-[ext_resource type="Resource" uid="uid://cwofhyab80hp2" path="res://components/item/gem.tres" id="5_wo182"]
-[ext_resource type="Resource" uid="uid://dgcyc5xo63nvy" path="res://components/item/potion.tres" id="6_2jjbl"]
-[ext_resource type="Resource" uid="uid://b24xqua5uyc5u" path="res://components/item/stone.tres" id="7_5cxw2"]
+[ext_resource type="Resource" uid="uid://cwofhyab80hp2" path="res://resources/items/gem.tres" id="5_wo182"]
+[ext_resource type="Resource" uid="uid://dgcyc5xo63nvy" path="res://resources/items/potion.tres" id="6_2jjbl"]
+[ext_resource type="Resource" uid="uid://b24xqua5uyc5u" path="res://resources/items/stone.tres" id="7_5cxw2"]
 [ext_resource type="PackedScene" uid="uid://copbpewupkbro" path="res://components/transition/area_transition.tscn" id="8_r3bxm"]
 
 [node name="World2D" type="Node2D" unique_id=998471761]
