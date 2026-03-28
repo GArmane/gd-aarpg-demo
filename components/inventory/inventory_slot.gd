@@ -10,7 +10,7 @@ const MIN_ITEM_STACK := 0
 @export var item: Item:
 	set(value):
 		item = value
-		quantity = MIN_ITEM_STACK
+		quantity = MIN_ITEM_STACK + 1
 
 @export_range(MIN_ITEM_STACK, MAX_ITEM_STACK) var quantity: int = MIN_ITEM_STACK:
 	set(value):

@@ -25,7 +25,6 @@ func add_item(item: Item, qtd: int = 1) -> Error:
 		if not empty_slot:
 			return FAILED
 		empty_slot.item = item
-		empty_slot.quantity += 1
 	else:
 		item_slot.quantity += qtd
 	return OK
