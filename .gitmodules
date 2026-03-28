@@ -1,3 +1,7 @@
 [submodule "addons/beautify-code-on-save"]
 	path = addons/beautify-code-on-save
 	url = git@github.com-garmane:GArmane/gd-beautify-code-on-save.git
+[submodule "addons/script-ide"]
+	path = addons/script-ide
+	url = git@github.com-garmane:Maran23/script-ide.git
+
