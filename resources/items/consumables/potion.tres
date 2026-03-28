@@ -11,6 +11,5 @@ region = Rect2(32, 0, 32, 32)
 [resource]
 script = ExtResource("2_fc4gg")
 name = "Potion"
-type = 1
 description = "This red drink restores your health!"
 texture = SubResource("AtlasTexture_w0gyr")

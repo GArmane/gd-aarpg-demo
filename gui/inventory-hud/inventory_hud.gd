@@ -1,10 +1,11 @@
 @icon("res://assets/icon-godot-node/control/icon_grid.png")
 class_name InventoryUI extends Control
 
-signal no_item_selected
-signal item_selected(ref: InventoryButton)
+signal no_button_selected
+signal buttom_select(ref: InventoryButton)
+signal buttom_activated(ref: InventoryButton)
 
-const INVENTORY_BUTTON = preload("res://gui/inventory-hud/inventory_button.tscn")
+const INVENTORY_BUTTON := preload("res://gui/inventory-hud/inventory_button.tscn")
 
 @export var data: Inventory:
 	set(value):
@@ -13,8 +14,9 @@ const INVENTORY_BUTTON = preload("res://gui/inventory-hud/inventory_button.tscn"
 			child.queue_free()
 		if data != null:
 			for slot in data.slots:
-				var button = INVENTORY_BUTTON.instantiate()
+				var button := INVENTORY_BUTTON.instantiate() as InventoryButton
 				button.data = slot
-				button.focus_entered.connect(func(): item_selected.emit(button))
-				button.focus_exited.connect(func(): no_item_selected.emit())
+				button.focus_exited.connect(func(): no_button_selected.emit())
+				button.focus_entered.connect(func(): buttom_select.emit(button))
+				button.pressed.connect(func(): buttom_activated.emit(button))
 				%GridContainer.add_child(button)

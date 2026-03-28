@@ -20,10 +20,6 @@
 [ext_resource type="PackedScene" uid="uid://biba33ekj332o" path="res://components/hit-detection/hurtbox.tscn" id="11_rt46e"]
 [ext_resource type="Script" uid="uid://cd32mx70vnotr" path="res://components/stats/stat_sheet.gd" id="19_otn2r"]
 
-[sub_resource type="Resource" id="Resource_qrxv1"]
-script = ExtResource("6_dqf5y")
-metadata/_custom_type_script = "uid://cgbio5n8xulu5"
-
 [sub_resource type="Resource" id="Resource_dqf5y"]
 script = ExtResource("6_dqf5y")
 metadata/_custom_type_script = "uid://cgbio5n8xulu5"
@@ -52,9 +48,13 @@ metadata/_custom_type_script = "uid://cgbio5n8xulu5"
 script = ExtResource("6_dqf5y")
 metadata/_custom_type_script = "uid://cgbio5n8xulu5"
 
+[sub_resource type="Resource" id="Resource_2vokq"]
+script = ExtResource("6_dqf5y")
+metadata/_custom_type_script = "uid://cgbio5n8xulu5"
+
 [sub_resource type="Resource" id="Resource_otn2r"]
 script = ExtResource("5_qrxv1")
-slots = Array[ExtResource("6_dqf5y")]([SubResource("Resource_qrxv1"), SubResource("Resource_dqf5y"), SubResource("Resource_ctwkf"), SubResource("Resource_icg72"), SubResource("Resource_lj3dd"), SubResource("Resource_nsxbo"), SubResource("Resource_yeioo"), SubResource("Resource_qct7d")])
+_slots = Array[ExtResource("6_dqf5y")]([SubResource("Resource_dqf5y"), SubResource("Resource_ctwkf"), SubResource("Resource_icg72"), SubResource("Resource_lj3dd"), SubResource("Resource_nsxbo"), SubResource("Resource_yeioo"), SubResource("Resource_qct7d"), SubResource("Resource_2vokq")])
 metadata/_custom_type_script = "uid://cupk5vpjmox38"
 
 [sub_resource type="Animation" id="Animation_g1dw6"]

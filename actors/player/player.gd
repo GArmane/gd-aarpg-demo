@@ -41,8 +41,23 @@ var inventory: Inventory:
 		return _inventory
 
 
+#region Engine callbacks
+func _ready() -> void:
+	if _inventory:
+		inventory.item_activated.connect(
+			func(item: Item): print("THIS ITEM CHANGED: {item}".format({"item": item}))
+		)
+
+
+#endregion
+
+
+#region Signal handlers
 func _on_pause_action_triggered() -> void:
 	EventBus.pause.emit()
+
+
+#endregion
 
 
 #region StateChart
