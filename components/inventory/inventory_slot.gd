@@ -2,6 +2,7 @@
 class_name InventorySlot extends Resource
 
 signal activated
+signal depleted
 
 const MAX_ITEM_STACK := 255
 const MIN_ITEM_STACK := 0
@@ -11,7 +12,7 @@ const MIN_ITEM_STACK := 0
 		item = value
 		quantity = MIN_ITEM_STACK
 
-@export_range(MIN_ITEM_STACK, MAX_ITEM_STACK) var quantity: int:
+@export_range(MIN_ITEM_STACK, MAX_ITEM_STACK) var quantity: int = MIN_ITEM_STACK:
 	set(value):
 		quantity = clampi(value, MIN_ITEM_STACK, MAX_ITEM_STACK)
 		emit_changed()
@@ -22,17 +23,27 @@ var description:
 
 
 func activate() -> Error:
-	if not item:
+	if is_empty():
 		return ERR_DOES_NOT_EXIST
+	if is_depreted():
+		return ERR_UNAVAILABLE
+
 	if item is Consumable:
-		if quantity == 0:
-			return ERR_UNAVAILABLE
 		quantity -= 1
 		activated.emit()
-		emit_changed()
+		if is_depreted():
+			depleted.emit()
 		return OK
 	return FAILED
 
 
+func is_depreted() -> bool:
+	return quantity == 0
+
+
 func is_empty() -> bool:
 	return item == null
+
+
+func empty() -> void:
+	item = null

@@ -10,6 +10,13 @@ var slots: Array[InventorySlot]:
 		return _slots.duplicate()
 
 
+func _ready() -> void:
+	for slot in slots:
+		slot.activated.connect(slot_activated.emit.bind(slot))
+		slot.changed.connect(changed.emit)
+		slot.depleted.connect(_on_inventory_slot_depleted.bind(slot))
+
+
 func add_item(item: Item, qtd: int = 1) -> Error:
 	var item_slot = find_item_slot(item)
 	if not item_slot:
@@ -19,11 +26,8 @@ func add_item(item: Item, qtd: int = 1) -> Error:
 			return FAILED
 		empty_slot.item = item
 		empty_slot.quantity += 1
-		empty_slot.activated.connect(slot_activated.emit.bind(empty_slot))
-		empty_slot.changed.connect(changed.emit)
 	else:
 		item_slot.quantity += qtd
-	changed.emit()
 	return OK
 
 
@@ -39,3 +43,7 @@ func find_empty_slot() -> InventorySlot:
 	if idx == -1:
 		return null
 	return _slots[idx]
+
+
+func _on_inventory_slot_depleted(slot: InventorySlot) -> void:
+	slot.empty()
