@@ -2,21 +2,44 @@
 class_name InventoryUI extends Control
 
 signal no_button_selected
-signal buttom_selected(ref: InventoryButton)
-signal buttom_activated(ref: InventoryButton)
+signal button_selected(ref: InventoryButton)
 
 const INVENTORY_BUTTON := preload("res://gui/inventory-hud/inventory_button.tscn")
 
 @export var data: Inventory:
 	set(value):
 		data = value
-		for child in %GridContainer.get_children():
-			child.queue_free()
+		_clear_grid()
 		if data != null:
 			for slot in data.slots:
 				var button := INVENTORY_BUTTON.instantiate() as InventoryButton
 				button.data = slot
-				button.focus_exited.connect(func(): no_button_selected.emit())
-				button.focus_entered.connect(func(): buttom_selected.emit(button))
-				button.pressed.connect(func(): buttom_activated.emit(button))
+				button.focus_entered.connect(_on_inventory_button_focus_entered.bind(button))
+				button.focus_exited.connect(_on_inventory_button_focus_exited)
 				%GridContainer.add_child(button)
+			_set_last_focus.call_deferred()
+
+var _focused_idx: int = -1
+
+
+func _clear_grid():
+	var children = %GridContainer.get_children()
+	for idx in children.size():
+		var child = children[idx]
+		if child.has_focus():
+			_focused_idx = idx
+		child.queue_free()
+
+
+func _set_last_focus():
+	if _focused_idx >= 0:
+		await get_tree().process_frame
+		%GridContainer.get_children()[_focused_idx].grab_focus()
+
+
+func _on_inventory_button_focus_entered(button: InventoryButton) -> void:
+	button_selected.emit(button)
+
+
+func _on_inventory_button_focus_exited() -> void:
+	no_button_selected.emit()

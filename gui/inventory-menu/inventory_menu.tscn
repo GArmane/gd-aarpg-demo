@@ -23,5 +23,5 @@ text = "[Item Description]"
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[connection signal="buttom_selected" from="InventoryHUD" to="." method="_on_inventory_hud_buttom_selected"]
+[connection signal="button_selected" from="InventoryHUD" to="." method="_on_inventory_hud_button_selected"]
 [connection signal="no_button_selected" from="InventoryHUD" to="." method="_on_inventory_hud_no_button_selected"]
