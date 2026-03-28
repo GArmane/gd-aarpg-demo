@@ -44,7 +44,11 @@ var damage: int:
 #endregion
 
 
-#region Health points functions.
+#region Gameplay functions.
 func apply_damage(qtd: int) -> void:
 	health_points -= abs(qtd)
+
+
+func use_item(item: Item) -> void:
+	print("I've used: {item}".format({"item": item}))
 #endregion

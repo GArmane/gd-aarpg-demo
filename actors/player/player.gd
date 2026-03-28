@@ -30,7 +30,6 @@ signal active
 @export var _pause_action: GUIDEAction
 @export var _move_action: GUIDEAction
 @export var _attack_action: GUIDEAction
-@export var _inventory: Inventory
 
 var stat_sheet: StatSheet:
 	get():
@@ -38,23 +37,16 @@ var stat_sheet: StatSheet:
 
 var inventory: Inventory:
 	get():
-		return _inventory
-
-
-#region Engine callbacks
-func _ready() -> void:
-	if _inventory:
-		inventory.item_activated.connect(
-			func(item: Item): print("THIS ITEM CHANGED: {item}".format({"item": item}))
-		)
-
-
-#endregion
+		return %Inventory
 
 
 #region Signal handlers
 func _on_pause_action_triggered() -> void:
 	EventBus.pause.emit()
+
+
+func _on_inventory_slot_activated(slot: InventorySlot) -> void:
+	stat_sheet.use_item(slot.item)
 
 
 #endregion

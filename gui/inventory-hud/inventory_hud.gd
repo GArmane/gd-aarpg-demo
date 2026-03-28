@@ -2,7 +2,7 @@
 class_name InventoryUI extends Control
 
 signal no_button_selected
-signal buttom_select(ref: InventoryButton)
+signal buttom_selected(ref: InventoryButton)
 signal buttom_activated(ref: InventoryButton)
 
 const INVENTORY_BUTTON := preload("res://gui/inventory-hud/inventory_button.tscn")
@@ -17,6 +17,6 @@ const INVENTORY_BUTTON := preload("res://gui/inventory-hud/inventory_button.tscn
 				var button := INVENTORY_BUTTON.instantiate() as InventoryButton
 				button.data = slot
 				button.focus_exited.connect(func(): no_button_selected.emit())
-				button.focus_entered.connect(func(): buttom_select.emit(button))
+				button.focus_entered.connect(func(): buttom_selected.emit(button))
 				button.pressed.connect(func(): buttom_activated.emit(button))
 				%GridContainer.add_child(button)
