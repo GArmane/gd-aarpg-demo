@@ -50,5 +50,7 @@ func apply_damage(qtd: int) -> void:
 
 
 func use_item(item: Item) -> void:
-	print("I've used: {item}".format({"item": item}))
+	if item is Consumable:
+		item.apply(self)
+	changed.emit()
 #endregion

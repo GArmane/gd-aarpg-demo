@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="InstantEffect" format=3 uid="uid://dko32gy8cdti8"]
+
+[ext_resource type="Script" uid="uid://ckskmqu6m3ejm" path="res://resources/effects/instant.gd" id="1_3y5ue"]
+
+[resource]
+script = ExtResource("1_3y5ue")
+attribute = "health_points"
+name = "Instant Healing"
+description = "Instantly heal"
+metadata/_custom_type_script = "uid://ckskmqu6m3ejm"
