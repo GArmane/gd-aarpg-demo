@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://dfe0g6675tjry" path="res://resources/items/consumable.gd" id="2_fc4gg"]
 [ext_resource type="Resource" uid="uid://dko32gy8cdti8" path="res://resources/effects/instants/instant_healing.tres" id="2_w0gyr"]
 [ext_resource type="Texture2D" uid="uid://yqsfwfi188uk" path="res://resources/items/sprites/item.png" id="3_fc4gg"]
+[ext_resource type="AudioStream" uid="uid://d2qymx54fbdpf" path="res://resources/items/audio/potion.wav" id="5_vjus6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w0gyr"]
 atlas = ExtResource("3_fc4gg")
@@ -15,3 +16,4 @@ effects = Array[ExtResource("1_mplrw")]([ExtResource("2_w0gyr")])
 name = "Potion"
 description = "This red drink restores your health!"
 texture = SubResource("AtlasTexture_w0gyr")
+use_audio = ExtResource("5_vjus6")

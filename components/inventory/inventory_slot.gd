@@ -32,7 +32,7 @@ func activate() -> Error:
 		quantity -= 1
 		activated.emit()
 		if is_depreted():
-			depleted.emit()
+			depleted.emit.call_deferred()
 		return OK
 	return FAILED
 

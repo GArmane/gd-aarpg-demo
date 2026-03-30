@@ -14,8 +14,8 @@ const INVENTORY_BUTTON := preload("res://gui/inventory-hud/inventory_button.tscn
 			for slot in data.slots:
 				var button := INVENTORY_BUTTON.instantiate() as InventoryButton
 				button.data = slot
-				button.focus_entered.connect(_on_inventory_button_focus_entered.bind(button))
-				button.focus_exited.connect(_on_inventory_button_focus_exited)
+				button.focus_entered.connect(button_selected.emit.bind(button))
+				button.focus_exited.connect(no_button_selected.emit)
 				%GridContainer.add_child(button)
 			_set_last_focus.call_deferred()
 
@@ -35,11 +35,3 @@ func _set_last_focus():
 	if _focused_idx >= 0:
 		await get_tree().process_frame
 		%GridContainer.get_children()[_focused_idx].grab_focus()
-
-
-func _on_inventory_button_focus_entered(button: InventoryButton) -> void:
-	button_selected.emit(button)
-
-
-func _on_inventory_button_focus_exited() -> void:
-	no_button_selected.emit()

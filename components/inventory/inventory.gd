@@ -12,8 +12,8 @@ var slots: Array[InventorySlot]:
 
 func _ready() -> void:
 	for slot in slots:
-		slot.activated.connect(slot_activated.emit.bind(slot))
 		slot.changed.connect(changed.emit)
+		slot.activated.connect(_on_inventory_slot_activated.bind(slot))
 		slot.depleted.connect(_on_inventory_slot_depleted.bind(slot))
 
 
@@ -42,6 +42,12 @@ func find_empty_slot() -> InventorySlot:
 	if idx == -1:
 		return null
 	return _slots[idx]
+
+
+func _on_inventory_slot_activated(slot: InventorySlot) -> void:
+	slot_activated.emit()
+	if slot.item.use_audio:
+		EventBus.request_play_gui_audio.emit(slot.item.use_audio)
 
 
 func _on_inventory_slot_depleted(slot: InventorySlot) -> void:

@@ -2,6 +2,7 @@ extends Node
 
 signal pause
 signal unpause
+signal request_play_gui_audio(stream: AudioStream)
 
 
 func _ready() -> void:

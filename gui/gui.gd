@@ -29,9 +29,17 @@ func _ready() -> void:
 	# Event bus signals
 	EventBus.pause.connect(_on_event_bus_pause)
 	EventBus.unpause.connect(_on_event_bus_unpause)
+	EventBus.request_play_gui_audio.connect(_on_event_bus_request_play_gui_audio)
 	# GUIDE actions signals
 	_debug_action.triggered.connect(_on_debug_action_triggered)
 	_unpause_action.triggered.connect(_on_unpause_action_triggered)
+
+
+func _on_event_bus_request_play_gui_audio(stream: AudioStream):
+	%GUIAudio.stream = stream
+	%GUIAudio.play()
+	await %GUIAudio.finished
+	%GUIAudio.stream = null
 
 
 func _on_event_bus_pause() -> void:

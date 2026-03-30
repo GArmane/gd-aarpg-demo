@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://d2qymx54fbdpf"
-path="res://.godot/imported/hp_up.wav-bb37eb4784ab02b89b2aa7356a4cef42.sample"
+path="res://.godot/imported/potion.wav-22c31944d4ce9608875dbf42ddd11cc7.sample"
 
 [deps]
 
-source_file="res://resources/effects/audio/hp_up.wav"
-dest_files=["res://.godot/imported/hp_up.wav-bb37eb4784ab02b89b2aa7356a4cef42.sample"]
+source_file="res://resources/items/audio/potion.wav"
+dest_files=["res://.godot/imported/potion.wav-22c31944d4ce9608875dbf42ddd11cc7.sample"]
 
 [params]
 

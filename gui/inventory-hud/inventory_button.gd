@@ -12,3 +12,4 @@ var data: InventorySlot:
 func _on_pressed() -> void:
 	if data.activate() == FAILED:
 		assert(false, "button failed with code: {code}".format({"code": FAILED}))
+		return
