@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Consumable" format=3 uid="uid://c8vy5d8vgi4am"]
+
+[ext_resource type="Script" uid="uid://dbnyfpet1jwru" path="res://resources/effects/effect.gd" id="1_vq3h3"]
+[ext_resource type="Resource" uid="uid://dko32gy8cdti8" path="res://resources/effects/instants/instant_healing.tres" id="2_cxqr1"]
+[ext_resource type="Script" uid="uid://dfe0g6675tjry" path="res://resources/items/consumable.gd" id="2_ht6es"]
+[ext_resource type="Texture2D" uid="uid://yqsfwfi188uk" path="res://resources/items/sprites/item.png" id="3_ht6es"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cxqr1"]
+atlas = ExtResource("3_ht6es")
+region = Rect2(192, 0, 32, 32)
+
+[resource]
+script = ExtResource("2_ht6es")
+effects = Array[ExtResource("1_vq3h3")]([ExtResource("2_cxqr1")])
+name = "Apple"
+description = "A delicious red apple."
+texture = SubResource("AtlasTexture_cxqr1")
+metadata/_custom_type_script = "uid://dfe0g6675tjry"

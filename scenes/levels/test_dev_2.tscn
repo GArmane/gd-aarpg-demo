@@ -6,6 +6,7 @@
 [ext_resource type="Resource" uid="uid://cwofhyab80hp2" path="res://resources/items/generic/gem.tres" id="5_wo182"]
 [ext_resource type="Resource" uid="uid://dgcyc5xo63nvy" path="res://resources/items/consumables/potion.tres" id="6_2jjbl"]
 [ext_resource type="Resource" uid="uid://b24xqua5uyc5u" path="res://resources/items/generic/stone.tres" id="7_5cxw2"]
+[ext_resource type="Resource" uid="uid://c8vy5d8vgi4am" path="res://resources/items/consumables/apple.tres" id="8_5cxw2"]
 [ext_resource type="PackedScene" uid="uid://copbpewupkbro" path="res://components/transition/area_transition.tscn" id="8_r3bxm"]
 
 [node name="World2D" type="Node2D" unique_id=998471761]
@@ -23,15 +24,19 @@ size = 3
 side = 2
 
 [node name="GemPickup" parent="." unique_id=1353502759 instance=ExtResource("4_i2gpr")]
-position = Vector2(96, 104)
+position = Vector2(96, 120)
 item = ExtResource("5_wo182")
 
 [node name="PotionPickup" parent="." unique_id=222720735 instance=ExtResource("4_i2gpr")]
-position = Vector2(96, 146)
+position = Vector2(96, 162)
 item = ExtResource("6_2jjbl")
 
 [node name="StonePickup" parent="." unique_id=212900106 instance=ExtResource("4_i2gpr")]
-position = Vector2(96, 184)
+position = Vector2(96, 200)
 item = ExtResource("7_5cxw2")
+
+[node name="ApplePickup" parent="." unique_id=954953608 instance=ExtResource("4_i2gpr")]
+position = Vector2(96, 80)
+item = ExtResource("8_5cxw2")
 
 [connection signal="travel_to" from="AreaTransition" to="." method="_on_area_transition_travel_to"]

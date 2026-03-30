@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://d2qymx54fbdpf"
-path="res://.godot/imported/potion.wav-22c31944d4ce9608875dbf42ddd11cc7.sample"
+path="res://.godot/imported/instant_healing.wav-84f166c9f5b6cd8e1209a54293199153.sample"
 
 [deps]
 
-source_file="res://resources/items/audio/potion.wav"
-dest_files=["res://.godot/imported/potion.wav-22c31944d4ce9608875dbf42ddd11cc7.sample"]
+source_file="res://resources/effects/audios/instant_healing.wav"
+dest_files=["res://.godot/imported/instant_healing.wav-84f166c9f5b6cd8e1209a54293199153.sample"]
 
 [params]
 

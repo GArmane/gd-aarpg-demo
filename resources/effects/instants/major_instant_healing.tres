@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="InstantEffect" format=3 uid="uid://b5mglhoqgoq8q"]
+
+[ext_resource type="AudioStream" uid="uid://d2qymx54fbdpf" path="res://resources/effects/audios/instant_healing.wav" id="1_l7lrm"]
+[ext_resource type="Script" uid="uid://ckskmqu6m3ejm" path="res://resources/effects/instant.gd" id="1_wjgqu"]
+
+[resource]
+script = ExtResource("1_wjgqu")
+attribute = "health_points"
+magnitude = 2
+on_apply_audio = ExtResource("1_l7lrm")
+name = "Major Instant Healing"
+description = "Instantly heal for greater effect."
+metadata/_custom_type_script = "uid://ckskmqu6m3ejm"
