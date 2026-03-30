@@ -9,5 +9,5 @@ attribute = "health_points"
 magnitude = 2
 on_apply_audio = ExtResource("1_l7lrm")
 name = "Major Instant Healing"
-description = "Instantly heal for greater effect."
+description = "Instantly heal for major effect."
 metadata/_custom_type_script = "uid://ckskmqu6m3ejm"
