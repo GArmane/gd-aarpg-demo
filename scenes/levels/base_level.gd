@@ -1,6 +1,6 @@
 class_name Level extends Node2D
 
-signal actor_traveling_to(level, actor, target_area_transition, position_offset)
+signal actor_traveling_to(level, target_area_transition, position_offset, actor)
 
 @export var spawn_point: Marker2D
 
@@ -46,15 +46,15 @@ func spawn_actor_at_transition_area(
 
 ## Emit signal to request level change.
 ## [level]: should be the path to the desired scene.
-## [player]: should be an instanced actor.
 ## [target_area_transition]: should be a valid transition area child node inside the new level.
 ## [position_offset]: should be the position in reference to the transition area.
+## [actor]: should be an instanced actor.
 ##
 ## If a transition area is not found, errors out with a message.
 func _on_area_transition_travel_to(
 	level: String,
-	actor: Actor2D,
 	target_area_transition: String,
 	position_offset: Vector2,
+	actor: Actor2D,
 ) -> void:
-	actor_traveling_to.emit(level, actor, target_area_transition, position_offset)
+	actor_traveling_to.emit(level, target_area_transition, position_offset, actor)

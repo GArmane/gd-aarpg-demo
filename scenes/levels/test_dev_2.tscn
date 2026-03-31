@@ -19,7 +19,6 @@ tile_map_data = PackedByteArray("AAAAAAAAAAAKAAQAAAAAAAEAAAAKAAUAAAAAAAIAAAAKAAY
 [node name="AreaTransition" parent="." unique_id=815850460 instance=ExtResource("8_r3bxm")]
 position = Vector2(480, 128)
 level = "uid://ovs7lvvfl4nx"
-target_area_transition = "AreaTransition"
 size = 3
 side = 2
 
