@@ -19,10 +19,10 @@ func show_menu() -> void:
 
 
 func _on_save_button_pressed() -> void:
-	SaveManager.save_game()
+	#SaveManager.save_game()
 	EventBus.unpause.emit()
 
 
 func _on_load_button_pressed() -> void:
-	SaveManager.load_game()
+	#SaveManager.load_game()
 	EventBus.unpause.emit()

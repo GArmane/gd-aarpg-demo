@@ -5,6 +5,10 @@ signal actor_traveling_to(level, actor, target_area_transition, position_offset)
 @export var spawn_point: Marker2D
 
 
+func _ready() -> void:
+	y_sort_enabled = true
+
+
 ## Spawn an instanced actor at designated global position.
 ## [actor]: should be an instanced actor.
 func spawn_actor_at_global_position(actor: Actor2D, target_position: Vector2) -> void:
@@ -38,10 +42,6 @@ func spawn_actor_at_transition_area(
 	assert(transition != null, "(%s): area transition not found" % name)
 	add_child(actor)
 	transition.place_actor(actor, position_offset)
-
-
-func _ready() -> void:
-	y_sort_enabled = true
 
 
 func _on_area_transition_travel_to(

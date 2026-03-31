@@ -9,7 +9,6 @@ extends Node
 func _ready() -> void:
 	EventBus.pause.connect(_on_event_bus_pause)
 	EventBus.unpause.connect(_on_event_bus_unpause)
-	SaveManager.game_loaded.connect(_on_save_manager_game_loaded)
 
 
 func start_game(scene_path: String) -> void:
@@ -26,13 +25,9 @@ func start_game(scene_path: String) -> void:
 	await gui.set_scene_transition(true)
 
 
-func _initialize_player(save_data: Dictionary = {}) -> Player:
-	# TODO: better player initialization logic.
+func _initialize_player() -> Player:
 	var player := PlayerManager.create_player_chracter()
 	player.active.connect(_on_player_active)
-	if not save_data.is_empty():
-		player.stat_sheet.health_points = save_data.health_points
-		player.stat_sheet.max_health_points = save_data.max_health_points
 	return player
 
 
@@ -86,20 +81,3 @@ func _on_event_bus_pause() -> void:
 
 func _on_event_bus_unpause() -> void:
 	_switch_to_game_mode()
-
-
-## Executed while save/load, TODO: refactor with composition
-func _on_save_manager_game_loaded(save_data: Dictionary) -> void:
-	# Get GUI and fade out.
-	var gui = GUIController.get_current_gui()
-	await gui.set_scene_transition(false)
-	# Initialize game, load and setup level.
-	var player := _initialize_player(save_data.player)
-	var level := await LevelManager.load_level(save_data["scene_path"])
-	level.actor_traveling_to.connect(_on_actor_travelling_to)
-	level.spawn_actor_at_global_position(
-		player, Vector2(save_data.player.position_x, save_data.player.position_y)
-	)
-	# Setup GUI and fade in.
-	gui.attach_player(player)
-	await gui.set_scene_transition(true)
