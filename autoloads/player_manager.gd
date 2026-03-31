@@ -7,7 +7,7 @@ var _current_player: Player
 ## Get current instanced player.
 ##
 ## Returns the current player character. If no current player character is
-## found, returns null.
+## found, errors out.
 func get_current_player() -> Player:
 	assert(_current_player != null, "(%s): player not properly setup" % name)
 	return _current_player

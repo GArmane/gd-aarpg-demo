@@ -11,6 +11,7 @@ func _ready() -> void:
 
 ## Spawn an instanced actor at designated global position.
 ## [actor]: should be an instanced actor.
+## [target_position]: should be an Vector2 with global position coordinates.
 func spawn_actor_at_global_position(actor: Actor2D, target_position: Vector2) -> void:
 	add_child(actor)
 	actor.global_position = target_position
@@ -20,7 +21,6 @@ func spawn_actor_at_global_position(actor: Actor2D, target_position: Vector2) ->
 ## [actor]: should be an instanced actor.
 ##
 ## If a spawn point is not defined, errors with a message.
-## Otherwise returns spawned actor at designated spawn point.
 func spawn_actor_at_spawn_point(actor: Actor2D) -> void:
 	assert(spawn_point != null, "(%s): spawn point not defined" % name)
 	spawn_actor_at_global_position(actor, spawn_point.global_position)
@@ -44,6 +44,13 @@ func spawn_actor_at_transition_area(
 	transition.place_actor(actor, position_offset)
 
 
+## Emit signal to request level change.
+## [level]: should be the path to the desired scene.
+## [player]: should be an instanced actor.
+## [target_area_transition]: should be a valid transition area child node inside the new level.
+## [position_offset]: should be the position in reference to the transition area.
+##
+## If a transition area is not found, errors out with a message.
 func _on_area_transition_travel_to(
 	level: String,
 	actor: Actor2D,
