@@ -8,6 +8,24 @@
 [ext_resource type="Resource" uid="uid://b24xqua5uyc5u" path="res://resources/items/generic/stone.tres" id="7_5cxw2"]
 [ext_resource type="Resource" uid="uid://c8vy5d8vgi4am" path="res://resources/items/consumables/apple.tres" id="8_5cxw2"]
 [ext_resource type="PackedScene" uid="uid://copbpewupkbro" path="res://components/transition/area_transition.tscn" id="8_r3bxm"]
+[ext_resource type="Script" uid="uid://cupk5vpjmox38" path="res://components/inventory/inventory.gd" id="9_emxqt"]
+[ext_resource type="Script" uid="uid://cgbio5n8xulu5" path="res://components/inventory/inventory_slot.gd" id="10_hgv2e"]
+
+[sub_resource type="Resource" id="Resource_gbcur"]
+script = ExtResource("10_hgv2e")
+metadata/_custom_type_script = "uid://cgbio5n8xulu5"
+
+[sub_resource type="Resource" id="Resource_04ult"]
+script = ExtResource("10_hgv2e")
+metadata/_custom_type_script = "uid://cgbio5n8xulu5"
+
+[sub_resource type="Resource" id="Resource_cwekm"]
+script = ExtResource("10_hgv2e")
+metadata/_custom_type_script = "uid://cgbio5n8xulu5"
+
+[sub_resource type="Resource" id="Resource_1wft1"]
+script = ExtResource("10_hgv2e")
+metadata/_custom_type_script = "uid://cgbio5n8xulu5"
 
 [node name="World2D" type="Node2D" unique_id=998471761]
 y_sort_enabled = true
@@ -38,5 +56,10 @@ item = ExtResource("7_5cxw2")
 [node name="ApplePickup" parent="." unique_id=954953608 instance=ExtResource("4_i2gpr")]
 position = Vector2(96, 80)
 item = ExtResource("8_5cxw2")
+
+[node name="Inventory" type="Node" parent="." unique_id=452098286]
+script = ExtResource("9_emxqt")
+_slots = Array[ExtResource("10_hgv2e")]([SubResource("Resource_gbcur"), SubResource("Resource_04ult"), SubResource("Resource_cwekm"), SubResource("Resource_1wft1")])
+metadata/_custom_type_script = "uid://cupk5vpjmox38"
 
 [connection signal="travel_to" from="AreaTransition" to="." method="_on_area_transition_travel_to"]
