@@ -1,7 +1,5 @@
 extends Node
 
-signal level_load_started(level_path: String)
-signal level_loaded(current_scene: Level)
 signal tilemap_bounds_changed(bounds: TilemapLayerBounds)
 
 var current_scene: Node2D:
@@ -16,8 +14,6 @@ func change_tilemap_bounds(bounds: TilemapLayerBounds) -> void:
 
 
 func load_level(level_path: String) -> Level:
-	level_load_started.emit(level_path)
-
 	# Pause current scene so it can finish any process leftover.
 	var scene_tree = get_tree()
 	scene_tree.paused = true
@@ -31,10 +27,4 @@ func load_level(level_path: String) -> Level:
 	scene_tree.paused = false
 	await scene_tree.process_frame
 
-	level_loaded.emit(scene_tree.current_scene as Level)
 	return scene_tree.current_scene as Level
-
-
-func toggle_pause() -> void:
-	var scene_tree = get_tree()
-	scene_tree.paused = !scene_tree.paused
