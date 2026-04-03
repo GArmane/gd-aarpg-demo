@@ -69,14 +69,14 @@ func _on_actor_travelling_to(
 	await gui.set_scene_transition(true)
 
 
-func _on_game_loaded():
+func _on_game_loaded(state: GameState):
 	# Initialize GUI and fade out.
 	var gui := GUIController.get_current_gui()
 	await gui.set_scene_transition(false)
 	# Initialize the saved level.
-	var level := await _setup_level(SaveManager.state.current_loaded_scene)
+	var level := await _setup_level(state.current_loaded_scene)
 	# Setup player character and load it into the level.
-	var player := _setup_player(SaveManager.state.current_player_data, level)
+	var player := _setup_player(state.current_player_data, level)
 	# Setup current GUI and show loaded level
 	gui.attach_player(player)
 	await gui.set_scene_transition(true)
