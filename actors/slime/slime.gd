@@ -28,6 +28,7 @@ class_name Slime extends Actor2D
 }
 
 
+#region State Chart handlers
 func _on_root_state_entered() -> void:
 	%StateChart.set_expression_property("health_points", %StatSheet.health_points)
 
@@ -100,5 +101,15 @@ func _on_stunned_state_exited() -> void:
 
 func _on_dead_state_entered() -> void:
 	update_animation(state_configuration["Dead"]["base_animation"])
+	%LootDrop.generate_loot(global_position)
 	await %AnimationPlayer.animation_finished
 	queue_free()
+
+
+#endregion
+
+
+#region Signal handlers
+func _on_loot_drop_loot_generated(arr: Array[ItemPickup]) -> void:
+	EventBus.loot_generated.emit(arr)
+#endregion
