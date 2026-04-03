@@ -1,6 +1,8 @@
 @tool
 @icon("res://assets/icon-godot-node/node-2D/icon_money_bag.png")
-class_name ItemPickup extends Node2D
+class_name ItemPickup extends CharacterBody2D
+
+const FRICTION_FACTOR := 2
 
 @export var item: Item:
 	set(value):
@@ -13,6 +15,13 @@ func _ready() -> void:
 
 	if Engine.is_editor_hint():
 		return
+
+
+func _physics_process(delta: float) -> void:
+	var collision := move_and_collide(velocity)
+	if collision:
+		velocity = velocity.bounce(collision.get_normal())
+	velocity -= velocity * (FRICTION_FACTOR * delta)
 
 
 func _update_texture() -> void:

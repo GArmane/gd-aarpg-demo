@@ -6,7 +6,12 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_g186c"]
 radius = 8.0
 
-[node name="ItemPickup" type="Node2D" unique_id=1353502759]
+[sub_resource type="CircleShape2D" id="CircleShape2D_6f81x"]
+radius = 8.0
+
+[node name="ItemPickup" type="CharacterBody2D" unique_id=1021141098]
+collision_layer = 64
+motion_mode = 1
 script = ExtResource("1_g186c")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=117494159]
@@ -17,6 +22,9 @@ collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=93775108]
 shape = SubResource("CircleShape2D_g186c")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=58700095]
+shape = SubResource("CircleShape2D_6f81x")
 
 [node name="ItemSprite" type="Sprite2D" parent="." unique_id=1283506025]
 unique_name_in_owner = true

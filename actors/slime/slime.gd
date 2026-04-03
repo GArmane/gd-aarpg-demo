@@ -101,7 +101,7 @@ func _on_stunned_state_exited() -> void:
 
 func _on_dead_state_entered() -> void:
 	update_animation(state_configuration["Dead"]["base_animation"])
-	%LootDrop.generate_loot(global_position)
+	%LootDrop.generate_loot(self)
 	await %AnimationPlayer.animation_finished
 	queue_free()
 
