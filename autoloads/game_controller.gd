@@ -11,6 +11,7 @@ extends Node
 func _ready() -> void:
 	EventBus.pause.connect(_on_event_bus_pause)
 	EventBus.unpause.connect(_on_event_bus_unpause)
+	SaveManager.game_loaded.connect(_on_game_loaded)
 
 
 #endregion
@@ -24,7 +25,10 @@ func start_game(initial_scene: String) -> void:
 	# Initialize the initial level.
 	var level := await _setup_level(initial_scene)
 	# Initialize the player character.
-	_setup_player(gui, level)
+	var player := _setup_player()
+	# Setup loaded GUI and level
+	gui.attach_player(player)
+	level.spawn_actor_at_spawn_point(player)
 	# Fade in the level.
 	await gui.set_scene_transition(true)
 
@@ -35,16 +39,12 @@ func _setup_level(path: String) -> Level:
 	return level
 
 
-func _setup_player(gui: GUI, level: Level) -> Player:
-	var player := _initialize_player()
-	level.spawn_actor_at_spawn_point(player)
-	gui.attach_player(player)
-	return player
-
-
-func _initialize_player() -> Player:
+func _setup_player(state: Dictionary = {}, level: Level = null) -> Player:
 	var player := PlayerManager.create_player_chracter()
 	player.active.connect(_on_player_active)
+	if state and level:
+		player.load_state(state)
+		level.spawn_actor_at_global_position(player, player.position)
 	return player
 
 
@@ -66,6 +66,19 @@ func _on_actor_travelling_to(
 	var level := await _setup_level(level_path)
 	level.spawn_actor_at_transition_area(actor, target_transition_area, position_offset)
 	# Show current level.
+	await gui.set_scene_transition(true)
+
+
+func _on_game_loaded():
+	# Initialize GUI and fade out.
+	var gui := GUIController.get_current_gui()
+	await gui.set_scene_transition(false)
+	# Initialize the saved level.
+	var level := await _setup_level(SaveManager.state.current_loaded_scene)
+	# Setup player character and load it into the level.
+	var player := _setup_player(SaveManager.state.current_player_data, level)
+	# Setup current GUI and show loaded level
+	gui.attach_player(player)
 	await gui.set_scene_transition(true)
 
 

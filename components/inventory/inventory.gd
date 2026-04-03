@@ -4,10 +4,10 @@ class_name Inventory extends Node
 signal changed
 signal slot_activated(slot: InventorySlot)
 
-@export var _slots: Array[InventorySlot] = []
-var slots: Array[InventorySlot]:
-	get():
-		return _slots.duplicate()
+@export var slots: Array[InventorySlot]:
+	set(value):
+		slots = value
+		changed.emit()
 
 
 func _ready() -> void:
@@ -31,17 +31,17 @@ func add_item(item: Item, qtd: int = 1) -> Error:
 
 
 func find_item_slot(item: Item) -> InventorySlot:
-	var idx := _slots.find_custom(func(slot): return slot.item == item)
+	var idx := slots.find_custom(func(slot): return slot.item == item)
 	if idx == -1:
 		return null
-	return _slots[idx]
+	return slots[idx]
 
 
 func find_empty_slot() -> InventorySlot:
-	var idx := _slots.find_custom(func(sl): return sl.is_empty())
+	var idx := slots.find_custom(func(sl): return sl.is_empty())
 	if idx == -1:
 		return null
-	return _slots[idx]
+	return slots[idx]
 
 
 func _on_inventory_slot_depleted(slot: InventorySlot):

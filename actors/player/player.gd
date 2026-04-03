@@ -40,13 +40,32 @@ var inventory: Inventory:
 		return %Inventory
 
 
-#region Signal handlers
-func _on_pause_action_triggered() -> void:
-	EventBus.pause.emit()
+#region Persistence
+func save_state() -> Dictionary:
+	return {
+		"position": position,
+		"cardinal_direction": cardinal_direction,
+		"stat_sheet":
+		{
+			"health": %StatSheet.health_points,
+			"max_health": %StatSheet.max_health_points,
+		},
+		"inventory":
+		{
+			"slots": %Inventory.slots,
+		},
+	}
 
 
-func _on_inventory_slot_activated(slot: InventorySlot) -> void:
-	stat_sheet.use_item(slot.item)
+func load_state(state: Dictionary) -> bool:
+	position = state["position"]
+	cardinal_direction = state["cardinal_direction"]
+	var stat_sheet_data = state["stat_sheet"]
+	%StatSheet.max_health_points = stat_sheet_data["max_health"]
+	%StatSheet.health_points = stat_sheet_data["health"]
+	var inventory_data = state["inventory"]
+	%Inventory.slots = inventory_data["slots"]
+	return true
 
 
 #endregion
@@ -142,5 +161,17 @@ func _on_stunned_state_physics_processing(delta: float) -> void:
 
 func _on_stunned_state_exited() -> void:
 	cardinal_direction *= -1
+
+
+#endregion
+
+
+#region Signal handlers
+func _on_pause_action_triggered() -> void:
+	EventBus.pause.emit()
+
+
+func _on_inventory_slot_activated(slot: InventorySlot) -> void:
+	stat_sheet.use_item(slot.item)
 
 #endregion
