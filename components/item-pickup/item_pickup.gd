@@ -16,6 +16,9 @@ func _ready() -> void:
 	if Engine.is_editor_hint():
 		return
 
+	if velocity:
+		%AnimationPlayer.play("Movement/Bounce")
+
 
 func _physics_process(delta: float) -> void:
 	var collision := move_and_collide(velocity)
