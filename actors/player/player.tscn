@@ -7,7 +7,6 @@
 [ext_resource type="Resource" uid="uid://bf14bejt1d6x2" path="res://input/game-mode/attack.tres" id="4_pxnim"]
 [ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="5_boad6"]
 [ext_resource type="AudioStream" uid="uid://bedtfa1kdlgb8" path="res://actors/player/audio/sword_swoosh.wav" id="5_vxcs8"]
-[ext_resource type="Script" uid="uid://cgbio5n8xulu5" path="res://components/inventory/inventory_slot.gd" id="6_dqf5y"]
 [ext_resource type="Texture2D" uid="uid://bwb323mswpe82" path="res://actors/player/sprites/attack-slash-fx.png" id="6_fwwnh"]
 [ext_resource type="AudioStream" uid="uid://bn6smj6jjsoso" path="res://actors/player/audio/hit_player.wav" id="6_k67x5"]
 [ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="6_rgyib"]
@@ -17,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://w7txpjedkngh" path="res://components/hit-detection/hitbox.tscn" id="9_7aotg"]
 [ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="10_7aotg"]
 [ext_resource type="PackedScene" uid="uid://biba33ekj332o" path="res://components/hit-detection/hurtbox.tscn" id="11_rt46e"]
+[ext_resource type="Script" uid="uid://cgbio5n8xulu5" path="res://components/inventory/inventory_slot.gd" id="19_dqf5y"]
 [ext_resource type="Script" uid="uid://cd32mx70vnotr" path="res://components/stats/stat_sheet.gd" id="19_otn2r"]
 [ext_resource type="PackedScene" uid="uid://bb86p3ijve1pw" path="res://components/inventory/inventory.tscn" id="20_otn2r"]
 
@@ -854,39 +854,39 @@ height = 16.0
 radius = 8.0
 height = 42.0
 
-[sub_resource type="Resource" id="Resource_tpopl"]
-script = ExtResource("6_dqf5y")
+[sub_resource type="Resource" id="Resource_otn2r"]
+script = ExtResource("19_dqf5y")
 metadata/_custom_type_script = "uid://cgbio5n8xulu5"
 
-[sub_resource type="Resource" id="Resource_0nck3"]
-script = ExtResource("6_dqf5y")
+[sub_resource type="Resource" id="Resource_ctwkf"]
+script = ExtResource("19_dqf5y")
 metadata/_custom_type_script = "uid://cgbio5n8xulu5"
 
-[sub_resource type="Resource" id="Resource_1c637"]
-script = ExtResource("6_dqf5y")
+[sub_resource type="Resource" id="Resource_icg72"]
+script = ExtResource("19_dqf5y")
 metadata/_custom_type_script = "uid://cgbio5n8xulu5"
 
-[sub_resource type="Resource" id="Resource_4ihbh"]
-script = ExtResource("6_dqf5y")
+[sub_resource type="Resource" id="Resource_lj3dd"]
+script = ExtResource("19_dqf5y")
 metadata/_custom_type_script = "uid://cgbio5n8xulu5"
 
-[sub_resource type="Resource" id="Resource_4jc6f"]
-script = ExtResource("6_dqf5y")
+[sub_resource type="Resource" id="Resource_nsxbo"]
+script = ExtResource("19_dqf5y")
 metadata/_custom_type_script = "uid://cgbio5n8xulu5"
 
-[sub_resource type="Resource" id="Resource_v3s8r"]
-script = ExtResource("6_dqf5y")
+[sub_resource type="Resource" id="Resource_yeioo"]
+script = ExtResource("19_dqf5y")
 metadata/_custom_type_script = "uid://cgbio5n8xulu5"
 
-[sub_resource type="Resource" id="Resource_ne5l8"]
-script = ExtResource("6_dqf5y")
+[sub_resource type="Resource" id="Resource_qct7d"]
+script = ExtResource("19_dqf5y")
 metadata/_custom_type_script = "uid://cgbio5n8xulu5"
 
-[sub_resource type="Resource" id="Resource_qls60"]
-script = ExtResource("6_dqf5y")
+[sub_resource type="Resource" id="Resource_2vokq"]
+script = ExtResource("19_dqf5y")
 metadata/_custom_type_script = "uid://cgbio5n8xulu5"
 
-[node name="Player" type="CharacterBody2D" unique_id=1024496006]
+[node name="Player" type="CharacterBody2D" unique_id=1024496006 groups=["Persistent"]]
 collision_layer = 4
 motion_mode = 1
 script = ExtResource("1_rkbax")
@@ -1051,7 +1051,7 @@ metadata/_custom_type_script = "uid://cd32mx70vnotr"
 
 [node name="Inventory" parent="." unique_id=1345008649 instance=ExtResource("20_otn2r")]
 unique_name_in_owner = true
-_slots = Array[ExtResource("6_dqf5y")]([SubResource("Resource_tpopl"), SubResource("Resource_0nck3"), SubResource("Resource_1c637"), SubResource("Resource_4ihbh"), SubResource("Resource_4jc6f"), SubResource("Resource_v3s8r"), SubResource("Resource_ne5l8"), SubResource("Resource_qls60")])
+slots = Array[ExtResource("19_dqf5y")]([SubResource("Resource_otn2r"), SubResource("Resource_ctwkf"), SubResource("Resource_icg72"), SubResource("Resource_lj3dd"), SubResource("Resource_nsxbo"), SubResource("Resource_yeioo"), SubResource("Resource_qct7d"), SubResource("Resource_2vokq")])
 
 [connection signal="damaged" from="Hurtbox" to="." method="_on_hurtbox_damaged"]
 [connection signal="state_entered" from="StateChart/Root" to="." method="_on_root_state_entered"]

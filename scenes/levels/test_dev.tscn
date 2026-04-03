@@ -88,7 +88,6 @@ position = Vector2(80, 112)
 [node name="AreaTransition" parent="." unique_id=1163607277 instance=ExtResource("9_uog5e")]
 position = Vector2(0, 464)
 level = "uid://dt0tcdjp5ty4u"
-target_area_transition = "AreaTransition"
 size = 3
 
 [connection signal="travel_to" from="AreaTransition" to="." method="_on_area_transition_travel_to"]

@@ -1,41 +1,91 @@
 extends Node
 
-# GUIDE input game modes
+#region GUIDE input modes
 @export var _game_mode: GUIDEMappingContext = preload("res://input/game-mode/game_mode.tres")
 @export var _pause_mode: GUIDEMappingContext = preload("res://input/pause-mode/pause_mode.tres")
 @export var _debug_mode: GUIDEMappingContext = preload("res://input/debug-mode/debug_mode.tres")
+#endregion
 
 
+#region Engine callbacks
 func _ready() -> void:
 	EventBus.pause.connect(_on_event_bus_pause)
 	EventBus.unpause.connect(_on_event_bus_unpause)
-	SaveManager.game_loaded.connect(_on_save_manager_game_loaded)
+	SaveManager.game_loaded.connect(_on_game_loaded)
 
 
-func start_game(scene_path: String) -> void:
+#endregion
+
+
+#region Game handlers
+func start_game(initial_scene: String) -> void:
 	# Initialize GUI and fade out.
-	var gui = GUIController.get_current_gui()
+	var gui := GUIController.get_current_gui()
 	await gui.set_scene_transition(false)
-	# Initialize game, load and setup level.
-	var player := _initialize_player()
-	var level := await LevelManager.load_level(scene_path)
-	level.actor_traveling_to.connect(_on_actor_travelling_to)
+	# Initialize the initial level.
+	var level := await _setup_level(initial_scene)
+	# Initialize the player character.
+	var player := _setup_player()
+	# Setup loaded GUI and level
+	gui.attach_player(player)
 	level.spawn_actor_at_spawn_point(player)
-	# Setup GUI and fade in.
+	# Fade in the level.
+	await gui.set_scene_transition(true)
+
+
+func _setup_level(path: String) -> Level:
+	var level := await LevelManager.load_level(path)
+	level.actor_traveling_to.connect(_on_actor_travelling_to)
+	return level
+
+
+func _setup_player(state: Dictionary = {}, level: Level = null) -> Player:
+	var player := PlayerManager.create_player_chracter()
+	player.active.connect(_on_player_active)
+	if state and level:
+		player.load_state(state)
+		level.spawn_actor_at_global_position(player, player.position)
+	return player
+
+
+func _on_actor_travelling_to(
+	level_path: String,
+	target_transition_area: String,
+	position_offset: Vector2,
+	actor: Player,
+) -> void:
+	# Scene travel is currently only for the player character.
+	if actor is not Player:
+		return
+	# Hide current level.
+	var gui := GUIController.get_current_gui()
+	await gui.set_scene_transition(false)
+	# Forcefully unparent player before a level is cleaned.
+	PlayerManager.unparent_player()
+	# Load and setup new level.
+	var level := await _setup_level(level_path)
+	level.spawn_actor_at_transition_area(actor, target_transition_area, position_offset)
+	# Show current level.
+	await gui.set_scene_transition(true)
+
+
+func _on_game_loaded():
+	# Initialize GUI and fade out.
+	var gui := GUIController.get_current_gui()
+	await gui.set_scene_transition(false)
+	# Initialize the saved level.
+	var level := await _setup_level(SaveManager.state.current_loaded_scene)
+	# Setup player character and load it into the level.
+	var player := _setup_player(SaveManager.state.current_player_data, level)
+	# Setup current GUI and show loaded level
 	gui.attach_player(player)
 	await gui.set_scene_transition(true)
 
 
-func _initialize_player(save_data: Dictionary = {}) -> Player:
-	# TODO: better player initialization logic.
-	var player := PlayerManager.create_player_chracter()
-	player.active.connect(_on_player_active)
-	if not save_data.is_empty():
-		player.stat_sheet.health_points = save_data.health_points
-		player.stat_sheet.max_health_points = save_data.max_health_points
-	return player
+#endregion
 
 
+#region Input modes handling
 func _switch_input_game_modes(
 	enable_modes: Array[GUIDEMappingContext],
 	disable_modes: Array[GUIDEMappingContext],
@@ -54,28 +104,10 @@ func _switch_to_pause_mode():
 	get_tree().paused = true
 
 
-func _on_actor_travelling_to(
-	level_path: String,
-	actor: Player,
-	target_transition_area: String,
-	position_offset: Vector2,
-) -> void:
-	# Scene travel is currently only for the player character.
-	if actor is not Player:
-		return
-	# Hide current level.
-	var gui = GUIController.get_current_gui()
-	await gui.set_scene_transition(false)
-	# Forcefully unparent player before a level is cleaned.
-	PlayerManager.unparent_player()
-	# Load and setup new level.
-	var level := await LevelManager.load_level(level_path)
-	level.spawn_actor_at_transition_area(actor, target_transition_area, position_offset)
-	level.actor_traveling_to.connect(_on_actor_travelling_to)
-	# Show current level.
-	await gui.set_scene_transition(true)
+#endregion
 
 
+#region Signal handlers
 func _on_player_active() -> void:
 	_switch_to_game_mode()
 
@@ -86,20 +118,4 @@ func _on_event_bus_pause() -> void:
 
 func _on_event_bus_unpause() -> void:
 	_switch_to_game_mode()
-
-
-## Executed while save/load, TODO: refactor with composition
-func _on_save_manager_game_loaded(save_data: Dictionary) -> void:
-	# Get GUI and fade out.
-	var gui = GUIController.get_current_gui()
-	await gui.set_scene_transition(false)
-	# Initialize game, load and setup level.
-	var player := _initialize_player(save_data.player)
-	var level := await LevelManager.load_level(save_data["scene_path"])
-	level.actor_traveling_to.connect(_on_actor_travelling_to)
-	level.spawn_actor_at_global_position(
-		player, Vector2(save_data.player.position_x, save_data.player.position_y)
-	)
-	# Setup GUI and fade in.
-	gui.attach_player(player)
-	await gui.set_scene_transition(true)
+#endregion

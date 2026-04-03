@@ -1,7 +1,7 @@
 @tool
 class_name AreaTransition extends Area2D
 
-signal travel_to(level, actor, target_area_transition, offset)
+signal travel_to(level, target_area_transition, offset, actor)
 
 @export_file("*.tscn") var level
 @export var target_area_transition: String = "AreaTransition"
@@ -67,4 +67,4 @@ func _update_collision_shape() -> void:
 
 func _on_body_entered(body: Actor2D) -> void:
 	if body is Actor2D:
-		travel_to.emit(level, body, target_area_transition, _get_body_offset(body))
+		travel_to.emit(level, target_area_transition, _get_body_offset(body), body)
