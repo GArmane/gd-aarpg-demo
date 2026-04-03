@@ -28,6 +28,7 @@ LevelManager="*res://autoloads/level_manager.gd"
 PlayerManager="*res://autoloads/player_manager.gd"
 GUIController="*res://autoloads/gui_controller.gd"
 GameController="*res://autoloads/game_controller.gd"
+SaveManager="*uid://tds732eajevh"
 
 [display]
 
@@ -45,6 +46,10 @@ version_control/autoload_on_startup=true
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/beautify_code_on_save/plugin.cfg", "res://addons/godot_state_charts/plugin.cfg", "res://addons/guide/plugin.cfg", "res://addons/script-ide/plugin.cfg", "res://addons/signal_lens/plugin.cfg")
+
+[global_group]
+
+Persistent="Nodes that should be persistent between game sessions."
 
 [input]
 
