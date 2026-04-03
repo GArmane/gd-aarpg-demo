@@ -7,14 +7,11 @@ signal slot_activated(slot: InventorySlot)
 @export var slots: Array[InventorySlot]:
 	set(value):
 		slots = value
+		for slot in slots:
+			slot.activated.connect(slot_activated.emit.bind(slot))
+			slot.changed.connect(changed.emit)
+			slot.depleted.connect(_on_inventory_slot_depleted.bind(slot))
 		changed.emit()
-
-
-func _ready() -> void:
-	for slot in slots:
-		slot.activated.connect(slot_activated.emit.bind(slot))
-		slot.changed.connect(changed.emit)
-		slot.depleted.connect(_on_inventory_slot_depleted.bind(slot))
 
 
 func add_item(item: Item, qtd: int = 1) -> Error:
