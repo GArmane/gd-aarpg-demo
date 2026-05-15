@@ -30,6 +30,7 @@ signal active
 @export var _pause_action: GUIDEAction
 @export var _move_action: GUIDEAction
 @export var _attack_action: GUIDEAction
+@export var _activate_action: GUIDEAction
 
 var stat_sheet: StatSheet:
 	get():
@@ -88,8 +89,6 @@ func _on_idle_state_physics_processing(delta: float) -> void:
 func _on_idle_state_processing(_delta: float) -> void:
 	if _move_action.is_triggered() and _move_action.value_axis_2d != Vector2.ZERO:
 		%StateChart.send_event(state_configuration["Walking"]["event"])
-	elif _attack_action.is_triggered():
-		%StateChart.send_event(state_configuration["Attacking"]["event"])
 
 
 func _on_walking_state_cardinal_direction_changed(_old_dir, _new_dir) -> void:
@@ -110,8 +109,6 @@ func _on_walking_state_physics_processing(delta: float) -> void:
 func _on_walking_state_processing(_delta: float) -> void:
 	if not _move_action.is_triggered() or _move_action.value_axis_2d == Vector2.ZERO:
 		%StateChart.send_event(state_configuration["Idle"]["event"])
-	elif _attack_action.is_triggered():
-		%StateChart.send_event(state_configuration["Attacking"]["event"])
 
 
 func _on_walking_state_exited() -> void:
@@ -167,11 +164,25 @@ func _on_stunned_state_exited() -> void:
 
 
 #region Signal handlers
-func _on_pause_action_triggered() -> void:
-	EventBus.pause.emit()
+func _on_activate_enabled_state_processing(_delta: float) -> void:
+	if _activate_action.is_triggered():
+		print("ACTIVATE")
+
+
+func _on_attack_enabled_state_processing(_delta: float) -> void:
+	if _attack_action.is_triggered():
+		%StateChart.send_event(state_configuration["Attacking"]["event"])
+
+
+func _on_cardinal_direction_changed(_old_dir: Vector2, new_dir: Vector2) -> void:
+	%InterationTrigger.rotation = new_dir.angle() - (PI / 2)
 
 
 func _on_inventory_slot_activated(slot: InventorySlot) -> void:
 	stat_sheet.use_item(slot.item)
+
+
+func _on_pause_action_triggered() -> void:
+	EventBus.pause.emit()
 
 #endregion

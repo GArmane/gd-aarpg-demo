@@ -6,6 +6,7 @@
 [ext_resource type="Resource" uid="uid://be146lb73a8yl" path="res://input/game-mode/pause.tres" id="2_rt46e"]
 [ext_resource type="Resource" uid="uid://bf14bejt1d6x2" path="res://input/game-mode/attack.tres" id="4_pxnim"]
 [ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="5_boad6"]
+[ext_resource type="Resource" uid="uid://b4kgs3qb4uhmc" path="res://input/game-mode/activate.tres" id="5_otn2r"]
 [ext_resource type="AudioStream" uid="uid://bedtfa1kdlgb8" path="res://actors/player/audio/sword_swoosh.wav" id="5_vxcs8"]
 [ext_resource type="Texture2D" uid="uid://bwb323mswpe82" path="res://actors/player/sprites/attack-slash-fx.png" id="6_fwwnh"]
 [ext_resource type="AudioStream" uid="uid://bn6smj6jjsoso" path="res://actors/player/audio/hit_player.wav" id="6_k67x5"]
@@ -854,6 +855,9 @@ height = 16.0
 radius = 8.0
 height = 42.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_otn2r"]
+size = Vector2(32, 24)
+
 [sub_resource type="Resource" id="Resource_otn2r"]
 script = ExtResource("19_dqf5y")
 metadata/_custom_type_script = "uid://cgbio5n8xulu5"
@@ -893,6 +897,7 @@ script = ExtResource("1_rkbax")
 _pause_action = ExtResource("2_rt46e")
 _move_action = ExtResource("2_g1dw6")
 _attack_action = ExtResource("4_pxnim")
+_activate_action = ExtResource("5_otn2r")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1652821765]
 unique_name_in_owner = true
@@ -952,6 +957,17 @@ collision_layer = 8
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=836436307]
 shape = SubResource("CapsuleShape2D_rt46e")
 debug_color = Color(1, 1, 0, 0.419608)
+
+[node name="InterationTrigger" type="Area2D" parent="." unique_id=1352250231]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 128
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InterationTrigger" unique_id=933573740]
+position = Vector2(0, 20)
+shape = SubResource("RectangleShape2D_otn2r")
+debug_color = Color(0.15525675, 0.6805879, 3.85046e-07, 0.41960785)
 
 [node name="StateChart" type="Node" parent="." unique_id=264237481]
 unique_name_in_owner = true
@@ -1053,15 +1069,20 @@ metadata/_custom_type_script = "uid://cd32mx70vnotr"
 unique_name_in_owner = true
 slots = Array[ExtResource("19_dqf5y")]([SubResource("Resource_otn2r"), SubResource("Resource_ctwkf"), SubResource("Resource_icg72"), SubResource("Resource_lj3dd"), SubResource("Resource_nsxbo"), SubResource("Resource_yeioo"), SubResource("Resource_qct7d"), SubResource("Resource_2vokq")])
 
+[connection signal="cardinal_direction_changed" from="." to="." method="_on_cardinal_direction_changed"]
 [connection signal="damaged" from="Hurtbox" to="." method="_on_hurtbox_damaged"]
 [connection signal="state_entered" from="StateChart/Root" to="." method="_on_root_state_entered"]
 [connection signal="state_entered" from="StateChart/Root/Active/Idle" to="." method="_on_idle_state_entered"]
 [connection signal="state_physics_processing" from="StateChart/Root/Active/Idle" to="." method="_on_idle_state_physics_processing"]
 [connection signal="state_processing" from="StateChart/Root/Active/Idle" to="." method="_on_idle_state_processing"]
+[connection signal="state_processing" from="StateChart/Root/Active/Idle" to="." method="_on_activate_enabled_state_processing"]
+[connection signal="state_processing" from="StateChart/Root/Active/Idle" to="." method="_on_attack_enabled_state_processing"]
 [connection signal="state_entered" from="StateChart/Root/Active/Walking" to="." method="_on_walking_state_entered"]
 [connection signal="state_exited" from="StateChart/Root/Active/Walking" to="." method="_on_walking_state_exited"]
 [connection signal="state_physics_processing" from="StateChart/Root/Active/Walking" to="." method="_on_walking_state_physics_processing"]
 [connection signal="state_processing" from="StateChart/Root/Active/Walking" to="." method="_on_walking_state_processing"]
+[connection signal="state_processing" from="StateChart/Root/Active/Walking" to="." method="_on_activate_enabled_state_processing"]
+[connection signal="state_processing" from="StateChart/Root/Active/Walking" to="." method="_on_attack_enabled_state_processing"]
 [connection signal="state_entered" from="StateChart/Root/Active/Attacking" to="." method="_on_attacking_state_entered"]
 [connection signal="state_physics_processing" from="StateChart/Root/Active/Attacking" to="." method="_on_attacking_state_physics_processing"]
 [connection signal="state_processing" from="StateChart/Root/Active/Attacking" to="." method="_on_attacking_state_processing"]

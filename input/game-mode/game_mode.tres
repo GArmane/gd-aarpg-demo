@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://b52rqq28tuqpg" path="res://addons/guide/triggers/guide_trigger_pressed.gd" id="10_teaac"]
 [ext_resource type="Script" uid="uid://dsa1dnifd6w32" path="res://addons/guide/guide_mapping_context.gd" id="11_4r0d7"]
 [ext_resource type="Resource" uid="uid://be146lb73a8yl" path="res://input/game-mode/pause.tres" id="11_6x4li"]
+[ext_resource type="Resource" uid="uid://b4kgs3qb4uhmc" path="res://input/game-mode/activate.tres" id="12_mmvjt"]
 
 [sub_resource type="Resource" id="Resource_egfbn"]
 script = ExtResource("4_q6d2s")
@@ -104,8 +105,27 @@ script = ExtResource("1_0pol1")
 action = ExtResource("11_6x4li")
 input_mappings = Array[ExtResource("3_mmvjt")]([SubResource("Resource_ce0b8")])
 
+[sub_resource type="Resource" id="Resource_82epi"]
+script = ExtResource("4_q6d2s")
+key = 69
+
+[sub_resource type="Resource" id="Resource_57v2y"]
+script = ExtResource("10_teaac")
+
+[sub_resource type="Resource" id="Resource_d81ln"]
+script = ExtResource("3_mmvjt")
+input = SubResource("Resource_82epi")
+triggers = Array[ExtResource("8_d81ln")]([SubResource("Resource_57v2y")])
+metadata/_guide_modifiers_collapsed = false
+metadata/_guide_triggers_collapsed = false
+
+[sub_resource type="Resource" id="Resource_cwppc"]
+script = ExtResource("1_0pol1")
+action = ExtResource("12_mmvjt")
+input_mappings = Array[ExtResource("3_mmvjt")]([SubResource("Resource_d81ln")])
+
 [resource]
 script = ExtResource("11_4r0d7")
 display_name = "Game Mode"
-mappings = Array[ExtResource("1_0pol1")]([SubResource("Resource_odpa8"), SubResource("Resource_qk616"), SubResource("Resource_mmvjt")])
+mappings = Array[ExtResource("1_0pol1")]([SubResource("Resource_odpa8"), SubResource("Resource_qk616"), SubResource("Resource_mmvjt"), SubResource("Resource_cwppc")])
 metadata/_custom_type_script = "uid://dsa1dnifd6w32"
