@@ -35,8 +35,8 @@ func _on_area_2d_body_entered(body: Player) -> void:
 	if body.inventory == null or body.inventory.add_item(item) != OK:
 		return
 
-	%Area2D.set_deferred("monitorable", false)
-	%Area2D.set_deferred("monitoring", false)
+	%PickupTrigger.set_deferred("monitorable", false)
+	%PickupTrigger.set_deferred("monitoring", false)
 	%ItemSprite.visible = false
 	%PickupSound.play()
 	await %PickupSound.finished

@@ -4,10 +4,10 @@
 [ext_resource type="AudioStream" uid="uid://dyfal1juv6751" path="res://components/item-pickup/item_pickup.wav" id="2_6f81x"]
 [ext_resource type="Texture2D" uid="uid://bs4tohj0v74kp" path="res://components/item-pickup/shadow.png" id="2_8po1y"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_g186c"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_6f81x"]
 radius = 8.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_6f81x"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_g186c"]
 radius = 8.0
 
 [sub_resource type="Animation" id="Animation_mf1e3"]
@@ -56,15 +56,6 @@ collision_layer = 64
 motion_mode = 1
 script = ExtResource("1_g186c")
 
-[node name="Area2D" type="Area2D" parent="." unique_id=117494159]
-unique_name_in_owner = true
-z_index = -1
-collision_layer = 0
-collision_mask = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=93775108]
-shape = SubResource("CircleShape2D_g186c")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=58700095]
 shape = SubResource("CircleShape2D_6f81x")
 
@@ -84,9 +75,18 @@ texture = ExtResource("2_8po1y")
 unique_name_in_owner = true
 stream = ExtResource("2_6f81x")
 
+[node name="PickupTrigger" type="Area2D" parent="." unique_id=117494159]
+unique_name_in_owner = true
+z_index = -1
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupTrigger" unique_id=93775108]
+shape = SubResource("CircleShape2D_g186c")
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=959770947]
 unique_name_in_owner = true
 libraries/ = SubResource("AnimationLibrary_vsh4a")
 libraries/Movement = SubResource("AnimationLibrary_tpb20")
 
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="PickupTrigger" to="." method="_on_area_2d_body_entered"]
